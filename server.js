@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import Mongoose from "mongoose";
 import { xss } from "express-xss-sanitizer";
+import { insertData } from "./assignmentsSeed.js";
 
 const app = express();
 
@@ -18,24 +19,27 @@ dotenv.config();
 
 // Connecting to mongoDB with mongoose
 Mongoose.connect(
-	process.env.DATABASE_URL,
-	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-	},
-	() => {
-		console.log("Database connected");
-	}
+  process.env.DATABASE_URL,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Database connected");
+  }
 );
+
+insertData();
+setInterval(insertData, 1000 * 60 * 60);
 
 app.use(cors()); //telling express to use the cors middleware
 
 app.use(xss()); //telling express to use xss sanitizer to sanitise all incoming requests
 
 app.use(
-	bodyParser.urlencoded({
-		extended: true,
-	})
+  bodyParser.urlencoded({
+    extended: true,
+  })
 );
 app.use(bodyParser.json());
 
@@ -43,7 +47,7 @@ app.use("/api", router);
 app.use("/articles", articleRoute);
 
 app.listen(PORT, () => {
-	//listen to the port we chose above
-	//print to the console that the server is listening
-	console.log("listening to port: " + PORT);
+  //listen to the port we chose above
+  //print to the console that the server is listening
+  console.log("listening to port: " + PORT);
 });
