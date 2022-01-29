@@ -75,7 +75,9 @@ export const updateArticle = (req, res) => {
     article.subtitle = req.body.subtitle ? req.body.subtitle : article.subtitle;
     article.content = req.body.content ? req.body.content : article.content;
     article.author = req.body.author ? req.body.author : article.author;
-    article.published = req.body.published !== undefined ? req.body.published : article.published;
+    article.published = req.body.published
+      ? req.body.published
+      : article.published;
 
     // save the article and check for errors
     article.save((err) => {
