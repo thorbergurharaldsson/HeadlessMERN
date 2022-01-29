@@ -27,6 +27,9 @@ const articleSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  comments: {
+    type: Array,
+  },
 });
 
 articleSchema.plugin(mongooseSlugPlugin, {

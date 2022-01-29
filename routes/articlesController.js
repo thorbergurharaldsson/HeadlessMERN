@@ -1,4 +1,5 @@
 import { Article } from "../schemas/articleModel.js";
+import { Comment } from "../schemas/commentModel.js";
 
 // handel index actions
 export const indexArticles = (req, res) => {
@@ -104,4 +105,46 @@ export const deleteArticle = (req, res) => {
       });
     }
   );
+};
+
+// Add comment
+export const newComment = (req, res) => {
+  const comment = new Comment();
+  comment.name = req.body.name;
+  comment.email = req.body.email;
+  comment.comment = req.body.comment;
+  comment.article_id = req.params.article_id;
+
+  if (!comment.name) {
+    res.status(400).json({
+      message: "'name' is required",
+    });
+  }
+  if (!comment.email) {
+    res.status(400).json({
+      message: "'email' is required",
+    });
+  }
+  if (!comment.comment) {
+    res.status(400).json({
+      message: "'comment' is required",
+    });
+  }
+  if (!comment.article_id) {
+    res.status(400).json({
+      message: "'article_id' is required",
+    });
+  } else {
+    Article.findById(req.params.article_id, (err, article) => {
+      article.comments.push(comment);
+      article.save((err) => {
+        if (err) res.send(err);
+        else
+          res.json({
+            message: "New comment created!",
+            data: article,
+          });
+      });
+    });
+  }
 };
