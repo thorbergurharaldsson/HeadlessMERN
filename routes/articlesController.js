@@ -56,7 +56,7 @@ export const newArticle = (req, res) => {
 };
 
 // get a single article by ID
-export const viewArticle = (req, res) => {
+export const viewArticleByID = (req, res) => {
   Article.findById(req.params.article_id, (err, article) => {
     if (err) res.send(err);
 
