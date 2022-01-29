@@ -28,17 +28,17 @@ export const newArticle = (req, res) => {
   article.published = req.body.published;
 
   if (!article.title) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'title' is required",
     });
   }
   if (!article.content) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'content' is required",
     });
   }
   if (!article.author) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'author' is required",
     });
   } else {
