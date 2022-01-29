@@ -28,17 +28,17 @@ export const newArticle = (req, res) => {
   article.published = req.body.published;
 
   if (!article.title) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'title' is required",
     });
   }
   if (!article.content) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'content' is required",
     });
   }
   if (!article.author) {
-    res.status(400).json({
+    return res.status(400).json({
       message: "'author' is required",
     });
   } else {
@@ -75,7 +75,9 @@ export const updateArticle = (req, res) => {
     article.subtitle = req.body.subtitle ? req.body.subtitle : article.subtitle;
     article.content = req.body.content ? req.body.content : article.content;
     article.author = req.body.author ? req.body.author : article.author;
-    article.published = req.body.published !== undefined ? req.body.published : article.published;
+    article.published = req.body.published
+      ? req.body.published
+      : article.published;
 
     // save the article and check for errors
     article.save((err) => {
