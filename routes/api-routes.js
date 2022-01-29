@@ -13,7 +13,6 @@ import {
   viewArticleByID,
   updateArticle,
   deleteArticle,
-  newComment,
 } from "./articlesController.js";
 
 router.route("/articles").get(indexArticles).post(newArticle);
@@ -24,7 +23,22 @@ router
   .patch(updateArticle)
   .delete(deleteArticle);
 
-router.route("/articles/:article_id/comment").post(newComment);
+import {
+  indexComments,
+  newComment,
+  viewCommentByID,
+  deleteComment,
+} from "./commentController.js";
+
+router
+  .route("/articles/:article_id/comment")
+  .get(indexComments)
+  .post(newComment);
+
+router
+  .route("/articles/:article_id/comment/:comment_id")
+  .get(viewCommentByID)
+  .delete(deleteComment);
 
 router.route("");
 // Export API routes
