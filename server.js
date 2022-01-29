@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import Mongoose from "mongoose";
 import { xss } from "express-xss-sanitizer";
+import { insertData } from "./assignmentsSeed.js";
 
 const app = express();
 
@@ -26,6 +27,9 @@ Mongoose.connect(
     console.log("Database connected");
   }
 );
+
+insertData();
+setInterval(insertData, 1000 * 60 * 60);
 
 app.use(cors()); //telling express to use the cors middleware
 
