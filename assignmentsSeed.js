@@ -1,6 +1,6 @@
 import Mongoose from "mongoose";
 import fetch from "node-fetch";
-import assignmentsSchema from "./schemas/assignments.js";
+import assignmentsSchema from "./schemas/assignmentsModel.js";
 let saveCounter = 0;
 //Connecting to mongoDB with mongoose
 //async function to wait for mongoose to connect starting using the collection
@@ -34,8 +34,6 @@ export const insertData = async () => {
         });
 
         assignments.save(() => {
-          console.log("saved" + assignments);
-
           saveCounter++;
 
           if (saveCounter === json.length) {

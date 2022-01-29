@@ -42,6 +42,24 @@ router
   .get(viewCommentByID)
   .delete(deleteComment);
 
+// ------- Author Routes -------
+
+import {
+  indexAuthors,
+  newAuthor,
+  viewAuthorByID,
+  updateAuthor,
+  deleteAuthor,
+} from "./authorController.js";
+
+router.route("/authors").get(indexAuthors).post(newAuthor);
+
+router
+  .route("/authors/:author_id")
+  .get(viewAuthorByID)
+  .patch(updateAuthor)
+  .delete(deleteAuthor);
+
 router.route("");
 // Export API routes
 export default router;

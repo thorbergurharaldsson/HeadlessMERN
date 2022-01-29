@@ -96,7 +96,7 @@ export const deleteArticle = (req, res) => {
     {
       _id: req.params.article_id,
     },
-    (err, article) => {
+    (err) => {
       if (err) res.send(err);
       res.json({
         status: "success",

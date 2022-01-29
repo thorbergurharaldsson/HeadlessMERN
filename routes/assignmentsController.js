@@ -2,7 +2,7 @@ import express from "express";
 let router = express.Router();
 
 // Assignment Model
-import assignmentsSchema from "../schemas/assignments.js";
+import assignmentsSchema from "../schemas/assignmentsModel.js";
 
 // GET all Assignments
 router.route("/").get((req, res) => {
