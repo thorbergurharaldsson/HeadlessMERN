@@ -23,6 +23,8 @@ router
   .patch(updateArticle)
   .delete(deleteArticle);
 
+// ------- Comment Routes -------
+
 import {
   indexComments,
   newComment,
