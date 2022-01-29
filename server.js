@@ -11,8 +11,7 @@ const app = express();
 
 const PORT = 8080; //we will use port 8080
 
-import router from "./api-routes.js";
-import articleRoute from "./routes/articles.js";
+import router from "./routes/api-routes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -44,7 +43,6 @@ app.use(
 app.use(bodyParser.json());
 
 app.use("/api", router);
-app.use("/articles", articleRoute);
 
 app.listen(PORT, () => {
   //listen to the port we chose above
