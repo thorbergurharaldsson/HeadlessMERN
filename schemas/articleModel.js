@@ -8,6 +8,9 @@ const articleSchema = new Schema({
     type: String,
     required: true,
   },
+  subtitle: {
+    type: String,
+  },
   content: {
     type: String,
     required: true,
@@ -16,9 +19,16 @@ const articleSchema = new Schema({
     type: String,
     required: true,
   },
+  published: {
+    type: Boolean,
+    default: false,
+  },
   posted_at: {
     type: Date,
     default: Date.now,
+  },
+  comments: {
+    type: Array,
   },
 });
 
