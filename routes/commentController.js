@@ -37,6 +37,7 @@ export const newComment = (req, res) => {
     });
   } else {
     Article.findById(req.params.article_id, (err, article) => {
+      if (err) res.send(err);
       article.comments.push(comment);
       article.save((err) => {
         if (err) res.send(err);

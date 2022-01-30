@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const commentSchema = new Schema({
+const authorSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -18,4 +18,4 @@ const commentSchema = new Schema({
   },
 });
 
-export const Comment = mongoose.model("Comment", commentSchema);
+export const Author = mongoose.model("Author", authorSchema);
