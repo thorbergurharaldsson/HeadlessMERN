@@ -20,20 +20,22 @@ export default function Home() {
 	};
 
 	return (
-		<div>
+    <div>
 			<Header />
-			<div className="title">
-				<h1>Articles</h1>
-			</div>
-			{articles?.map((article) => (
-				<div className="article" key={article._id}>
-					<div>
-						<Link to={`/article/${article._id}`}>{article?.title}</Link>
-						<h3>{article?.subtitle}</h3>
-            <h3>{article?.author}</h3>
-					</div>
-				</div>
+			<div className="article-body">
+        <div className="title">
+				  <h1>Articles</h1>
+			  </div>
+			  {articles?.map((article) => (
+				  <div className="article" key={article._id}>
+					  <div>
+						  <Link to={`/article/${article._id}`}>{article?.title}</Link>
+						  <h3>{article?.subtitle}</h3>
+              <h3>{article?.author}</h3>
+					  </div>
+				  </div>
 			))}
+      </div>
 		</div>
 	);
 }

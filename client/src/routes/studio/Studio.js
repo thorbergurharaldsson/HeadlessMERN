@@ -1,9 +1,8 @@
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Routes, Route } from "react-router-dom";
 
-import Overview from "./overview/Overview";
+import Dashboard from "./dashboard/Dashboard";
 import Articles from "./articles/Articles";
-import Projects from "./projects/Projects";
+import Assignments from "./assignments/Assignments";
 import Layout from "./components/layout/Layout";
 import Article from "./article/Article";
 import NewArticle from "./new-article/NewArticle";
@@ -12,11 +11,11 @@ const Studio = () => {
 	return (
 		<Layout>
 			<Routes>
-				<Route path="/" element={<Overview />} />
+				<Route path="/" element={<Dashboard />} />
 				<Route path="articles/new-article" element={<NewArticle />} />
 				<Route path="articles/:id" element={<Article />} />
 				<Route path="articles" element={<Articles />} />
-				<Route path="projects" element={<Projects />} />
+				<Route path="assignments" element={<Assignments />} />
 			</Routes>
 		</Layout>
 	);

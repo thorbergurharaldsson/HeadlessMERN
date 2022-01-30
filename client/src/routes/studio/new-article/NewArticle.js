@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ArticleForm from "../components/article-form/ArticleForm";
+import { useStores } from "../../../stores";
 
 export default function NewArticle() {
+	const { userStore } = useStores();
 	const navigate = useNavigate();
 	const [message, setMessage] = useState("");
 	const [article, setArticle] = useState({
-		author: "Tryggvi",
+		author: userStore.id,
 		title: "",
 		content: "",
 	});

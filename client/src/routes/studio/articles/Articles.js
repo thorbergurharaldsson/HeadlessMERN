@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Switch from "../components/switch/Switch";
+import { useStores } from "../../../stores";
 import "./Articles.scss";
 
 export default function Articles() {
+	const { userStore } = useStores();
+
 	const [articles, setArticles] = useState([]);
 	useEffect(() => {
 		getArticles();
@@ -15,8 +18,10 @@ export default function Articles() {
 			`${process.env.REACT_APP_API_SERVER}/articles`
 		);
 		const { data } = await response.json();
-
-		setArticles(data);
+		const filteredArticles = data.filter(
+			(article) => article.author == userStore.id
+		);
+		setArticles(filteredArticles);
 	};
 
 	const updateArticle = async (published, article) => {

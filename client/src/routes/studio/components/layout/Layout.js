@@ -12,7 +12,7 @@ export default function Layout({ children }) {
 				<div className="sidebar__links">
 					<Link to="/studio">Dashboard</Link>
 					<Link to="/studio/articles">Articles</Link>
-					<Link to="/studio/projects">Projects</Link>
+					<Link to="/studio/assignments">Assignments</Link>
 				</div>
 			</div>
 			<div className="content">{children}</div>
