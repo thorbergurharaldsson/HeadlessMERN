@@ -1,0 +1,29 @@
+.layout {
+	display: flex;
+	flex-direction: row;
+}
+
+.content {
+	width: 100%;
+	padding: 20px;
+}
+
+.sidebar {
+	padding: 10px;
+	color: white;
+	background-color: #282c34;
+	height: 100vh;
+
+	a {
+		color: white;
+	}
+}
+
+.sidebar__links {
+	display: flex;
+	flex-direction: column;
+
+	padding-top: 20px;
+	font-size: 24px;
+	font-weight: 800;
+}
