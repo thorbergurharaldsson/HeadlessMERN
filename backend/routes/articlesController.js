@@ -5,7 +5,7 @@ import { Author } from "../schemas/authorModel.js";
 export const indexArticles = (req, res) => {
   Article.get((err, articles) => {
     if (err) {
-      res.json({
+      return res.json({
         status: "error",
         message: err,
       });
@@ -44,7 +44,7 @@ export const newArticle = (req, res) => {
     });
   } else {
     Author.findById(article.author, (err, author) => {
-      if (err) res.send(err);
+      if (err) return res.send(err);
       author.articles.push(article);
       author.save((err) => {
         if (err) res.send(err);
@@ -71,7 +71,7 @@ export const newArticle = (req, res) => {
 // get a single article by ID
 export const viewArticleByID = (req, res) => {
   Article.findById(req.params.article_id, (err, article) => {
-    if (err) res.send(err);
+    if (err) return res.send(err);
 
     res.json({
       message: "Article details loading...",
@@ -83,7 +83,7 @@ export const viewArticleByID = (req, res) => {
 // Handle update article info
 export const updateArticle = (req, res) => {
   Article.findById(req.params.article_id, (err, article) => {
-    if (err) res.send(err);
+    if (err) return res.send(err);
     article.title = req.body.title ? req.body.title : article.title;
     article.subtitle = req.body.subtitle ? req.body.subtitle : article.subtitle;
     article.content = req.body.content ? req.body.content : article.content;
@@ -91,25 +91,22 @@ export const updateArticle = (req, res) => {
     article.published = req.body.published !== undefined ? req.body.published : article.published;
 
     Author.findById(article.author, (err, author) => {
-      if (err) res.send(err);
+      if (err) return res.send(err);
       author.articles.push(article);
       author.save((err) => {
         if (err) res.send(err);
         else
-          res.json({
-            data: article,
+          // save the article and check for errors
+          article.save((err) => {
+            if (err) res.json(err);
+            res.json({
+              message: "Article Info updated",
+              data: article,
+            });
           });
       });
     });
 
-    // save the article and check for errors
-    article.save((err) => {
-      if (err) res.json(err);
-      res.json({
-        message: "Article Info updated",
-        data: article,
-      });
-    });
   });
 };
 
@@ -120,7 +117,7 @@ export const deleteArticle = (req, res) => {
       _id: req.params.article_id,
     },
     (err) => {
-      if (err) res.send(err);
+      if (err) return res.send(err);
       res.json({
         status: "success",
         message: "Article deleted",
