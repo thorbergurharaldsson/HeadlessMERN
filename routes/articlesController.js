@@ -1,4 +1,5 @@
 import { Article } from "../schemas/articleModel.js";
+import { Author } from "../schemas/authorModel.js";
 
 // handel index actions
 export const indexArticles = (req, res) => {
@@ -42,6 +43,18 @@ export const newArticle = (req, res) => {
       message: "'author' is required",
     });
   } else {
+    Author.findById(article.author, (err, author) => {
+      if (err) res.send(err);
+      author.articles.push(article);
+      author.save((err) => {
+        if (err) res.send(err);
+        else
+          res.json({
+            data: article,
+          });
+      });
+    });
+
     // save the article and check for errors
     article.save((err) => {
       // Check for validation error
@@ -78,6 +91,18 @@ export const updateArticle = (req, res) => {
     article.published = req.body.published
       ? req.body.published
       : article.published;
+
+    Author.findById(article.author, (err, author) => {
+      if (err) res.send(err);
+      author.articles.push(article);
+      author.save((err) => {
+        if (err) res.send(err);
+        else
+          res.json({
+            data: article,
+          });
+      });
+    });
 
     // save the article and check for errors
     article.save((err) => {
