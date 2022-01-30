@@ -49,21 +49,17 @@ export const newArticle = (req, res) => {
       author.save((err) => {
         if (err) res.send(err);
         else
-          res.json({
-            data: article,
+          // save the article and check for errors
+          article.save((err) => {
+            // Check for validation error
+            if (err) res.json(err);
+            else
+              res.json({
+              message: "New article created!",
+              data: article,
           });
-      });
-    });
-
-    // save the article and check for errors
-    article.save((err) => {
-      // Check for validation error
-      if (err) res.json(err);
-      else
-        res.json({
-          message: "New article created!",
-          data: article,
         });
+      });
     });
   }
 };
