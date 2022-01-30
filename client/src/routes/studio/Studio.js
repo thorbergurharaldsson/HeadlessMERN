@@ -1,6 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import Dashboard from "./dashboard/Dashboard";
 import Articles from "./articles/Articles";
 import Assignments from "./assignments/Assignments";
 import Layout from "./components/layout/Layout";
@@ -11,7 +10,7 @@ const Studio = () => {
 	return (
 		<Layout>
 			<Routes>
-				<Route path="/" element={<Dashboard />} />
+				<Route path="/" element={<Navigate replace to="articles" />} />
 				<Route path="articles/new-article" element={<NewArticle />} />
 				<Route path="articles/:id" element={<Article />} />
 				<Route path="articles" element={<Articles />} />
