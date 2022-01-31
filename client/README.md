@@ -9,6 +9,16 @@ REACT_APP_USER_ID= //Remove this comment and add your userID in form the databas
 ```
 
 ```
+REACT_APP_API_KEY=ask Tristan
+REACT_APP_AUTH_DOMAIN=ask Tristan
+REACT_APP_PROJECT_ID=ask Tristan
+REACT_APP_STORAGE_BUCKET=ask Tristan
+REACT_APP_MESSAGE_SENDER_ID=ask Tristan
+REACT_APP_APP_ID=ask Tristan
+
+```
+
+```
 yarn install
 yarn start
 ```
