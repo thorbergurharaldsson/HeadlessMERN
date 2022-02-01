@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase";
 
 import Header from "../../components/header/Header";
 
 import "./Home.scss";
 
 export default function Home() {
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, []);
+
   const [articles, setArticles] = useState([]);
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
