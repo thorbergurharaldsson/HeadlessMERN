@@ -7,17 +7,17 @@ import Article from "./article/Article";
 import NewArticle from "./new-article/NewArticle";
 
 const Studio = () => {
-	return (
-		<Layout>
-			<Routes>
-				<Route path="/" element={<Navigate replace to="articles" />} />
-				<Route path="articles/new-article" element={<NewArticle />} />
-				<Route path="articles/:id" element={<Article />} />
-				<Route path="articles" element={<Articles />} />
-				<Route path="assignments" element={<Assignments />} />
-			</Routes>
-		</Layout>
-	);
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="articles" />} />
+        <Route path="articles/new-article" element={<NewArticle />} />
+        <Route path="articles/:id" element={<Article />} />
+        <Route path="articles" element={<Articles />} />
+        <Route path="assignments" element={<Assignments />} />
+      </Routes>
+    </Layout>
+  );
 };
 
 export default Studio;

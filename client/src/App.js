@@ -1,48 +1,28 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import "./index.css";
-
+// import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./routes/firebase/Login";
+import Register from "./routes/firebase/Register";
+import Reset from "./routes/firebase/Reset";
+import Dashboard from "./routes/firebase/Dashboard";
 import Home from "./routes/home/Home";
-import Login from "./routes/login/Login";
 import Studio from "./routes/studio/Studio";
 import Article from "./routes/article/Article";
-import fire from "./fire";
-
-export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  fire.auth().onAuthStateChanged((user) => {
-    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
-
-  const signOut = () => {
-    fire.auth().signOut();
-  };
-
-  console.log(isLoggedIn);
+function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Router>
-        {!isLoggedIn ? (
-          <>
-            <Routes>
-              <Route path="/" element={<Login />} />
-            </Routes>
-          </>
-        ) : (
-          <>
-            <span onClick={signOut}>
-              <a href="/">Sign out</a>
-            </span>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="studio/*" element={<Studio />} />
-              <Route path="article/:id" element={<Article />} />
-            </Routes>
-          </>
-        )}
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route path="studio/*" element={<Studio />} />
+          <Route path="article/:id" element={<Article />} />
+        </Routes>
       </Router>
     </div>
   );
 }
+
+export default App;
