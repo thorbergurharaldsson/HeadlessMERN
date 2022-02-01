@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Header from "../../components/header/Header";
 
 import "./Home.scss";
 
 export default function Home() {
+  const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  if(!user) navigate("/home") //if there is no user navigate to the login page
   const [articles, setArticles] = useState([]);
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
