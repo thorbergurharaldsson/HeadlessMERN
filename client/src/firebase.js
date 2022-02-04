@@ -1,3 +1,4 @@
+import { createContext, useContext } from "react";
 import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
@@ -52,6 +53,39 @@ const signInWithGoogle = async () => {
   }
 };
 
+const signInWithTskoli = async () => {
+  let authenticated = false;
+  // check if user is logged in to tskoli.dev
+  const loggedIn = await fetch(
+    "https://tskoli-intranet-api-alpha.vercel.app/api/v1/auth/me",
+    {
+      credentials: "include",
+    }
+  )
+    .then((response) => {
+      console.log(response.status);
+      if (response.status === 401) {
+        const tskoliLogin = window.open("https://io.tskoli.dev/");
+        console.log("below windowOpen " + authenticated);
+        const timer = setInterval(() => {
+          if (tskoliLogin.close) {
+            signInWithTskoli();
+          }
+        }, 1000);
+      } else {
+        authenticated = true;
+        return response.json();
+      }
+    })
+    .catch((err) => {
+      throw new Error(err.status);
+    });
+  const user = loggedIn;
+  if (authenticated === true) {
+    return user;
+  }
+};
+
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -97,6 +131,7 @@ export {
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
+  signInWithTskoli,
   sendPasswordReset,
   logout,
 };

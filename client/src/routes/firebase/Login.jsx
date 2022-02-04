@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../../firebase";
+import { auth, logInWithEmailAndPassword, signInWithGoogle, signInWithTskoli } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Firebase.scss";
 import Header from "../../components/header/Header";
@@ -11,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (loading) {
@@ -47,6 +48,9 @@ function Login() {
         </button>
         <button className="firebase__btn firebase__google" onClick={signInWithGoogle}>
           Login with Google
+        </button>
+        <button className="firebase__btn firebase__tskoli" onClick={signInWithTskoli}>
+          Login with tskoli.dev
         </button>
         <div>
           <Link to="/reset">Forgot Password</Link>
