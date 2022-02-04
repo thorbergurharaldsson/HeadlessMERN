@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase";
+import { auth, signInWithTskoli } from "../../firebase";
 
 import Header from "../../components/header/Header";
 
 import "./Home.scss";
 
 export default function Home() {
-  const [user, loading, error] = useAuthState(auth);
+  const [tUser, setTuser] = useState({});
+  const useAuth = useAuthState(auth);
+  const user = tUser || useAuth[0];
   const navigate = useNavigate();
+
   useEffect(() => {
+    signInWithTskoli().then((r) => setTuser);
     if (!user) {
       navigate("/");
     }
