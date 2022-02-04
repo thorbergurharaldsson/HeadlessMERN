@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { auth } from "../../firebase";
+import { auth, signInWithTskoli } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -11,10 +11,13 @@ import Article from "./article/Article";
 import NewArticle from "./new-article/NewArticle";
 
 const Studio = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [tUser, setTuser] = useState({});
+  const useAuth = useAuthState(auth);
+  const user = tUser || useAuth[0]
   const navigate = useNavigate();
 
   useEffect(() => {
+    signInWithTskoli().then(r=>setTuser);
     if (!user) {
       navigate("/");
     }
