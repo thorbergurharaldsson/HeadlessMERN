@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../util/mongodb";
 import articleStyles from "../styles/Articles.module.css";
 
-export default function Articles({ articles }) {
+const Articles = ({ articles }) => {
   return (
     <div className={articleStyles.container}>
       <main className={articleStyles.main}>
@@ -20,7 +20,8 @@ export default function Articles({ articles }) {
       </main>
     </div>
   );
-}
+};
+export default Articles;
 
 export async function getServerSideProps() {
   const { db } = await connectToDatabase();

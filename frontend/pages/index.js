@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 // import { connectToDatabase } from '../util/mongodb'
 import clientPromise from "../util/mongodb";
@@ -31,36 +32,53 @@ export default function Home({ isConnected }) {
           </p> */}
 
           <div className="grid">
-            <a href="/articles" className="card">
-              <h3>Articles &rarr;</h3>
+            <div className="card">
+              <Link href="/articles">
+                <a>
+                  <h3>Articles &rarr; </h3>
+                </a>
+              </Link>
+
               <p>
                 Read the articles from the Vefþróun and learn more about web
                 design!
               </p>
-            </a>
+            </div>
 
-            <a href="/assignments" className="card">
-              <h3>Projects &rarr;</h3>
+            <div className="card">
+              <Link href="/assignments">
+                <a>
+                  <h3>Projects &rarr; </h3>
+                </a>
+              </Link>
               <p>
                 Discover our projects and the stack we used to develop them.
               </p>
-            </a>
+            </div>
 
-            <a href="/" className="card">
-              <h3>About us &rarr;</h3>
+            <div className="card">
+              <Link href="/">
+                <a>
+                  <h3>About us &rarr; </h3>
+                </a>
+              </Link>
               <p>
                 We are the students from the Reykjavík Academy of Web
                 Develop­ment, come meet us!
               </p>
-            </a>
+            </div>
 
-            <a href="/" className="card">
-              <h3>Documentation &rarr;</h3>
+            <div className="card">
+              <Link href="/">
+                <a>
+                  <h3>Documentation &rarr; </h3>
+                </a>
+              </Link>
               <p>
                 You want to know how this website was developed and how we built
                 our backend? Follow this link!
               </p>
-            </a>
+            </div>
           </div>
         </main>
 
