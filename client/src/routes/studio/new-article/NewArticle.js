@@ -1,21 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../utils/authContext";
 
 import ArticleForm from "../components/article-form/ArticleForm";
-import getUserInfo from "../../../stores/getUserInfo";
 
 export default function NewArticle() {
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-  });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    const userInfo = await getUserInfo();
-
-    setUser(userInfo);
-  }, []);
+  const user = useAuth();
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -26,6 +16,8 @@ export default function NewArticle() {
   });
 
   const saveArticle = async () => {
+    console.log(user);
+    console.log(user);
     const response = await fetch(
       `${process.env.REACT_APP_API_SERVER}/articles`,
       {
