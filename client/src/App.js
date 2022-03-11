@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./routes/auth/login";
+import Auth from "./routes/auth";
 import Home from "./routes/home/Home";
 import Studio from "./routes/studio/Studio";
 import Article from "./routes/article/Article";
 import { AuthProvider } from "./utils/authContext";
+import "./styles/globals.scss";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Login />} />
+          <Route path="*" element={<Auth />} />
           <Route exact path="/home" element={<Home />} />
+          <Route path="auth/*" element={<Auth />} />
           <Route path="studio/*" element={<Studio />} />
           <Route path="article/:id" element={<Article />} />
         </Routes>

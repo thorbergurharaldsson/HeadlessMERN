@@ -1,12 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "./api";
 import useSWR from "swr";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  let navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -38,12 +36,11 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     const result = await api.delete("/auth/logout");
     setUser(null);
-    navigate("/auth/login", { replace: true });
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, loading, login, logout, setUser }}
+      value={{ isAuthenticated: !!user, user, loading, setUser }}
     >
       {children}
     </AuthContext.Provider>
