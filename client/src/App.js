@@ -1,27 +1,22 @@
-// import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./routes/firebase/Login";
-import Register from "./routes/firebase/Register";
-import Reset from "./routes/firebase/Reset";
-import Dashboard from "./routes/firebase/Dashboard";
+import Login from "./routes/auth/login";
 import Home from "./routes/home/Home";
 import Studio from "./routes/studio/Studio";
 import Article from "./routes/article/Article";
+import { AuthProvider } from "./utils/authContext";
+
 function App() {
   return (
-    <div className="app">
+    <AuthProvider>
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/reset" element={<Reset />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/home" element={<Home />} />
           <Route path="studio/*" element={<Studio />} />
           <Route path="article/:id" element={<Article />} />
         </Routes>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 
