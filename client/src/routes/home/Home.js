@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ProtectedRoute from "../../utils/protectedRoute";
 
 import Header from "../../components/header/Header";
 
 import "./Home.scss";
 
-export default function Home() {
+function Home() {
   const [articles, setArticles] = useState([]);
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
@@ -67,3 +68,4 @@ export default function Home() {
     </div>
   );
 }
+export default ProtectedRoute(Home)

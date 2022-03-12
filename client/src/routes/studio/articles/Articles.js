@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Switch from "../components/switch/Switch";
 import getUserInfo from "../../../stores/getUserInfo";
+
 import "./Articles.scss";
 
 export default function Articles() {
@@ -11,7 +12,6 @@ export default function Articles() {
     id: "",
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const userInfo = await getUserInfo();
 

@@ -2,22 +2,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../utils/authContext";
 
+import getUserInfo from "../../../stores/getUserInfo";
+
 import ArticleForm from "../components/article-form/ArticleForm";
 
-export default function NewArticle() {
-  const user = useAuth();
+export default async function  NewArticle() {
+  const userInfo = await getUserInfo();
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [article, setArticle] = useState({
-    author: user.id,
+    author: userInfo.id,
     title: "",
     content: "",
   });
 
   const saveArticle = async () => {
-    console.log(user);
-    console.log(user);
+    console.log(userInfo);
     const response = await fetch(
       `${process.env.REACT_APP_API_SERVER}/articles`,
       {

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from "./routes/auth";
+import Index from "./routes/Index";
 import Home from "./routes/home/Home";
 import Studio from "./routes/studio/Studio";
 import Article from "./routes/article/Article";
@@ -11,7 +12,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="*" element={<Auth />} />
+          <Route path="/" element={<Index />} />
           <Route exact path="/home" element={<Home />} />
           <Route path="auth/*" element={<Auth />} />
           <Route path="studio/*" element={<Studio />} />

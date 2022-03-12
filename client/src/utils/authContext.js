@@ -4,6 +4,7 @@ import useSWR from "swr";
 
 export const AuthContext = createContext({});
 
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,24 +24,23 @@ export const AuthProvider = ({ children }) => {
     setLoading(!finished);
   }, [finished, hasUser]);
 
-  const login = async ({ email, password }) => {
-    const result = await api.post("/auth/login", { email, password });
+  const login = async () => {
+    const result = await api.get("/auth/me");
 
     if (result.status === 200) {
       setUser(result.data);
     }
-
+    if (result.status === 401){
+      console.log("you need to sign in to io.tskoli.dev");
+    }
     return result;
   };
 
-  const logout = async () => {
-    const result = await api.delete("/auth/logout");
-    setUser(null);
-  };
 
+  
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, loading, setUser }}
+      value={{ isAuthenticated: !!user, user, loading, login, setUser }}
     >
       {children}
     </AuthContext.Provider>

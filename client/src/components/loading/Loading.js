@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ClientOnlyPortal from "./ClientOnlyPortal";
+import ClientOnlyPortal from "../ClientOnlyPortal";
 
 import style from "./LoadingScreen.module.scss";
 
