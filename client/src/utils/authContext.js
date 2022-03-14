@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "./api";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
-
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,14 +31,12 @@ export const AuthProvider = ({ children }) => {
     if (result.status === 200) {
       setUser(result.data);
     }
-    if (result.status === 401){
-      console.log("you need to sign in to io.tskoli.dev");
+    if (result.status === 401) {
+      navigate(`https://io.tskoli.dev/auth/sso`);
     }
     return result;
   };
 
-
-  
   return (
     <AuthContext.Provider
       value={{ isAuthenticated: !!user, user, loading, login, setUser }}
