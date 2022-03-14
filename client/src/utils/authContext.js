@@ -1,12 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import api from "./api";
 import useSWR from "swr";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       setUser(result.data);
     }
     if (result.status === 401) {
-      navigate(`https://io.tskoli.dev/auth/sso`);
+      window.location.replace(`https://io.tskoli.dev/auth/sso`);
     }
     return result;
   };
