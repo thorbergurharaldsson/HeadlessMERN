@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { data, error } = useSWR("/auth/me", api.get);
+  const { data } = useSWR("/auth/me", api.get);
   const fetchedUser = data && data.data;
   const finished = Boolean(data);
   const hasUser = Boolean(fetchedUser && fetchedUser._id);
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     setLoading(!finished);
-  }, [finished, hasUser]);
+  }, [finished, hasUser, fetchedUser]);
 
   const login = async () => {
     const result = await api.get("/auth/me");
