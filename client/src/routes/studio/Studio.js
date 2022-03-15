@@ -5,6 +5,7 @@ import Assignments from "./assignments/Assignments";
 import Layout from "./components/layout/Layout";
 import Article from "./article/Article";
 import NewArticle from "./new-article/NewArticle";
+import ProtectedRoute from "../../utils/protectedRoute";
 
 const Studio = () => {
   return (
@@ -20,4 +21,4 @@ const Studio = () => {
   );
 };
 
-export default Studio;
+export default ProtectedRoute(Studio);

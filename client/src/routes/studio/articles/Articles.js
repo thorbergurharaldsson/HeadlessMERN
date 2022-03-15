@@ -1,27 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import ProtectedRoute from "../../../utils/protectedRoute";
 import Switch from "../components/switch/Switch";
-import getUserInfo from "../../../stores/getUserInfo";
+import { useAuth } from "../../../utils/authContext";
 
 import "./Articles.scss";
 
-export default function Articles() {
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-  });
-
-  useEffect(async () => {
-    const userInfo = await getUserInfo();
-
-    setUser(userInfo);
-  }, []);
+function Articles() {
+  const { user } = useAuth();
 
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles();
-  }, []);
+  }, [user]);
 
   const getArticles = async () => {
     const response = await fetch(
@@ -96,3 +87,5 @@ export default function Articles() {
     </div>
   );
 }
+
+export default ProtectedRoute(Articles);

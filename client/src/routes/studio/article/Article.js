@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import ProtectedRoute from "../../../utils/protectedRoute";
 import ArticleForm from "../components/article-form/ArticleForm";
 
-export default function Article() {
+function Article() {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -59,3 +59,5 @@ export default function Article() {
     />
   );
 }
+
+export default ProtectedRoute(Article);

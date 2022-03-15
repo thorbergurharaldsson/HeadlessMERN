@@ -1,22 +1,10 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-
 import Logo from "../../../../components/logo/Logo";
-import getUserInfo from "../../../../stores/getUserInfo";
+import { useAuth } from "./authContext";
 import "./Layout.scss";
 
 export default function Layout({ children }) {
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-  });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    const userInfo = await getUserInfo();
-
-    setUser(userInfo);
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div className="layout">
