@@ -22,6 +22,7 @@ export const newAuthor = (req, res) => {
   const author = new Author();
   author.name = req.body.name;
   author.email = req.body.email;
+  author.tskoliID = req.body.tskoliID;
   author.bio = req.body.bio;
 
   if (!author.name) {
@@ -32,6 +33,11 @@ export const newAuthor = (req, res) => {
   if (!author.email) {
     return res.status(400).json({
       message: "'email' is required",
+    });
+  }
+  if (!author.tskoliID) {
+    return res.status(400).json({
+      message: "'tskoliID' is required",
     });
   } else {
     // save the author and check for errors
@@ -49,7 +55,7 @@ export const newAuthor = (req, res) => {
 
 // Handle index author by id
 export const viewAuthorByID = (req, res) => {
-  Author.findById(req.params.author_id, (err, author) => {
+  Author.findOne({ tskoliID: req.params.author_id }, (err, author) => {
     if (err) res.send(err);
     else
       res.json({
@@ -61,10 +67,11 @@ export const viewAuthorByID = (req, res) => {
 
 // Handle update author by id
 export const updateAuthor = (req, res) => {
-  Author.findById(req.params.author_id, (err, author) => {
+  Author.findOne({ tskoliID: req.params.author_id }, (err, author) => {
     if (err) res.send(err);
     author.name = req.body.name ? req.body.name : author.name;
     author.email = req.body.email ? req.body.email : author.email;
+    author.tskoliID = req.body.tskoliID ? req.body.tskoliID : author.tskoliID;
     author.bio = req.body.bio ? req.body.bio : author.bio;
 
     author.save((err) => {
@@ -81,7 +88,7 @@ export const updateAuthor = (req, res) => {
 export const deleteAuthor = (req, res) => {
   Author.deleteOne(
     {
-      _id: req.params.author_id,
+      tskoliID: req.params.author_id,
     },
     (err) => {
       if (err) res.send(err);

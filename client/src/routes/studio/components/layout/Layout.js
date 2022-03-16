@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../../components/logo/Logo";
-import { useAuth } from "./authContext";
+import { useAuth } from "../../../../utils/authContext";
 import "./Layout.scss";
 
 export default function Layout({ children }) {

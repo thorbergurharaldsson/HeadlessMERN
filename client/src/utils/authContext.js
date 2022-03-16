@@ -1,14 +1,18 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import api from "./api";
+import { horsemernAPI, tskoliAPI } from "./api";
 import useSWR from "swr";
 
 export const AuthContext = createContext({});
+
+const createAuthorIfNotExisting = (id) => {
+  console.log(horsemernAPI.get(`/authors/${id}`));
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { data } = useSWR("/auth/me", api.get);
+  const { data } = useSWR("/auth/me", tskoliAPI.get);
   const fetchedUser = data && data.data;
   const finished = Boolean(data);
   const hasUser = Boolean(fetchedUser && fetchedUser._id);
@@ -24,10 +28,12 @@ export const AuthProvider = ({ children }) => {
   }, [finished, hasUser, fetchedUser]);
 
   const login = async () => {
-    const result = await api.get("/auth/me");
+    const result = await tskoliAPI.get("/auth/me");
 
     if (result.status === 200) {
       setUser(result.data);
+      console.log(user);
+      createAuthorIfNotExisting(user.tskoliID);
     }
     if (result.status === 401) {
       window.location.replace(`https://io.tskoli.dev/auth/sso`);

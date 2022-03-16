@@ -54,6 +54,7 @@ import {
 
 router.route("/authors").get(indexAuthors).post(newAuthor);
 
+// author_id is the tskoliID
 router
   .route("/authors/:author_id")
   .get(viewAuthorByID)
