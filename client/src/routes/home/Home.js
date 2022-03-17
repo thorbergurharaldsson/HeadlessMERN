@@ -40,9 +40,8 @@ function Home() {
       <Header />
       <div className="section">
         <div className="section__header">
-          <h1>Articlessss</h1>
-          <button onClick={createAuthorIfNotExisting}>test</button>
-          <p>test</p>
+          <h1>Articles</h1>
+          <button onClick={() => createAuthorIfNotExisting}>test</button>
         </div>
         {articles?.map((article) => (
           <div className="section__body" key={article._id}>
