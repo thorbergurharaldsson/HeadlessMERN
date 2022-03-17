@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     if (result.status === 200) {
       setUser(result.data);
-      console.log(user);
+      console.log(result.data);
       createAuthorIfNotExisting(user.tskoliID);
     }
     if (result.status === 401) {
