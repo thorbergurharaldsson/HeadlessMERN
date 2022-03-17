@@ -13,8 +13,6 @@ const horsemernAPI = {
   get: (path) =>
     fetch(`${process.env.HORSEMERN_PUBLIC_API_URL}${path}`, {
       method: "GET",
-      credentials: "include",
-      headers: {},
     }).then(async (res) => ({ data: await res.json(), status: res.status })),
 
   post: (path, body) =>

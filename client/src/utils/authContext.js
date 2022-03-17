@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const createAuthorIfNotExisting = (id) => {
-    const { hmdata } = horsemernAPI.get(`/authors/${id}`);
+    const hmdata = horsemernAPI.get(`/authors/${id}`);
     console.log(hmdata);
   };
 
