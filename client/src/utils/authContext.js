@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
       createAuthorIfNotExisting(user.tskoliID);
     }
     if (result.status === 401) {
-      window.location.replace(`https://io.tskoli.dev/auth/sso`);
+      window.location.replace(`${process.env.TSKOLIWEB}/auth/sso`);
     }
     return result;
   };
