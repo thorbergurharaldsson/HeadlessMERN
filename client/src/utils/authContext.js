@@ -28,8 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     if (result.status === 200) {
       setUser(result.data);
-      console.log(result.data);
-      createAuthorIfNotExisting(user.tskoliID);
+      createAuthorIfNotExisting(result.data._id);
     }
     if (result.status === 401) {
       window.location.replace(`${process.env.TSKOLIWEB}/auth/sso`);
