@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProtectedRoute from "../../utils/protectedRoute";
+import { useAuth } from "../../utils/authContext";
 
 import Header from "../../components/header/Header";
 
 import "./Home.scss";
 
 function Home() {
+  const { createAuthorIfNotExisting } = useAuth();
   const [articles, setArticles] = useState([]);
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
@@ -38,7 +40,9 @@ function Home() {
       <Header />
       <div className="section">
         <div className="section__header">
-          <h1>Articles</h1>
+          <h1>Articlessss</h1>
+          <button onClick={createAuthorIfNotExisting}>test</button>
+          <p>test</p>
         </div>
         {articles?.map((article) => (
           <div className="section__body" key={article._id}>
@@ -68,4 +72,4 @@ function Home() {
     </div>
   );
 }
-export default ProtectedRoute(Home)
+export default ProtectedRoute(Home);

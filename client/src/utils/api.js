@@ -1,7 +1,7 @@
 const dev = process.env.DEV;
 const tskoliapiURL = dev
-  ? "http://localhost:3001/api/v1"
-  : "https://tskoli-intranet-api-alpha.vercel.app/api/v1";
+  ? "https://tskoli-intranet-api-alpha.vercel.app/api/v1"
+  : "http://localhost:3001/api/v1";
 
 const tskoliAPI = {
   get: (path) =>
