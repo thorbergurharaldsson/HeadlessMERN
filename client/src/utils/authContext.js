@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { horsemernAPI, tskoliAPI } from "./api";
+import { tskoliAPI } from "./api";
 import useSWR from "swr";
 
 export const AuthContext = createContext({});
@@ -11,6 +11,8 @@ let tskoliWeb = "https://io.tskoli.dev";
 if (dev) {
   tskoliWeb = "http://localhost:3002";
 }
+
+const hmAPI = process.env.REACT_APP_HORSEMERN_API;
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -44,8 +46,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const createAuthorIfNotExisting = (id) => {
-    const hmdata = horsemernAPI.get(`/authors/${id}`);
-    console.log(hmdata);
+    const author = fetch(`${hmAPI}/authors/${id}`, {
+      method: "GET",
+    }).then(async (res) => ({ data: await res.json(), status: res.status }));
+    console.log(author.status);
   };
 
   return (

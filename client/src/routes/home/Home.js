@@ -38,6 +38,7 @@ function Home() {
   return (
     <div>
       <Header />
+      <button onClick={() => createAuthorIfNotExisting()}>Test</button>
       <div className="section">
         <div className="section__header">
           <h1>Articles</h1>
