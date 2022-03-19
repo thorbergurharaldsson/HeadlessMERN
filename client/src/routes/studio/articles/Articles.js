@@ -16,7 +16,7 @@ function Articles() {
 
   const getArticles = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/articles`
+      `${process.env.REACT_APP_HORSEMERN_API}/articles`
     );
     const { data } = await response.json();
     const filteredArticles = data.filter(
@@ -36,19 +36,25 @@ function Articles() {
 
     setArticles(updatedArticles);
 
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${article._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8", // Indicates the content
-      },
-      body: JSON.stringify(updatedArticle),
-    });
+    await fetch(
+      `${process.env.REACT_APP_HORSEMERN_API}/articles/${article._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8", // Indicates the content
+        },
+        body: JSON.stringify(updatedArticle),
+      }
+    );
   };
 
   const deleteArticle = async (article) => {
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${article._id}`, {
-      method: "DELETE",
-    });
+    await fetch(
+      `${process.env.REACT_APP_HORSEMERN_API}/articles/${article._id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     getArticles();
   };

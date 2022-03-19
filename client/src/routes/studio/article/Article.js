@@ -11,7 +11,7 @@ function Article() {
   useEffect(() => {
     const getArticle = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/articles/${params.id}`
+        `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`
       );
       const { data } = await response.json();
 
@@ -26,19 +26,25 @@ function Article() {
   }, [article.published]);
 
   const saveArticle = async () => {
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${params.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8", // Indicates the content
-      },
-      body: JSON.stringify(article),
-    });
+    await fetch(
+      `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8", // Indicates the content
+        },
+        body: JSON.stringify(article),
+      }
+    );
   };
 
   const deleteArticle = async () => {
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${params.id}`, {
-      method: "DELETE",
-    });
+    await fetch(
+      `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     navigate("/studio/articles");
   };

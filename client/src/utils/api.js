@@ -1,4 +1,9 @@
-const tskoliapiURL = "https://tskoli-intranet-api-alpha.vercel.app/api/v1";
+let tskoliapiURL = process.env.REACT_APP_TSKOLI_API;
+const horsemernapiURL = process.env.REACT_APP_HORSEMERN_API;
+
+if (process.env.REACT_APP_NODE_ENV === "development") {
+  tskoliapiURL = "http://localhost:3001/api/v1";
+}
 
 const tskoliAPI = {
   get: (path) =>
@@ -11,12 +16,12 @@ const tskoliAPI = {
 
 const horsemernAPI = {
   get: (path) =>
-    fetch(`${process.env.HORSEMERN_PUBLIC_API_URL}${path}`, {
+    fetch(`${horsemernapiURL}${path}`, {
       method: "GET",
     }).then(async (res) => ({ data: await res.json(), status: res.status })),
 
   post: (path, body) =>
-    fetch(`${process.env.HORSEMERN_PUBLIC_API_URL}${path}`, {
+    fetch(`${horsemernapiURL}${path}`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -31,7 +36,7 @@ const horsemernAPI = {
     }),
 
   patch: (path, body) =>
-    fetch(`${process.env.HORSEMERN_PUBLIC_API_URL}${path}`, {
+    fetch(`${horsemernapiURL}${path}`, {
       method: "PATCH",
       credentials: "include",
       headers: {
@@ -41,7 +46,7 @@ const horsemernAPI = {
     }).then(async (res) => ({ data: await res.json(), status: res.status })),
 
   delete: (path, body) =>
-    fetch(`${process.env.HORSEMERN_PUBLIC_API_URL}${path}`, {
+    fetch(`${horsemernapiURL}${path}`, {
       method: "DELETE",
       credentials: "include",
       headers: {

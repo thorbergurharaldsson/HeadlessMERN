@@ -14,7 +14,15 @@ export default function ProtectedRoute(Component) {
     }, [loading, isAuthenticated]);
 
     return (
-      <>{isAuthenticated ? <Component {...props} /> : <p>Loading... </p>}</>
+      <>
+        {isAuthenticated ? (
+          <Component {...props} />
+        ) : process.env.REACT_APP_NODE_ENV === "development" ? (
+          <Component {...props} />
+        ) : (
+          <p>Not authorized</p>
+        )}
+      </>
     );
   };
 }

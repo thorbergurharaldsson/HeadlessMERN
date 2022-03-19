@@ -18,7 +18,7 @@ function Home() {
 
   const getArticles = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/articles`
+      `${process.env.REACT_APP_HORSEMERN_API}/articles`
     );
     const { data } = await response.json();
 
@@ -28,7 +28,7 @@ function Home() {
 
   const getAssignments = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/assignments`
+      `${process.env.REACT_APP_HORSEMERN_API}/assignments`
     );
     const data = await response.json();
 
@@ -41,7 +41,6 @@ function Home() {
       <div className="section">
         <div className="section__header">
           <h1>Articles</h1>
-          <button onClick={() => createAuthorIfNotExisting}>test</button>
         </div>
         {articles?.map((article) => (
           <div className="section__body" key={article._id}>

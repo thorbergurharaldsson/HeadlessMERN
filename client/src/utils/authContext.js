@@ -4,6 +4,14 @@ import useSWR from "swr";
 
 export const AuthContext = createContext({});
 
+const dev = process.env.REACT_APP_NODE_ENV === "development";
+
+let tskoliWeb = "https://io.tskoli.dev";
+
+if (dev) {
+  tskoliWeb = "http://localhost:3002";
+}
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,7 +27,6 @@ export const AuthProvider = ({ children }) => {
     } else {
       setUser(null);
     }
-
     setLoading(!finished);
   }, [finished, hasUser, fetchedUser]);
 
@@ -31,7 +38,7 @@ export const AuthProvider = ({ children }) => {
       createAuthorIfNotExisting(result.data._id);
     }
     if (result.status === 401) {
-      window.location.replace(`${process.env.TSKOLIWEB}/auth/sso`);
+      window.location.replace(`${tskoliWeb}/auth/sso`);
     }
     return result;
   };

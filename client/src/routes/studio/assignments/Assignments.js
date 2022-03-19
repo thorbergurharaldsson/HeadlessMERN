@@ -15,7 +15,7 @@ function Assignments(params) {
 
   const getAssignments = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/assignments`
+      `${process.env.REACT_APP_HORSEMERN_API}/assignments`
     );
     const data = await response.json();
     const filteredAssignments = data.filter(

@@ -17,7 +17,7 @@ async function NewArticle() {
 
   const saveArticle = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/articles`,
+      `${process.env.REACT_APP_HORSEMERN_API}/articles`,
       {
         method: "POST",
         headers: {

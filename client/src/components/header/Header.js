@@ -9,7 +9,6 @@ function Header() {
       <Logo />
       <div className="links">
         <Link to="/studio">Studio</Link>
-        <Link to="/dashboard">Dashboard</Link>
       </div>
     </header>
   );

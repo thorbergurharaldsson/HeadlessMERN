@@ -10,7 +10,7 @@ export default function Article() {
   useEffect(() => {
     const getArticle = async () => {
       const response = await fetch(
-        `${process.env.REACT_APP_API_SERVER}/articles/${params.id}`
+        `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`
       );
       const { data } = await response.json();
 
