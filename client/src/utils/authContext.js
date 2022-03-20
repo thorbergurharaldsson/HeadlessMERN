@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }) => {
 
     if (result.status === 200) {
       setUser(result.data);
-      createAuthorIfNotExisting(result.data._id, user);
+      console.log(result.data + " user before running create");
+      createAuthorIfNotExisting(result.data._id, result.data);
     }
     if (result.status === 401) {
       window.location.replace(`${tskoliWeb}/auth/sso`);
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         email: user.email,
         tskoliID: user._id,
       };
-      horsemernAPI.post("/authors", body);
+      horsemernAPI.post("/author", body);
     }
     if (author.status === 200) {
       console.log("author exists.");
