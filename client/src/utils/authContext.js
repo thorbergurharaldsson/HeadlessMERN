@@ -37,7 +37,6 @@ export const AuthProvider = ({ children }) => {
 
     if (result.status === 200) {
       setUser(result.data);
-      createAuthorIfNotExisting(result.data._id);
     }
     if (result.status === 401) {
       window.location.replace(`${tskoliWeb}/auth/sso`);
@@ -48,8 +47,8 @@ export const AuthProvider = ({ children }) => {
   const createAuthorIfNotExisting = (id) => {
     const author = fetch(`${hmAPI}/authors/${id}`, {
       method: "GET",
-    }).then(async (res) => ({ data: await res.json(), status: res.status }));
-    console.log(author.status);
+    }).then(async (res) => (console.log(res)));
+    // { data: await res.json(), status: res.status }
   };
 
   return (
