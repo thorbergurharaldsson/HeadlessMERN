@@ -57,11 +57,18 @@ export const newAuthor = (req, res) => {
 export const viewAuthorByID = (req, res) => {
   Author.findOne({ tskoliID: req.params.author_id }, (err, author) => {
     if (err) res.send(err);
-    else
-      res.json({
-        message: "Loading author",
-        data: author,
-      });
+    else {
+      if (author) {
+        res.json({
+          message: "Succesfully retrived author",
+          data: author,
+        });
+      } else {
+        return res.status(400).json({
+          message: "No author with that ID.",
+        });
+      }
+    }
   });
 };
 
