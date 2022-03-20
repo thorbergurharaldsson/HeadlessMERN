@@ -12,8 +12,6 @@ if (dev) {
   tskoliWeb = "http://localhost:3002";
 }
 
-const hmAPI = process.env.REACT_APP_HORSEMERN_API;
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
