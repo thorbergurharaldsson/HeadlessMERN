@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { tskoliAPI } from "./api";
+import { horsemernAPI, tskoliAPI } from "./api";
 import useSWR from "swr";
 
 export const AuthContext = createContext({});
@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
 
     if (result.status === 200) {
       setUser(result.data);
+      createAuthorIfNotExisting(result.data._id, user);
     }
     if (result.status === 401) {
       window.location.replace(`${tskoliWeb}/auth/sso`);
@@ -44,11 +45,21 @@ export const AuthProvider = ({ children }) => {
     return result;
   };
 
-  const createAuthorIfNotExisting = (id) => {
-    const author = fetch(`${hmAPI}/authors/${id}`, {
-      method: "GET",
-    }).then(async (res) => (console.log(res)));
-    // { data: await res.json(), status: res.status }
+  const createAuthorIfNotExisting = async (id, user) => {
+    const author = await horsemernAPI.get(`/authors/${id}`);
+
+    if (author.status === 400) {
+      console.log("author does not exist, creating author...");
+      const body = {
+        name: user.name,
+        email: user.email,
+        tskoliID: user._id,
+      };
+      horsemernAPI.post("/authors", body);
+    }
+    if (author.status === 200) {
+      console.log("author exists.");
+    }
   };
 
   return (

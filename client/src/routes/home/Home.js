@@ -8,7 +8,7 @@ import Header from "../../components/header/Header";
 import "./Home.scss";
 
 function Home() {
-  const { createAuthorIfNotExisting } = useAuth();
+  const { createAuthorIfNotExisting, user } = useAuth();
   const [articles, setArticles] = useState([]);
   const [assignments, setAssignments] = useState([]);
   useEffect(() => {
@@ -17,13 +17,10 @@ function Home() {
   }, []);
 
   const getArticles = async () => {
-    console.log("b4 fetch");
     const response = await fetch(
       `${process.env.REACT_APP_HORSEMERN_API}/articles`
     );
-    console.log("b4 data");
     const { data } = await response.json();
-    console.log("data: " + data)
     const publishedArticles = data.filter((article) => article.published);
     setArticles(publishedArticles);
   };
@@ -40,7 +37,13 @@ function Home() {
   return (
     <div>
       <Header />
-      <button onClick={() => createAuthorIfNotExisting("611e314b0cf1d80009c74e30")}>Test</button>
+      <button
+        onClick={() =>
+          createAuthorIfNotExisting("611e314b0cf1d80009c74e30", user)
+        }
+      >
+        Test
+      </button>
       <div className="section">
         <div className="section__header">
           <h1>Articles</h1>
