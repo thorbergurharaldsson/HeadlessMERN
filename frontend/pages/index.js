@@ -1,7 +1,7 @@
-import Head from "next/head";
+// import Head from "next/head";
+// import { connectToDatabase } from '../util/mongodb'
 import Link from "next/link";
 
-// import { connectToDatabase } from '../util/mongodb'
 import clientPromise from "../util/mongodb";
 
 export default function Home({ isConnected }) {
@@ -32,53 +32,44 @@ export default function Home({ isConnected }) {
           </p> */}
 
           <div className="grid">
-            <div className="card">
-              <Link href="/articles">
-                <a>
-                  <h3>Articles &rarr; </h3>
-                </a>
-              </Link>
+            <Link href="/articles">
+              <a className="card">
+                <h3>Articles &rarr;</h3>
+                <p>
+                  Read the articles from the Vefþróun and learn more about web
+                  design!
+                </p>
+              </a>
+            </Link>
 
-              <p>
-                Read the articles from the Vefþróun and learn more about web
-                design!
-              </p>
-            </div>
+            <Link href="/assignments">
+              <a className="card">
+                <h3>Projects &rarr;</h3>
+                <p>
+                  Discover our projects and the stack we used to develop them.
+                </p>
+              </a>
+            </Link>
 
-            <div className="card">
-              <Link href="/assignments">
-                <a>
-                  <h3>Projects &rarr; </h3>
-                </a>
-              </Link>
-              <p>
-                Discover our projects and the stack we used to develop them.
-              </p>
-            </div>
+            <Link href="/">
+              <a className="card">
+                <h3>About us &rarr;</h3>
+                <p>
+                  We are the students from the Reykjavík Academy of Web
+                  Develop­ment, come meet us!
+                </p>
+              </a>
+            </Link>
 
-            <div className="card">
-              <Link href="/">
-                <a>
-                  <h3>About us &rarr; </h3>
-                </a>
-              </Link>
-              <p>
-                We are the students from the Reykjavík Academy of Web
-                Develop­ment, come meet us!
-              </p>
-            </div>
-
-            <div className="card">
-              <Link href="/">
-                <a>
-                  <h3>Documentation &rarr; </h3>
-                </a>
-              </Link>
-              <p>
-                You want to know how this website was developed and how we built
-                our backend? Follow this link!
-              </p>
-            </div>
+            <Link href="/">
+              <a className="card">
+                <h3>Documentation &rarr;</h3>
+                <p>
+                  You want to know how this website was developed and how we
+                  built our backend? Follow this link!
+                </p>
+              </a>
+            </Link>
           </div>
         </main>
 

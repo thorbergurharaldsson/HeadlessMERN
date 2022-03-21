@@ -1,6 +1,6 @@
 import { connectToDatabase } from "../../util/mongodb";
 
-export default async (req, res) => {
+export async function getServerSideProps(req, res) {
   const { db } = await connectToDatabase();
 
   const articles = await db
@@ -11,4 +11,4 @@ export default async (req, res) => {
     .toArray();
 
   res.json(articles);
-};
+}
