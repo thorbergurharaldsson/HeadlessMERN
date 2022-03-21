@@ -10,6 +10,7 @@ import "./styles/globals.scss";
 function App() {
   return (
     <AuthProvider>
+      <div id="loading-screen" />
       <Router>
         <Routes>
           <Route path="/" element={<Index />} />

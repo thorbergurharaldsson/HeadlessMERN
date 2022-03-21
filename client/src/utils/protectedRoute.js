@@ -1,7 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useAuth } from "./authContext";
 import { useNavigate } from "react-router-dom";
+
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function ProtectedRoute(Component) {
   return function FuncWithProps(props) {
@@ -9,18 +10,15 @@ export default function ProtectedRoute(Component) {
     const navigate = useNavigate();
 
     useEffect(() => {
-      if (!isAuthenticated && !loading)
-        navigate("/auth/login", { replace: true });
+      if (!isAuthenticated && !loading) navigate("/auth/login");
     }, [loading, isAuthenticated]);
 
     return (
       <>
         {isAuthenticated ? (
           <Component {...props} />
-        ) : process.env.REACT_APP_NODE_ENV === "development" ? (
-          <Component {...props} />
         ) : (
-          <p>Not authorized</p>
+          <LoadingScreen loading={true} />
         )}
       </>
     );

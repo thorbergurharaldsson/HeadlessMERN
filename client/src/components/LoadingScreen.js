@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import ClientOnlyPortal from "../ClientOnlyPortal";
+import ClientOnlyPortal from "./ClientOnlyPortal";
 
-import style from "./LoadingScreen.module.scss";
+import style from "../styles/components/LoadingScreen.module.scss";
 
 export default function LoadingScreen({ loading }) {
   const [loadingClass, setLoadingClass] = useState();
