@@ -19,7 +19,7 @@ function Articles() {
     const response = horsemernAPI.get("/articles");
     const data = (await response).data.data;
     const filteredArticles = data.filter(
-      (article) => article.author == user.id
+      (article) => article.author == user._id
     );
     setArticles(filteredArticles);
   };
@@ -48,14 +48,8 @@ function Articles() {
   };
 
   const deleteArticle = async (article) => {
-    await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/articles/${article._id}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    getArticles();
+    horsemernAPI.delete(`/articles/${article._id}`);
+    window.location.reload(false);
   };
 
   return (

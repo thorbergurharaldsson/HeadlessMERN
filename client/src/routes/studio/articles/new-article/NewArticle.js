@@ -7,7 +7,6 @@ import ArticleForm from "../../components/article-form/ArticleForm";
 
 function NewArticle() {
   const { user } = useAuth();
-  console.log(user);
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -18,22 +17,14 @@ function NewArticle() {
   });
 
   const saveArticle = async () => {
-    // const response = await fetch(
-    //   `${process.env.REACT_APP_HORSEMERN_API}/articles`,
-    //   {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8", // Indicates the content
-    //     },
-    //     body: JSON.stringify(article),
-    //   }
-    // );
-
     const { data, status } = await horsemernAPI.post("/articles", article);
+
+    console.log(data.data._id);
 
     setMessage(message);
     if (status === 200) {
-      navigate(`/studio/articles/${data._id}`);
+      console.log("article saved " + JSON.stringify(article));
+      navigate(`/studio/articles/${data.data._id}`);
     }
   };
 

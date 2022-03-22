@@ -1,5 +1,4 @@
 import { Article } from "../schemas/articleModel.js";
-import { Author } from "../schemas/authorModel.js";
 
 // handel index actions
 export const indexArticles = (req, res) => {
@@ -43,23 +42,14 @@ export const newArticle = (req, res) => {
       message: "'author' is required",
     });
   } else {
-    Author.findOne({ tskoliID: article.author }, (err, author) => {
-      if (err) return res.send(err);
-      author.articles.push(article);
-      author.save((err) => {
-        if (err) res.send(err);
-        // save the article and check for errors
-        else
-          article.save((err) => {
-            // Check for validation error
-            if (err) res.json(err);
-            else
-              res.json({
-                message: "New article created!",
-                data: article,
-              });
-          });
-      });
+    article.save((err) => {
+      // Check for validation error
+      if (err) res.json(err);
+      else
+        res.json({
+          message: "New article created!",
+          data: article,
+        });
     });
   }
 };
@@ -87,20 +77,11 @@ export const updateArticle = (req, res) => {
     article.published =
       req.body.published !== undefined ? req.body.published : article.published;
 
-    Author.findById(article.author, (err, author) => {
-      if (err) return res.send(err);
-      author.articles.push(article);
-      author.save((err) => {
-        if (err) res.send(err);
-        // save the article and check for errors
-        else
-          article.save((err) => {
-            if (err) res.json(err);
-            res.json({
-              message: "Article Info updated",
-              data: article,
-            });
-          });
+    article.save((err) => {
+      if (err) res.json(err);
+      res.json({
+        message: "Article Info updated",
+        data: article,
       });
     });
   });

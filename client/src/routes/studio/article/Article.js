@@ -2,49 +2,36 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ProtectedRoute from "../../../utils/protectedRoute";
 import ArticleForm from "../components/article-form/ArticleForm";
+import { horsemernAPI } from "../../../utils/api";
 
 function Article() {
   const params = useParams();
   const navigate = useNavigate();
 
   const [article, setArticle] = useState({});
+
   useEffect(() => {
     const getArticle = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`
-      );
-      const { data } = await response.json();
+      const { data } = await horsemernAPI.get(`/articles/${params.id}`);
+      console.log(data.data);
 
-      setArticle(data);
+      setArticle(data.data);
     };
-
     getArticle();
   }, []);
 
   useEffect(() => {
-    saveArticle();
+    updateArticle();
   }, [article.published]);
 
   const saveArticle = async () => {
-    await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8", // Indicates the content
-        },
-        body: JSON.stringify(article),
-      }
-    );
+    await horsemernAPI.patch(`/articles/${params.id}`, article);
+
+    navigate("/studio/articles");
   };
 
   const deleteArticle = async () => {
-    await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/articles/${params.id}`,
-      {
-        method: "DELETE",
-      }
-    );
+    await horsemernAPI.delete(`/articles/${params.id}`);
 
     navigate("/studio/articles");
   };
