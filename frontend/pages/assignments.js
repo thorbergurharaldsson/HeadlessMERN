@@ -1,24 +1,27 @@
 import { connectToDatabase } from "../util/mongodb";
-import articleStyles from "../styles/Articles.module.css";
+import styles from "../styles/Articles.module.scss";
+import Layout from "../components/Layout/Layout";
 
 const Assignments = ({ assignments }) => {
   return (
-    <div className={articleStyles.container}>
-      <main className={articleStyles.main}>
-        <h1 className={articleStyles.title}>Assignments</h1>
+    <Layout>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1 className={styles.title}>Assignments</h1>
 
-        <div className={articleStyles.grid}>
-          {assignments.map((assignment, index) => (
-            <div key={index} className={articleStyles.card}>
-              <h2>{assignment.title}</h2>
-              {/* <h3>{assignment.description}</h3> */}
-              <h3>{assignment.author}</h3>
-              {/* <p>{assignment.url}</p> */}
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+          <div className={styles.grid}>
+            {assignments.map((assignment, index) => (
+              <div key={index} className={styles.card}>
+                <h2>{assignment.title}</h2>
+                {/* <h3>{assignment.description}</h3> */}
+                <h3>{assignment.author}</h3>
+                {/* <p>{assignment.url}</p> */}
+              </div>
+            ))}
+          </div>
+        </main>
+      </div>
+    </Layout>
   );
 };
 

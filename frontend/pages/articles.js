@@ -1,24 +1,27 @@
 import { connectToDatabase } from "../util/mongodb";
-import articleStyles from "../styles/Articles.module.css";
+import styles from "../styles/Articles.module.scss";
+import Layout from "../components/Layout/Layout";
 
 const Articles = ({ articles }) => {
   return (
-    <div className={articleStyles.container}>
-      <main className={articleStyles.main}>
-        <h1 className={articleStyles.title}>Articles</h1>
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.main}>
+          <h1 className={styles.title}>Articles</h1>
 
-        <div className={articleStyles.grid}>
-          {articles.map((article, index) => (
-            <div key={index} className={articleStyles.card}>
-              <h2>{article.title}</h2>
-              <h3>{article.subtitle}</h3>
-              {/* <h4>{article.author}</h4> */}
-              <p>{article.content}</p>
-            </div>
-          ))}
+          <div className={styles.grid}>
+            {articles.map((article, index) => (
+              <div key={index} className={styles.card}>
+                <h2>{article.title}</h2>
+                <h3>{article.subtitle}</h3>
+                {/* <h4>{article.author}</h4> */}
+                <p>{article.content}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 };
 export default Articles;
