@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProtectedRoute from "../../../utils/protectedRoute";
 import Markdown from "../../../components/markdown/Markdown";
 import { useAuth } from "../../../utils/authContext";
+import { horsemernAPI } from "../../../utils/api";
 
 import "./Assignments.scss";
 
@@ -14,10 +15,9 @@ function Assignments(params) {
   }, [user]);
 
   const getAssignments = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/assignments`
-    );
-    const data = await response.json();
+    const response = horsemernAPI.get("/assignments");
+    const data = (await response).data;
+    console.log(data);
     const filteredAssignments = data.filter(
       (assignment) => assignment.author == user.name
     );

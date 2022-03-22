@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ProtectedRoute from "../../../utils/protectedRoute";
 import Switch from "../components/switch/Switch";
 import { useAuth } from "../../../utils/authContext";
+import { horsemernAPI } from "../../../utils/api";
 
 import "./Articles.scss";
 
@@ -15,10 +16,8 @@ function Articles() {
   }, [user]);
 
   const getArticles = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/articles`
-    );
-    const { data } = await response.json();
+    const response = horsemernAPI.get("/articles");
+    const data = (await response).data.data;
     const filteredArticles = data.filter(
       (article) => article.author == user.id
     );

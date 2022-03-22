@@ -61,6 +61,15 @@ router
   .patch(updateAuthor)
   .delete(deleteAuthor);
 
+router.get("/auth/me", (req, res) => {
+  res.send({
+    _id: "611e314b0cf1d80009c74e30",
+    name: "Þorbergur Haraldsson",
+    email: "test@dev.is",
+    active: false,
+  });
+});
+
 router.route("");
 // Export API routes
 export default router;

@@ -1,36 +1,38 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../utils/authContext";
-import ProtectedRoute from "../../../utils/protectedRoute";
-import ArticleForm from "../components/article-form/ArticleForm";
+import { horsemernAPI } from "../../../../utils/api";
+import { useAuth } from "../../../../utils/authContext";
+import ProtectedRoute from "../../../../utils/protectedRoute";
+import ArticleForm from "../../components/article-form/ArticleForm";
 
-async function NewArticle() {
+function NewArticle() {
   const { user } = useAuth();
+  console.log(user);
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [article, setArticle] = useState({
-    author: user.id,
+    author: user._id,
     title: "",
     content: "",
   });
 
   const saveArticle = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_HORSEMERN_API}/articles`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8", // Indicates the content
-        },
-        body: JSON.stringify(article),
-      }
-    );
+    // const response = await fetch(
+    //   `${process.env.REACT_APP_HORSEMERN_API}/articles`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8", // Indicates the content
+    //     },
+    //     body: JSON.stringify(article),
+    //   }
+    // );
 
-    const { data, message } = await response.json();
+    const { data, status } = await horsemernAPI.post("/articles", article);
 
     setMessage(message);
-    if (response.status === 200) {
+    if (status === 200) {
       navigate(`/studio/articles/${data._id}`);
     }
   };

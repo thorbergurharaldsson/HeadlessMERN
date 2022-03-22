@@ -5,9 +5,7 @@ import useSWR from "swr";
 export const AuthContext = createContext({});
 
 const dev = process.env.REACT_APP_NODE_ENV === "development";
-
 let tskoliWeb = "https://io.tskoli.dev";
-
 if (dev) {
   tskoliWeb = "http://localhost:3002";
 }
@@ -16,9 +14,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const { tsdata } = useSWR("/auth/me", tskoliAPI.get);
-  const fetchedUser = tsdata && tsdata.data;
-  const finished = Boolean(tsdata);
+  const { data } = useSWR("/auth/me", dev ? horsemernAPI.get : tskoliAPI.get);
+  const fetchedUser = data && data.data;
+  const finished = Boolean(data);
   const hasUser = Boolean(fetchedUser && fetchedUser._id);
 
   useEffect(() => {
@@ -31,12 +29,12 @@ export const AuthProvider = ({ children }) => {
   }, [finished, hasUser, fetchedUser]);
 
   const login = async () => {
-    const result = await tskoliAPI.get("/auth/me");
+    const result = dev
+      ? await horsemernAPI.get("/auth/me")
+      : await tskoliAPI.get("/auth/me");
 
     if (result.status === 200) {
       setUser(result.data);
-      console.log(result.data + " user before running create");
-      createAuthorIfNotExisting(result.data._id, result.data);
     }
     if (result.status === 401) {
       window.location.replace(`${tskoliWeb}/auth/sso`);
@@ -44,33 +42,9 @@ export const AuthProvider = ({ children }) => {
     return result;
   };
 
-  const createAuthorIfNotExisting = async (id, user) => {
-    const author = await horsemernAPI.get(`/authors/${id}`);
-
-    if (author.status === 400) {
-      console.log("author does not exist, creating author...");
-      const body = {
-        name: user.name,
-        email: user.email,
-        tskoliID: user._id,
-      };
-      horsemernAPI.post("/author", body);
-    }
-    if (author.status === 200) {
-      console.log("author exists.");
-    }
-  };
-
   return (
     <AuthContext.Provider
-      value={{
-        isAuthenticated: !!user,
-        user,
-        loading,
-        login,
-        setUser,
-        createAuthorIfNotExisting,
-      }}
+      value={{ isAuthenticated: !!user, user, loading, login, setUser }}
     >
       {children}
     </AuthContext.Provider>

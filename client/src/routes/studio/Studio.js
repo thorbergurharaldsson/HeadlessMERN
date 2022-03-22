@@ -4,7 +4,7 @@ import Articles from "./articles/Articles";
 import Assignments from "./assignments/Assignments";
 import Layout from "./components/layout/Layout";
 import Article from "./article/Article";
-import NewArticle from "./new-article/NewArticle";
+import NewArticle from "./articles/new-article/NewArticle";
 import ProtectedRoute from "../../utils/protectedRoute";
 
 const Studio = () => {

@@ -5,7 +5,6 @@ import "./Layout.scss";
 
 export default function Layout({ children }) {
   const { user } = useAuth();
-  console.log(user);
   return (
     <div className="layout">
       <div className="sidebar">

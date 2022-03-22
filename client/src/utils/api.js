@@ -1,8 +1,9 @@
 let tskoliapiURL = process.env.REACT_APP_TSKOLI_API;
-const horsemernapiURL = process.env.REACT_APP_HORSEMERN_API;
+let horsemernapiURL = process.env.REACT_APP_HORSEMERN_API;
 
 if (process.env.REACT_APP_NODE_ENV === "development") {
   tskoliapiURL = "http://localhost:3001/api/v1";
+  horsemernapiURL = "http://localhost:8080/api";
 }
 
 const tskoliAPI = {
@@ -23,7 +24,6 @@ const horsemernAPI = {
   post: (path, body) =>
     fetch(`${horsemernapiURL}${path}`, {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -38,7 +38,6 @@ const horsemernAPI = {
   patch: (path, body) =>
     fetch(`${horsemernapiURL}${path}`, {
       method: "PATCH",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -48,7 +47,6 @@ const horsemernAPI = {
   delete: (path, body) =>
     fetch(`${horsemernapiURL}${path}`, {
       method: "DELETE",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

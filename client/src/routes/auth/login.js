@@ -8,7 +8,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/home", { replace: true });
+      navigate("/studio", { replace: true });
     }
     if (!isAuthenticated) navigate("/auth/login", { replace: true });
   }, [isAuthenticated]);

@@ -1,0 +1,31 @@
+.background {
+  position: fixed;
+  background-color: var(--primary-color);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  display: none;
+  -webkit-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+
+.background.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.background.visible {
+  opacity: 1;
+  -webkit-transition: initial;
+  transition: initial;
+}
+/*# sourceMappingURL=LoadingScreen.module.css.map */
