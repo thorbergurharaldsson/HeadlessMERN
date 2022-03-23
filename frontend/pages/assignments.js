@@ -1,15 +1,10 @@
 import styles from "../styles/Articles.module.scss";
 
 import useSWR from "swr";
-
-const fetcher = async () => {
-  const response = await fetch("https://api.horsemern.xyz/api/assignments");
-  const data = await response.json();
-  return data;
-};
+import { fetcher } from "../utils/api";
 
 function Assignments() {
-  const { data, error } = useSWR("assignments", fetcher);
+  const { data, error } = useSWR("/assignments", fetcher);
   // console.log(data);
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;

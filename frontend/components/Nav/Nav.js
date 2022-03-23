@@ -11,12 +11,14 @@ const Nav = () => {
         <div className={styles.navSection}>
           <div className={styles.navLogo}>
             <Link href="/">
-              <Image
-                src={logo}
-                alt="Studio Code Logo"
-                width={149}
-                height={100}
-              />
+              <a>
+                <Image
+                  src={logo}
+                  alt="Studio Code Logo"
+                  width={149}
+                  height={100}
+                />
+              </a>
             </Link>
           </div>
 
