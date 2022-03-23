@@ -1,14 +1,26 @@
-import { connectToDatabase } from "../util/mongodb";
 import styles from "../styles/Articles.module.scss";
 
-const Articles = ({ articles }) => {
+import useSWR from "swr";
+
+const fetcher = async () => {
+  const response = await fetch("https://api.horsemern.xyz/api/articles");
+  const data = await response.json();
+  return data;
+};
+
+function Articles() {
+  const { data, error } = useSWR("articles", fetcher);
+  // console.log(data);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <div className={styles.container}>
       <div className={styles.main}>
         <h1 className={styles.title}>Articles</h1>
 
         <div className={styles.grid}>
-          {articles.map((article, index) => (
+          {data.data.map((article, index) => (
             <div key={index} className={styles.card}>
               <h2>{article.title}</h2>
               <h3>{article.subtitle}</h3>
@@ -20,21 +32,6 @@ const Articles = ({ articles }) => {
       </div>
     </div>
   );
-};
-export default Articles;
-
-export async function getServerSideProps() {
-  const { db } = await connectToDatabase();
-
-  const articles = await db
-    .collection("articles")
-    .find({})
-    // .sort({ metacritic: -1 })
-    .toArray();
-
-  return {
-    props: {
-      articles: JSON.parse(JSON.stringify(articles)),
-    },
-  };
 }
+
+export default Articles;
