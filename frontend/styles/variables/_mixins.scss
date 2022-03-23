@@ -1,0 +1,26 @@
+@use "sass:math";
+@import "./typography";
+
+/**** TYPOGRAPHY MIXINS ****/
+@mixin fluid-type($min-vw, $max-vw, $min-value, $max-value) {
+  $factor: math.div(1, ($max-vw - $min-vw)) * ($max-value - $min-value);
+  $calc-value: unquote(
+    "#{ $min-value - ($min-vw * $factor) } + #{ 100vw * $factor }"
+  );
+
+  font-size: $min-value; // Fallback for older browsers
+  font-size: clamp(
+    #{if($min-value > $max-value, $max-value, $min-value)},
+    #{$calc-value},
+    #{if($min-value > $max-value, $min-value, $max-value)}
+  );
+}
+
+@mixin heading-1 {
+  @include fluid-type(
+    $view-width-min,
+    $view-width-max,
+    $font-size-h1--min,
+    $font-size-h1--max
+  );
+}

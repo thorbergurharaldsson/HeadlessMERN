@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+/********** Font **********/
+$text-heading-sans: "Open Sans", sans-serif;
+
+/********** Base **********/
+$text-base-size: 10px;
+$text-scale-ratio: 1.2;
+
+/********** Size **********/
+$font-size-h1--max: 6.4rem;
+$font-size-h1--min: 4.8rem;
+
+/********** VIEW WIDTHS **********/
+$view-width-min: 32rem;
+$view-width-max: 144rem;

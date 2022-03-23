@@ -1,3 +1,5 @@
+@import "./variables/__variables";
+
 html,
 body {
   padding: 0;
@@ -13,4 +15,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: $text-heading-sans;
+  letter-spacing: 2px;
+}
+
+h1 {
+  @include heading-1;
 }
