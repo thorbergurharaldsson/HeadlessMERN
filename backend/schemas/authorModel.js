@@ -10,6 +10,10 @@ const authorSchema = new Schema({
     type: String,
     required: true,
   },
+  tskoliID: {
+    type: String,
+    required: true,
+  },
   bio: {
     type: String,
   },

@@ -1,5 +1,4 @@
 import { Article } from "../schemas/articleModel.js";
-import { Author } from "../schemas/authorModel.js";
 
 // handel index actions
 export const indexArticles = (req, res) => {
@@ -43,23 +42,14 @@ export const newArticle = (req, res) => {
       message: "'author' is required",
     });
   } else {
-    Author.findById(article.author, (err, author) => {
-      if (err) return res.send(err);
-      author.articles.push(article);
-      author.save((err) => {
-        if (err) res.send(err);
-        else
-          // save the article and check for errors
-          article.save((err) => {
-            // Check for validation error
-            if (err) res.json(err);
-            else
-              res.json({
-              message: "New article created!",
-              data: article,
-          });
+    article.save((err) => {
+      // Check for validation error
+      if (err) res.json(err);
+      else
+        res.json({
+          message: "New article created!",
+          data: article,
         });
-      });
     });
   }
 };
@@ -84,25 +74,16 @@ export const updateArticle = (req, res) => {
     article.subtitle = req.body.subtitle ? req.body.subtitle : article.subtitle;
     article.content = req.body.content ? req.body.content : article.content;
     article.author = req.body.author ? req.body.author : article.author;
-    article.published = req.body.published !== undefined ? req.body.published : article.published;
+    article.published =
+      req.body.published !== undefined ? req.body.published : article.published;
 
-    Author.findById(article.author, (err, author) => {
-      if (err) return res.send(err);
-      author.articles.push(article);
-      author.save((err) => {
-        if (err) res.send(err);
-        else
-          // save the article and check for errors
-          article.save((err) => {
-            if (err) res.json(err);
-            res.json({
-              message: "Article Info updated",
-              data: article,
-            });
-          });
+    article.save((err) => {
+      if (err) res.json(err);
+      res.json({
+        message: "Article Info updated",
+        data: article,
       });
     });
-
   });
 };
 

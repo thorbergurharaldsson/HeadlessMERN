@@ -1,28 +1,13 @@
-import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { auth, signInWithTskoli } from "../../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
 
 import Articles from "./articles/Articles";
 import Assignments from "./assignments/Assignments";
 import Layout from "./components/layout/Layout";
 import Article from "./article/Article";
-import NewArticle from "./new-article/NewArticle";
+import NewArticle from "./articles/new-article/NewArticle";
+import ProtectedRoute from "../../utils/protectedRoute";
 
 const Studio = () => {
-  const [tUser, setTuser] = useState({});
-  const useAuth = useAuthState(auth);
-  const user = tUser || useAuth[0]
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    signInWithTskoli().then(r=>setTuser);
-    if (!user) {
-      navigate("/");
-    }
-  }, []);
-
   return (
     <Layout>
       <Routes>
@@ -36,4 +21,4 @@ const Studio = () => {
   );
 };
 
-export default Studio;
+export default ProtectedRoute(Studio);

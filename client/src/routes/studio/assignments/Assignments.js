@@ -1,33 +1,23 @@
 import { useEffect, useState } from "react";
-
+import ProtectedRoute from "../../../utils/protectedRoute";
 import Markdown from "../../../components/markdown/Markdown";
-import getUserInfo from "../../../stores/getUserInfo";
+import { useAuth } from "../../../utils/authContext";
+import { horsemernAPI } from "../../../utils/api";
 
 import "./Assignments.scss";
 
-export default function Assignments(params) {
+function Assignments(params) {
+  const { user } = useAuth();
   const [assignments, setAssignments] = useState([]);
-
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-  });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    const userInfo = await getUserInfo();
-    setUser(userInfo);
-  }, []);
 
   useEffect(() => {
     getAssignments();
   }, [user]);
 
   const getAssignments = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/assignments`
-    );
-    const data = await response.json();
+    const response = horsemernAPI.get("/assignments");
+    const data = (await response).data;
+    console.log(data);
     const filteredAssignments = data.filter(
       (assignment) => assignment.author == user.name
     );
@@ -52,3 +42,5 @@ export default function Assignments(params) {
     </div>
   );
 }
+
+export default ProtectedRoute(Assignments);

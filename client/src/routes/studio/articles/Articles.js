@@ -1,35 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import ProtectedRoute from "../../../utils/protectedRoute";
 import Switch from "../components/switch/Switch";
-import getUserInfo from "../../../stores/getUserInfo";
+import { useAuth } from "../../../utils/authContext";
+import { horsemernAPI } from "../../../utils/api";
+
 import "./Articles.scss";
 
-export default function Articles() {
-  const [user, setUser] = useState({
-    name: "",
-    id: "",
-  });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    const userInfo = await getUserInfo();
-
-    setUser(userInfo);
-  }, []);
+function Articles() {
+  const { user } = useAuth();
 
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     getArticles();
-  }, []);
+  }, [user]);
 
   const getArticles = async () => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_SERVER}/articles`
-    );
-    const { data } = await response.json();
+    const response = horsemernAPI.get("/articles");
+    const data = (await response).data.data;
     const filteredArticles = data.filter(
-      (article) => article.author == user.id
+      (article) => article.author == user._id
     );
     setArticles(filteredArticles);
   };
@@ -45,21 +35,21 @@ export default function Articles() {
 
     setArticles(updatedArticles);
 
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${article._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8", // Indicates the content
-      },
-      body: JSON.stringify(updatedArticle),
-    });
+    await fetch(
+      `${process.env.REACT_APP_HORSEMERN_API}/articles/${article._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8", // Indicates the content
+        },
+        body: JSON.stringify(updatedArticle),
+      }
+    );
   };
 
   const deleteArticle = async (article) => {
-    await fetch(`${process.env.REACT_APP_API_SERVER}/articles/${article._id}`, {
-      method: "DELETE",
-    });
-
-    getArticles();
+    horsemernAPI.delete(`/articles/${article._id}`);
+    window.location.reload(false);
   };
 
   return (
@@ -96,3 +86,5 @@ export default function Articles() {
     </div>
   );
 }
+
+export default ProtectedRoute(Articles);

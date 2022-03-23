@@ -5,7 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import Mongoose from "mongoose";
 import { xss } from "express-xss-sanitizer";
-import { insertData } from "./assignmentsSeed.js";
+import { insertData } from "./utils/assignmentsSeed.js";
 
 const app = express();
 
