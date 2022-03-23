@@ -1,15 +1,22 @@
-import { connectToDatabase } from "../util/mongodb";
-import articleStyles from "../styles/Articles.module.css";
+import styles from "../styles/Articles.module.scss";
 
-export default function Articles({ articles }) {
+import useSWR from "swr";
+
+import { fetcher } from "../utils/api";
+
+function Articles() {
+  const { data } = useSWR("/articles", fetcher);
+  // console.log(data);
+  if (!data) return <div>Loading...</div>;
+
   return (
-    <div className={articleStyles.container}>
-      <main className={articleStyles.main}>
-        <h1 className={articleStyles.title}>Articles</h1>
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Articles</h1>
 
-        <div className={articleStyles.grid}>
-          {articles.map((article, index) => (
-            <div key={index} className={articleStyles.card}>
+        <div className={styles.grid}>
+          {data.data.map((article, index) => (
+            <div key={index} className={styles.card}>
               <h2>{article.title}</h2>
               <h3>{article.subtitle}</h3>
               {/* <h4>{article.author}</h4> */}
@@ -17,23 +24,9 @@ export default function Articles({ articles }) {
             </div>
           ))}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  const { db } = await connectToDatabase();
-
-  const articles = await db
-    .collection("articles")
-    .find({})
-    // .sort({ metacritic: -1 })
-    .toArray();
-
-  return {
-    props: {
-      articles: JSON.parse(JSON.stringify(articles)),
-    },
-  };
-}
+export default Articles;

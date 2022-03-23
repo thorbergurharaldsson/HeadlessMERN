@@ -1,15 +1,22 @@
-import { connectToDatabase } from "../util/mongodb";
-import articleStyles from "../styles/Articles.module.css";
+import styles from "../styles/Articles.module.scss";
 
-export default function Assignments({ assignments }) {
+import useSWR from "swr";
+import { fetcher } from "../utils/api";
+
+function Assignments() {
+  const { data, error } = useSWR("/assignments", fetcher);
+  // console.log(data);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
-    <div className={articleStyles.container}>
-      <main className={articleStyles.main}>
-        <h1 className={articleStyles.title}>Assignments</h1>
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Assignments</h1>
 
-        <div className={articleStyles.grid}>
-          {assignments.map((assignment, index) => (
-            <div key={index} className={articleStyles.card}>
+        <div className={styles.grid}>
+          {data.map((assignment, index) => (
+            <div key={index} className={styles.card}>
               <h2>{assignment.title}</h2>
               {/* <h3>{assignment.description}</h3> */}
               <h3>{assignment.author}</h3>
@@ -17,23 +24,9 @@ export default function Assignments({ assignments }) {
             </div>
           ))}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
 
-export async function getServerSideProps() {
-  const { db } = await connectToDatabase();
-
-  const assignments = await db
-    .collection("assignments")
-    .find({})
-    // .sort({ metacritic: -1 })
-    .toArray();
-
-  return {
-    props: {
-      assignments: JSON.parse(JSON.stringify(assignments)),
-    },
-  };
-}
+export default Assignments;
