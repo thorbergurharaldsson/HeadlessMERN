@@ -1,8 +1,7 @@
 import Link from "next/link";
-import clientPromise from "../util/mongodb";
 import styles from "../styles/Home.module.scss";
 
-export default function Home({ isConnected }) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <main>
@@ -49,19 +48,4 @@ export default function Home({ isConnected }) {
       </main>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  let isConnected;
-  try {
-    const client = await clientPromise;
-    isConnected = true;
-  } catch (e) {
-    console.log(e);
-    isConnected = false;
-  }
-
-  return {
-    props: { isConnected },
-  };
 }
