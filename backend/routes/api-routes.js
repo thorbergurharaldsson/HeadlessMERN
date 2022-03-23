@@ -54,11 +54,21 @@ import {
 
 router.route("/authors").get(indexAuthors).post(newAuthor);
 
+// author_id is the tskoliID
 router
   .route("/authors/:author_id")
   .get(viewAuthorByID)
   .patch(updateAuthor)
   .delete(deleteAuthor);
+
+router.get("/auth/me", (req, res) => {
+  res.send({
+    _id: "611e314b0cf1d80009c74e30",
+    name: "Þorbergur Haraldsson",
+    email: "test@dev.is",
+    active: false,
+  });
+});
 
 router.route("");
 // Export API routes

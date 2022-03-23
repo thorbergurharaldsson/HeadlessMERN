@@ -1,44 +1,46 @@
 import { useEffect, useState } from "react";
-
+import ProtectedRoute from "../../../utils/protectedRoute";
 import Markdown from "../../../components/markdown/Markdown";
-import { useStores } from "../../../stores";
+import { useAuth } from "../../../utils/authContext";
+import { horsemernAPI } from "../../../utils/api";
 
 import "./Assignments.scss";
 
-export default function Assignments(params) {
-	const { userStore } = useStores();
-	const [assignments, setAssignments] = useState([]);
+function Assignments(params) {
+  const { user } = useAuth();
+  const [assignments, setAssignments] = useState([]);
 
-	useEffect(() => {
-		getAssignments();
-	}, []);
+  useEffect(() => {
+    getAssignments();
+  }, [user]);
 
-	const getAssignments = async () => {
-		const response = await fetch(
-			`${process.env.REACT_APP_API_SERVER}/assignments`
-		);
-		const data = await response.json();
-		const filteredAssignments = data.filter(
-			(assignment) => assignment.author == userStore.name
-		);
+  const getAssignments = async () => {
+    const response = horsemernAPI.get("/assignments");
+    const data = (await response).data;
+    console.log(data);
+    const filteredAssignments = data.filter(
+      (assignment) => assignment.author == user.name
+    );
 
-		setAssignments(filteredAssignments);
-	};
+    setAssignments(filteredAssignments);
+  };
 
-	return (
-		<div>
-			<div className="title">
-				<h1>Your Assignments</h1>
-			</div>
-			{assignments?.map((assignment) => (
-				<div className="assignment" key={assignment._id}>
-					<div>
-						<h2>{assignment?.title}</h2>
-						<h3>{assignment.author}</h3>
-						<Markdown>{assignment?.description}</Markdown>
-					</div>
-				</div>
-			))}
-		</div>
-	);
+  return (
+    <div>
+      <div className="title">
+        <h1>Your Assignments</h1>
+      </div>
+      {assignments?.map((assignment) => (
+        <div className="assignment" key={assignment._id}>
+          <div>
+            <h2>{assignment?.title}</h2>
+            <h3>{assignment.author}</h3>
+            <Markdown>{assignment?.description}</Markdown>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
+
+export default ProtectedRoute(Assignments);

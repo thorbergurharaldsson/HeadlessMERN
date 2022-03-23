@@ -1,0 +1,23 @@
+.background {
+  position: fixed;
+  background-color: var(--primary-color);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease-out;
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.visible {
+    opacity: 1;
+    transition: initial;
+  }
+}

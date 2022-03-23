@@ -4,15 +4,14 @@ import "./Header.scss";
 import Logo from "../logo/Logo";
 
 function Header() {
-	return (
-		<header className="header">
-			<Logo />
-			<div className="links">
-				<Link to="/login">Login</Link>
-				<Link to="/studio">Studio</Link>
-			</div>
-		</header>
-	);
+  return (
+    <header className="header">
+      <Logo />
+      <div className="links">
+        <Link to="/studio">Studio</Link>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
