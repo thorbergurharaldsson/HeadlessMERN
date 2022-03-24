@@ -30,6 +30,9 @@ const Nav = () => {
               <Link href="/assignments">Projects</Link>
             </li>
             <li className={styles.navSubMenu}>
+              <Link href="/singleTest">Single page test</Link>
+            </li>
+            <li className={styles.navSubMenu}>
               <Link href="https://horsemern.xyz/">
                 <a target="_blank" rel="noreferrer">
                   Login
