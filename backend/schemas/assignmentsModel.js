@@ -12,7 +12,10 @@ let assignmentsSchema = new Schema(
       type: String,
       required: true,
     },
-    title: {
+    moduleTitle: {
+      type: String,
+    },
+    assignmentTitle: {
       type: String,
     },
     description: {

@@ -6,7 +6,7 @@ import { horsemernAPI } from "../../../utils/api";
 
 import "./Assignments.scss";
 
-function Assignments(params) {
+function Assignments() {
   const { user } = useAuth();
   const [assignments, setAssignments] = useState([]);
 
@@ -19,7 +19,7 @@ function Assignments(params) {
     const data = (await response).data;
     console.log(data);
     const filteredAssignments = data.filter(
-      (assignment) => assignment.author == user.name
+      (assignment) => assignment.author === user.name
     );
 
     setAssignments(filteredAssignments);
@@ -29,13 +29,15 @@ function Assignments(params) {
     <div>
       <div className="title">
         <h1>Your Assignments</h1>
+        <h2>Recommended to gallery</h2>
       </div>
       {assignments?.map((assignment) => (
         <div className="assignment" key={assignment._id}>
           <div>
-            <h2>{assignment?.title}</h2>
-            <h3>{assignment.author}</h3>
-            <Markdown>{assignment?.description}</Markdown>
+            <h2>{assignment?.assignmentTitle}</h2>
+            <h3>{assignment?.moduleTitle}</h3>
+            <Markdown>{assignment?.comment}</Markdown>
+            <a href={assignment?.url}>{assignment?.url}</a>
           </div>
         </div>
       ))}
