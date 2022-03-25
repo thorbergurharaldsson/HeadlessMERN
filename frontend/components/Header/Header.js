@@ -27,7 +27,7 @@ const Header = () => {
             </p>
             <Link href="/">
               <a>
-                <button className={styles.BtnSm}>More</button>
+                <button className={styles.buttonSmall}>More</button>
               </a>
             </Link>
           </div>

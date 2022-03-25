@@ -1,51 +1,48 @@
+import React, { useState } from "react";
+import useSWR from "swr";
+import { fetcher } from "../utils/api";
 import Link from "next/link";
-import styles from "../styles/Home.module.scss";
+import styles from "../styles/index.module.scss";
+
+import Container from "../components/Container/Container";
 
 export default function Home() {
+  const [id, setID] = useState();
+  const { data, error } = useSWR("/assignments", fetcher);
+  // console.log(data);
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+  // to get coords to pass it into another API to get the weather
+  const getID = async (id) => {
+    // console.log(id);
+    setID(id);
+  };
   return (
-    <div className={styles.container}>
-      <main>
-        <div className={styles.grid}>
-          <Link href="/articles">
-            <a className={styles.card}>
-              <h3>Articles &rarr;</h3>
-              <p>
-                Read the articles from the Vefþróun and learn more about web
-                design!
-              </p>
-            </a>
-          </Link>
-
-          <Link href="/assignments">
-            <a className={styles.card}>
-              <h3>Projects &rarr;</h3>
-              <p>
-                Discover our projects and the stack we used to develop them.
-              </p>
-            </a>
-          </Link>
-
-          <Link href="/">
-            <a className={styles.card}>
-              <h3>About us &rarr;</h3>
-              <p>
-                We are the students from the Reykjavík Academy of Web
-                Develop­ment, come meet us!
-              </p>
-            </a>
-          </Link>
-
-          <Link href="/">
-            <a className={styles.card}>
-              <h3>Documentation &rarr;</h3>
-              <p>
-                You want to know how this website was developed and how we built
-                our backend? Follow this link!
-              </p>
-            </a>
-          </Link>
+    <Container>
+      <div className={styles.container}>
+        <div className={styles.main}>
+          <div>
+            <div className={styles.cardContainer}>
+              {data.slice(0, 3).map((assignment, index) => (
+                <div key={index} className={styles.card}>
+                  <p>{assignment.author}</p>
+                  <p className={styles.pSmall}>Mar 15, 2022</p>
+                  <h1>{assignment.assignmentTitle}</h1>
+                  {/* <h3>{assignment.description}</h3> */}
+                  <h4>{assignment.author}</h4>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: assignment.comment }}
+                  ></p>
+                  <button onClick={(e) => getID(e.target.value)}>
+                    <option value={assignment._id}>...</option>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </Container>
   );
 }

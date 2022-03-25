@@ -55,22 +55,3 @@
     }
   }
 }
-
-.BtnSm {
-  font-size: $font-size-h5;
-  font-family: $open-sans;
-  color: $secondary-250;
-  background-color: white; /* Green */
-  border: solid 2px $secondary-250;
-  border-radius: 24px;
-  padding: 5px 30px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-
-  &:hover {
-    color: $primary-250;
-    border-color: $primary-250;
-  }
-}

@@ -43,7 +43,7 @@ const Nav = () => {
             <li className={styles.navSubMenu}>
               <Link href="https://horsemern.xyz/">
                 <a target="_blank" rel="noreferrer">
-                  <button className={styles.BtnSm}>Login</button>
+                  <button className={styles.buttonSmall}>Login</button>
                 </a>
               </Link>
             </li>
