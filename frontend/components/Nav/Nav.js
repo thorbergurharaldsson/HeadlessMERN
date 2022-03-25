@@ -1,12 +1,14 @@
 import Link from "next/link";
 import styles from "./Nav.module.scss";
 
+import Container from "../Container/Container";
+
 import Image from "next/image";
 import logo from "../../public/logo.png";
 
 const Nav = () => {
   return (
-    <nav className={styles.nav}>
+    <Container>
       <div className={styles.section}>
         <div className={styles.navSection}>
           <div className={styles.navLogo}>
@@ -15,8 +17,8 @@ const Nav = () => {
                 <Image
                   src={logo}
                   alt="Studio Code Logo"
-                  width={149}
-                  height={100}
+                  width={113.45}
+                  height={80}
                 />
               </a>
             </Link>
@@ -24,25 +26,31 @@ const Nav = () => {
 
           <ul className={styles.navMenu}>
             <li className={styles.navSubMenu}>
-              <Link href="/articles">Articles</Link>
+              <Link href="/articles">
+                <h5>
+                  <a>Articles</a>
+                </h5>
+              </Link>
             </li>
             <li className={styles.navSubMenu}>
-              <Link href="/assignments">Projects</Link>
+              <Link href="/assignments">
+                <h5>
+                  <a>Projects</a>
+                </h5>
+              </Link>
             </li>
-            <li className={styles.navSubMenu}>
-              <Link href="/singleTest">Single page test</Link>
-            </li>
+
             <li className={styles.navSubMenu}>
               <Link href="https://horsemern.xyz/">
                 <a target="_blank" rel="noreferrer">
-                  Login
+                  <button className={styles.BtnSm}>Login</button>
                 </a>
               </Link>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </Container>
   );
 };
 
