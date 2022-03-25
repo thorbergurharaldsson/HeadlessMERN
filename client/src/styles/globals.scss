@@ -1,0 +1,35 @@
+:root {
+  --primary-color: #474a7b;
+  --secondary-color: #e25200;
+  --success-color: #3c921e;
+  --error-color: #f0523c;
+}
+
+@import "./normalize.scss";
+@import "./skeleton.scss";
+
+html,
+body {
+  color: var(--primary-color);
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  word-break: break-word;
+}
+
+h6 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  letter-spacing: 0em;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}

@@ -4,6 +4,8 @@ import Markdown from "../../../components/markdown/Markdown";
 import { useAuth } from "../../../utils/authContext";
 import { horsemernAPI } from "../../../utils/api";
 
+import Table from "../components/table/Table";
+
 import "./Assignments.scss";
 
 function Assignments() {
@@ -32,14 +34,18 @@ function Assignments() {
         <h2>Recommended to gallery</h2>
       </div>
       {assignments?.map((assignment) => (
-        <div className="assignment" key={assignment._id}>
-          <div>
-            <h2>{assignment?.assignmentTitle}</h2>
-            <h3>{assignment?.moduleTitle}</h3>
-            <Markdown>{assignment?.comment}</Markdown>
-            <a href={assignment?.url}>{assignment?.url}</a>
-          </div>
-        </div>
+        <Table
+          title={assignment?.assignmentTitle}
+          date={assignment?.assignmentTitle}
+        />
+        // <div className="assignment" key={assignment._id}>
+        //   <div>
+        //     <h2>{assignment?.assignmentTitle}</h2>
+        //     <h6>{assignment?.moduleTitle}</h6>
+        //     <Markdown>{assignment?.comment}</Markdown>
+        //     <a href={assignment?.url}>{assignment?.url}</a>
+        //   </div>
+        // </div>
       ))}
     </div>
   );

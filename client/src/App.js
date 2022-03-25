@@ -3,6 +3,7 @@ import Auth from "./routes/auth";
 import Index from "./routes/Index";
 import Studio from "./routes/studio/Studio";
 import { AuthProvider } from "./utils/authContext";
+import "./styles/globals.scss";
 
 function App() {
   return (

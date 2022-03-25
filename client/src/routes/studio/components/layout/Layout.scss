@@ -1,37 +1,28 @@
 .layout {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .content {
-	overflow: scroll;
-	height: 100vh;
+  overflow: scroll;
+  height: 100vh;
 
-	width: 100%;
-	padding: 20px;
+  width: 100%;
+  padding: 20px;
 }
 
 .sidebar {
-	padding: 10px;
-	color: white;
-	background-color: #282c34;
-	height: 100vh;
+  padding: 10px;
+  height: 100vh;
+  width: 20vw;
 
-	a {
-		color: white;
-	}
+  &__links {
+    display: flex;
+    flex-direction: column;
+  }
 
-	&__links {
-		display: flex;
-		flex-direction: column;
-
-		padding-top: 20px;
-		font-size: 24px;
-		font-weight: 800;
-	}
-
-	&__user {
-		position: absolute;
-		bottom: 20px;
-	}
+  &__user {
+    position: absolute;
+    bottom: 20px;
+  }
 }
