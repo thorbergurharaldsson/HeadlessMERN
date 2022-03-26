@@ -1,7 +1,8 @@
 @import "../styles/variables/__variables";
 
 .main {
-  h1 {
+  padding-top: 10rem;
+  h2 {
     color: $primary-200;
     font-weight: bold;
     padding-top: 2rem;
@@ -35,6 +36,28 @@
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
+.tagContainer {
+  display: flex;
+  align-items: center;
+  padding-top: 2rem;
+  margin: 0;
+
+  button {
+    position: relative;
+
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-right: 0.5;
+    }
+  }
+}
 // .grid {
 //   align-items: center;
 

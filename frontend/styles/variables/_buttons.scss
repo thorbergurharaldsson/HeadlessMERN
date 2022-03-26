@@ -15,3 +15,23 @@
     border-color: white;
   }
 }
+
+.buttonTag {
+  font-size: $font-caption;
+  font-family: $open-sans;
+  color: $primary-200;
+  font-weight: 600;
+  background-color: $neutral-150;
+  background-color: white;
+  border: solid 1px $neutral-250;
+  border-radius: 12px;
+  padding: 4px 16px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $primary-150;
+    color: $neutral-50;
+    border-color: white;
+  }
+}

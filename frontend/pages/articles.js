@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../utils/api";
-import styles from "../styles/Articles.module.scss";
+import styles from "../styles/index.module.scss";
+import dateParts from "../utils/dateParts";
+
+import Container from "../components/Container/Container";
 
 function Articles() {
   const [id, setID] = useState();
@@ -9,32 +12,45 @@ function Articles() {
   // console.log(data);
   if (!data) return <div>Loading...</div>;
 
-  // to get coords to pass it into another API to get the weather
+  // to get the id from the clicked article
   const getID = async (id) => {
     // console.log(id);
     setID(id);
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <h1 className={styles.title}>Articles</h1>
-
-        <div className={styles.grid}>
-          {data.data.map((article, index) => (
-            <div key={index} className={styles.card}>
-              <h2>{article.title}</h2>
-              <h3>{article.subtitle}</h3>
-              {/* <h4>{article.author}</h4> */}
-              <p>{article.content}</p>
-              <button onClick={(e) => getID(e.target.value)}>
-                <option value={article._id}>Button</option>
-              </button>
+    <Container>
+      <div>
+        <div className={styles.main}>
+          <div>
+            <div className={styles.cardContainer}>
+              {data.data.map((article, index) => (
+                <div key={index} className={styles.card}>
+                  <p>{article.author}</p>
+                  <p className={styles.pSmall}>
+                    {(() => {
+                      const d = dateParts(article.posted_at);
+                      return `${d.month} ${d.day}, ${d.year}`;
+                    })()}
+                  </p>
+                  <h2>{article.title}</h2>
+                  {/* <h3>{assignment.description}</h3> */}
+                  <h4>{article.subtitle}</h4>
+                  <p> {article.content}</p>
+                  <button onClick={(e) => getID(e.target.value)}>
+                    <option value={article._id}>...</option>
+                  </button>
+                  <div className={styles.tagContainer}>
+                    <button className={styles.buttonTag}>Tag</button>
+                    <button className={styles.buttonTag}>Tag</button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 }
 

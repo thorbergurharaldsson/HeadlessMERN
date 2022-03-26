@@ -25,14 +25,14 @@ const Nav = () => {
           </div>
 
           <ul className={styles.navMenu}>
-            <li className={styles.navSubMenu}>
+            <li>
               <Link href="/articles">
                 <h5>
                   <a>Articles</a>
                 </h5>
               </Link>
             </li>
-            <li className={styles.navSubMenu}>
+            <li>
               <Link href="/assignments">
                 <h5>
                   <a>Projects</a>
