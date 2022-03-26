@@ -11,15 +11,15 @@ import Articles from "./articles";
 import Assignments from "./assignments";
 
 export default function Home() {
-  const { data: articles } = useSWR("/articles", fetcher);
-  const { data: assignments } = useSWR("/assignments", fetcher);
-  const array1 = [{ articles }];
-  const array2 = [{ assignments }];
-  const fusion = array1.concat(array2);
-  console.log(fusion);
+  // const { data: articles } = useSWR("/articles", fetcher);
+  // const { data: assignments } = useSWR("/assignments", fetcher);
+  // const array1 = [{ articles }];
+  // const array2 = [{ assignments }];
+  // const fusion = array1.concat(array2);
+  // console.log(fusion);
 
-  if (!articles) return <div>Loading...</div>;
-  if (!assignments) return <div>Loading...</div>;
+  // if (!articles) return <div>Loading...</div>;
+  // if (!assignments) return <div>Loading...</div>;
 
   return (
     <Container>

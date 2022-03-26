@@ -3,14 +3,14 @@
   font-family: $open-sans;
   color: $secondary-250;
   background-color: white;
-  border: solid 2px $secondary-250;
+  border: solid 2px $secondary-200;
   border-radius: 24px;
   padding: 5px 30px;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    background-color: $primary-150;
+    background-color: $secondary-200;
     color: $neutral-50;
     border-color: white;
   }
@@ -30,8 +30,6 @@
   text-decoration: none;
 
   &:hover {
-    background-color: $primary-150;
-    color: $neutral-50;
-    border-color: white;
+    border-color: $primary-150;
   }
 }
