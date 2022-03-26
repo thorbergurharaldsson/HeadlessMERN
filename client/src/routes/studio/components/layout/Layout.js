@@ -3,7 +3,9 @@ import Logo from "../../../../components/logo/Logo";
 import { useAuth } from "../../../../utils/authContext";
 import "./Layout.scss";
 import articlesIcon from "../../../../img/Icon/Articles.svg";
+import selArticlesIcon from "../../../../img/Icon/ArticlesSel.svg";
 import projectsIcon from "../../../../img/Icon/Projects.svg";
+import selProjectsIcon from "../../../../img/Icon/ProjectsSel.svg";
 
 export default function Layout({ children }) {
   const { user } = useAuth();
@@ -17,13 +19,27 @@ export default function Layout({ children }) {
         <div className="sidebar__links">
           <div className="sidebar__link">
             <Link to="/studio/articles">
-              <img src={articlesIcon} alt="Assignments"></img>
+              <img
+                src={
+                  window.location.pathname === "/studio/articles"
+                    ? selArticlesIcon
+                    : articlesIcon
+                }
+                alt="Articles"
+              ></img>
             </Link>
             <p>Articles</p>
           </div>
           <div className="sidebar__link">
             <Link to="/studio/assignments">
-              <img src={projectsIcon} alt="Assignments"></img>
+              <img
+                src={
+                  window.location.pathname === "/studio/assignments"
+                    ? selProjectsIcon
+                    : projectsIcon
+                }
+                alt="Assignments"
+              ></img>
             </Link>
             <p>Projects</p>
           </div>
