@@ -27,6 +27,16 @@ let assignmentsSchema = new Schema(
     url: {
       type: String,
     },
+    createdAt: {
+      type: Date,
+    },
+    updatedAt: {
+      type: Date,
+    },
+    published: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     collection: "assignments",

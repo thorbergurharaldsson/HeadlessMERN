@@ -32,6 +32,8 @@ export const insertData = async () => {
           description: json[i].assignment.project.Description,
           comment: json[i].comment,
           url: json[i].url,
+          createdAt: json[i].createdAt,
+          updatedAt: json[i].updatedAt,
         });
 
         assignments.save(() => {

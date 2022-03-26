@@ -1,12 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import ProtectedRoute from "../../../utils/protectedRoute";
-import Markdown from "../../../components/markdown/Markdown";
 import { useAuth } from "../../../utils/authContext";
 import { horsemernAPI } from "../../../utils/api";
-
+import dateParts from "../../../utils/dateParts";
 import Table from "../components/table/Table";
-
-import "./Assignments.scss";
 
 function Assignments() {
   const { user } = useAuth();
@@ -19,7 +17,7 @@ function Assignments() {
   const getAssignments = async () => {
     const response = horsemernAPI.get("/assignments");
     const data = (await response).data;
-    console.log(data);
+
     const filteredAssignments = data.filter(
       (assignment) => assignment.author === user.name
     );
@@ -29,24 +27,33 @@ function Assignments() {
 
   return (
     <div>
-      <div className="title">
-        <h1>Your Assignments</h1>
-        <h2>Recommended to gallery</h2>
-      </div>
-      {assignments?.map((assignment) => (
-        <Table
-          title={assignment?.assignmentTitle}
-          date={assignment?.assignmentTitle}
-        />
-        // <div className="assignment" key={assignment._id}>
-        //   <div>
-        //     <h2>{assignment?.assignmentTitle}</h2>
-        //     <h6>{assignment?.moduleTitle}</h6>
-        //     <Markdown>{assignment?.comment}</Markdown>
-        //     <a href={assignment?.url}>{assignment?.url}</a>
-        //   </div>
-        // </div>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <h5>Assignments</h5>
+            </th>
+            <th></th>
+            <th className="p3">View</th>
+            <th className="p3">Publish</th>
+          </tr>
+        </thead>
+        <tbody>
+          {assignments?.map((assignment) => (
+            <Table
+              key={assignment.uniqueID}
+              title={assignment.assignmentTitle}
+              date={(() => {
+                const d = dateParts(assignment.createdAt);
+                return `${d.month} ${d.day}, ${d.year}`;
+              })()}
+              viewUrl={assignment?.url}
+              published={assignment.published}
+              type="assignments"
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

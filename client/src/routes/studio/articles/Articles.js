@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import ProtectedRoute from "../../../utils/protectedRoute";
-import Switch from "../components/switch/Switch";
 import { useAuth } from "../../../utils/authContext";
 import { horsemernAPI } from "../../../utils/api";
+import dateParts from "../../../utils/dateParts";
+import Table from "../components/table/Table";
 
 import "./Articles.scss";
 
@@ -19,7 +20,7 @@ function Articles() {
     const response = horsemernAPI.get("/articles");
     const data = (await response).data.data;
     const filteredArticles = data.filter(
-      (article) => article.author == user._id
+      (article) => article.author === user._id
     );
     setArticles(filteredArticles);
   };
@@ -34,7 +35,6 @@ function Articles() {
     );
 
     setArticles(updatedArticles);
-
     await fetch(
       `${process.env.REACT_APP_HORSEMERN_API}/articles/${article._id}`,
       {
@@ -53,36 +53,45 @@ function Articles() {
   };
 
   return (
-    <div className="article-list">
-      <div className="title">
-        <h1>Your Articles</h1>
-        <Link to="/studio/articles/new-article">
-          <button className="new-article">New</button>
-        </Link>
-      </div>
-      {articles?.map((article) => (
-        <div className="article" key={article._id}>
-          <div>
-            <h2>{article?.title}</h2>
-            <h3>{article?.subtitle}</h3>
-          </div>
-          <div className="actions">
-            <Link to={`/studio/articles/${article?._id}`}>
-              <button className="edit-button">Edit</button>
-            </Link>
-            <button
-              className="delete-button"
-              onClick={() => deleteArticle(article)}
-            >
-              Delete
-            </button>
-            <Switch
-              onChange={(value) => updateArticle(value, article)}
-              checked={!!article.published}
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <h5>Articles</h5>
+            </th>
+            <th></th>
+            <th className="p3">View</th>
+            <th className="p3">Edit</th>
+            <th className="p3">Delete</th>
+            <th className="p3">Publish</th>
+          </tr>
+        </thead>
+        <tbody>
+          {articles?.map((article) => (
+            <Table
+              key={article.slug}
+              title={article.title}
+              date={(() => {
+                const d = dateParts(article.posted_at);
+                return `${d.month} ${d.day}, ${d.year}`;
+              })()}
+              published={article.published}
+              type="article"
+              deleteFunc={() => deleteArticle(article)}
+              editUrl={`/studio/articles/${article?._id}`}
+              viewUrl={`/studio/articles/${article?._id}`}
+              publishFunc={() =>
+                updateArticle(
+                  article.published
+                    ? updateArticle(false, article)
+                    : updateArticle(true, article)
+                )
+              }
             />
-          </div>
-        </div>
-      ))}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
