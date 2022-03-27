@@ -1,18 +1,11 @@
 @import "../../styles/variables/__variables";
 
-.section {
-  width: 100%;
-}
-
-.navSection {
+.navBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   height: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-  margin: 0;
 }
 
 .navLogo {

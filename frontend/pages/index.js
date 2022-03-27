@@ -7,8 +7,7 @@ import dateParts from "../utils/dateParts";
 
 import Container from "../components/Container/Container";
 
-import Articles from "./articles";
-import Assignments from "./assignments";
+import Header from "../components/Header/Header";
 
 export default function Home() {
   // const { data: articles } = useSWR("/articles", fetcher);
@@ -23,10 +22,7 @@ export default function Home() {
 
   return (
     <Container>
-      <div>
-        <Articles />
-        <Assignments />
-      </div>
+      <Header />
     </Container>
   );
 }
