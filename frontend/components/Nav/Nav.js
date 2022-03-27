@@ -33,31 +33,27 @@ const Nav = () => {
             </Link>
           )}
           {!isShown && (
-            <Link href="/">
-              <a>
-                <Image
-                  src={logo}
-                  alt="Studio Code Logo"
-                  width={113.45}
-                  height={80}
-                />
-              </a>
-            </Link>
+            <Image
+              src={logo}
+              alt="Studio Code Logo"
+              width={113.45}
+              height={80}
+            />
           )}
         </div>
 
         <ul className={styles.navMenu}>
           <li>
-            <Link href="/articles">
+            <Link href="/">
               <h5>
-                <a>Articles</a>
+                <a>About</a>
               </h5>
             </Link>
           </li>
           <li>
-            <Link href="/assignments">
+            <Link href="/content">
               <h5>
-                <a>Projects</a>
+                <a>Content</a>
               </h5>
             </Link>
           </li>

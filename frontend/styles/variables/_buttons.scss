@@ -16,6 +16,22 @@
   }
 }
 
+.buttonBrowse {
+  font-size: $font-size-h5;
+  font-family: $open-sans;
+  color: $secondary-250;
+  background-color: white;
+  border: solid 2px $secondary-200;
+  border-radius: 24px;
+  padding: 5px 30px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:focus {
+    border-bottom: none;
+  }
+}
+
 .buttonTag {
   font-size: $font-caption;
   font-family: $open-sans;

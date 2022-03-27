@@ -1,6 +1,6 @@
 @import "../styles/variables/__variables";
 
-.main {
+.container {
   h2 {
     color: $primary-200;
     font-weight: bold;
@@ -24,8 +24,8 @@
 }
 
 .cardContainer {
-  padding-left: 20rem;
-  padding-right: 20rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
 }
 
 .card {
@@ -80,5 +80,37 @@
     &:last-child {
       margin-bottom: 0.5;
     }
+  }
+}
+
+.arrowUpContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5rem;
+  height: 100%;
+}
+
+.arrowUp {
+  display: flex;
+  transform: rotate(180deg);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  height: 100%;
+
+  h4 {
+    color: $error-200;
   }
 }

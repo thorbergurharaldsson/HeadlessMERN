@@ -1,7 +1,12 @@
 @import "../../styles/variables/__variables";
 
+.container {
+  padding-left: 0rem;
+  padding-right: 0rem;
+}
+
 .header {
-  height: 50%;
+  height: 100%;
   display: flex;
 
   .title,
@@ -12,28 +17,33 @@
   .title {
     font-size: $font-size-display-lg;
     text-align: left;
+    font-weight: 500;
+    line-height: 6rem;
   }
 
   .subtitle {
     color: $secondary-250;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   h3 {
-    padding-top: 5rem;
+    // padding-top: 5rem;
     padding-bottom: 1rem;
+    font-weight: 600;
+    // text-align: justify;
   }
 
   h4 {
-    line-height: 2rem;
+    line-height: 2.5rem;
     padding-bottom: 1rem;
     font-weight: normal;
     padding-bottom: 2rem;
+    // text-align: justify;
   }
 }
 
 .grid {
-  align-items: center;
+  // align-items: center;
   display: grid;
   grid-template-columns: 1fr;
   column-gap: 2rem;
@@ -48,19 +58,32 @@
     column-gap: 6rem;
 
     > * {
+      margin-top: 0;
       margin-bottom: 0;
     }
   }
+
+  .gridContent {
+    display: grid;
+    align-content: center;
+  }
 }
 
-.buttonSmall {
+.button {
   float: right;
 }
-.arrowDown {
+
+.arrowDownContainer {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding-top: 7rem;
+  height: 100%;
+}
+
+.arrowDown {
+  display: flex;
 
   &:hover {
     cursor: pointer;
