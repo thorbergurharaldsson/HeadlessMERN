@@ -6,7 +6,9 @@ import styles from "../styles/index.module.scss";
 import dateParts from "../utils/dateParts";
 
 import Container from "../components/Container/Container";
+import Content from "../components/Content/Content";
 
+import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
 
 export default function Home() {
@@ -21,8 +23,14 @@ export default function Home() {
   // if (!assignments) return <div>Loading...</div>;
 
   return (
-    <Container>
-      <Header />
-    </Container>
+    <>
+      <Container>
+        <Nav />
+        <Header />
+      </Container>
+      <Container>
+        <Content />
+      </Container>
+    </>
   );
 }
