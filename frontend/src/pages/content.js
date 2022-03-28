@@ -11,17 +11,10 @@ import Articles from "./articles";
 import Assignments from "./assignments";
 
 import Image from "next/image";
-import arrowDown from "../public/arrowDown.png";
-import arrowDown2 from "../public/arrowDown2.png";
+import arrowDown from "../../public/arrowDown.png";
+import arrowDown2 from "../../public/arrowDown2.png";
 
 import Dropdown from "../components/Dropdown/Dropdown";
-
-const stationMap = {
-  hvolsvollur: {
-    lon: -20.2243,
-    lat: 63.7533,
-  },
-};
 
 export default function Content() {
   // to change the arrow on hover

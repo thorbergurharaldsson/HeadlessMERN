@@ -5,8 +5,8 @@ import styles from "./Nav.module.scss";
 import Container from "../Container/Container";
 
 import Image from "next/image";
-import logo from "../../public/logo.png";
-import logo2 from "../../public/logo2.png";
+import logo from "../../../public/logo.png";
+import logo2 from "../../../public/logo2.png";
 
 const Nav = () => {
   // to change the logo on hover

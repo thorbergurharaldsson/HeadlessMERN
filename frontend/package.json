@@ -1,5 +1,5 @@
 {
-  "name": "studio-live",
+  "name": "studio-code",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -3,8 +3,8 @@ import Link from "next/link";
 import styles from "./Header.module.scss";
 
 import Image from "next/image";
-import arrowDown from "../../public/arrowDown.png";
-import arrowDown2 from "../../public/arrowDown2.png";
+import arrowDown from "../../../public/arrowDown.png";
+import arrowDown2 from "../../../public/arrowDown2.png";
 
 const Header = () => {
   // to change the arrow on hover
