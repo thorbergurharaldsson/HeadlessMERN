@@ -1,0 +1,112 @@
+@import "../styles/variables/__variables";
+
+.container {
+  h2 {
+    color: $primary-200;
+    font-weight: bold;
+    padding-top: 2rem;
+  }
+
+  h4 {
+    color: $secondary-200;
+    font-weight: normal;
+    padding-top: 0.2rem;
+  }
+
+  p {
+    padding-top: 2rem;
+  }
+
+  .pSmall {
+    font-size: $font-size-p-sm;
+    padding-top: 0.3rem;
+  }
+}
+
+.cardContainer {
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.card {
+  padding-bottom: 7rem;
+  text-align: left;
+  border-top: 1px solid $neutral-200;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tagContainer {
+  display: flex;
+  align-items: center;
+  padding-top: 2rem;
+
+  button {
+    position: relative;
+
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-right: 0.5;
+    }
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 9rem;
+  margin: 0;
+
+  button {
+    position: relative;
+
+    &:first-child {
+      margin-bottom: 1.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-bottom: 1.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0.5;
+    }
+  }
+}
+
+.arrowUpContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5rem;
+  height: 100%;
+}
+
+.arrowUp {
+  display: flex;
+  transform: rotate(180deg);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &:last-child {
+    padding-bottom: 5rem;
+  }
+}
