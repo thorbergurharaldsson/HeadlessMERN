@@ -1,6 +1,6 @@
 :root {
   --primary-color: #474a7b;
-  --secondary-color: #e25200;
+  --secondary-color: #fe7020;
   --success-color: #3c921e;
   --error-color: #f0523c;
 }
@@ -19,6 +19,13 @@ body {
   word-break: break-word;
 }
 
+h2 {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 5.6rem;
+  margin-bottom: 6rem;
+}
+
 h5 {
   font-weight: 700;
   font-size: 2rem;
@@ -32,7 +39,14 @@ h6 {
   line-height: 2.4rem;
   letter-spacing: 0em;
 }
-
+p {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.4rem;
+}
+.p_b {
+  font-weight: 700;
+}
 .p3 {
   font-weight: 400;
   font-size: 1.4rem;
@@ -51,4 +65,11 @@ a {
 button {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+input,
+textarea {
+  background-color: #fcfcfc;
+  border: 1px solid var(--secondary-color);
+  border-radius: 7px;
 }

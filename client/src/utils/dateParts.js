@@ -1,4 +1,5 @@
 export default function dateParts(dateStr) {
+  if (dateStr === undefined) return;
   const date = new Date(dateStr);
   const options = {
     year: "numeric",

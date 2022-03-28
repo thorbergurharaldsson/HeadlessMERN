@@ -19,6 +19,7 @@ function Table(props) {
     publishFunc,
     viewUrl,
   } = props;
+
   return (
     <tr>
       <td>{title}</td>

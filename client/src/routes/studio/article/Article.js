@@ -13,8 +13,6 @@ function Article() {
   useEffect(() => {
     const getArticle = async () => {
       const { data } = await horsemernAPI.get(`/articles/${params.id}`);
-      console.log(data.data);
-
       setArticle(data.data);
     };
     getArticle();
@@ -26,8 +24,7 @@ function Article() {
 
   const saveArticle = async () => {
     await horsemernAPI.patch(`/articles/${params.id}`, article);
-
-    navigate("/studio/articles");
+    setTimeout(window.location.reload(false), 100);
   };
 
   const deleteArticle = async () => {

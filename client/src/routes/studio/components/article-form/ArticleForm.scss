@@ -1,73 +1,49 @@
 .article-form {
-	padding: 20px;
+  margin-left: 6.5vw;
+  input {
+    width: 75vw;
+    max-width: 530px;
 
-	input,
-	textarea {
-		background-color: #fcfcfc;
-		border: 2px solid #e4e4e4;
-		padding: 5px;
-		margin-top: 10px;
-	}
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    letter-spacing: 0em;
+    padding: 0.8rem;
+  }
+  textarea {
+    width: 80vw;
+    height: 20vw;
+    max-width: 1000px;
+    max-height: 280px;
+  }
 
-	textarea {
-		box-sizing: border-box;
-	}
+  // button {
+  //   height: 28px;
+  //   width: 80px;
 
-	.title {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-		column-gap: 20px;
+  //   font-weight: 800;
+  //   color: white;
+  //   border: none;
+  // }
 
-		input {
-			width: 100%;
-			max-width: 400px;
+  // .delete-button {
+  //   background-color: #f17a7e;
+  // }
 
-			font-size: 24px;
-			font-weight: 800;
-		}
-	}
+  // .save-button {
+  //   background-color: #2f981e;
+  //   margin-right: 20px;
+  // }
 
-	.subtitle {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
+  // .content {
+  //   height: calc(100vh - 400px);
+  // }
 
-		input {
-			font-size: 16px;
-			font-weight: 600;
-		}
-	}
+  // .footer {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: space-between;
 
-	button {
-		height: 28px;
-		width: 80px;
-
-		font-weight: 800;
-		color: white;
-		border: none;
-	}
-
-	.delete-button {
-		background-color: #f17a7e;
-	}
-
-	.save-button {
-		background-color: #2f981e;
-		margin-right: 20px;
-	}
-
-	.content {
-		height: calc(100vh - 400px);
-	}
-
-	.footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		margin-top: 20px;
-	}
+  //   margin-top: 20px;
+  // }
 }

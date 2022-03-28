@@ -17,12 +17,33 @@ function Assignments() {
   const getAssignments = async () => {
     const response = horsemernAPI.get("/assignments");
     const data = (await response).data;
-
     const filteredAssignments = data.filter(
       (assignment) => assignment.author === user.name
     );
-
     setAssignments(filteredAssignments);
+  };
+
+  const updateAssingment = async (published, assignment) => {
+    const updatedAssignment = {
+      ...assignment,
+      published,
+    };
+    const updatedAssignments = assignments.map((a) =>
+      a._id === assignment._id ? updatedAssignment : a
+    );
+
+    setAssignments(updatedAssignments);
+    // await fetch(
+    //   `${process.env.REACT_APP_HORSEMERN_API}/assignments/${assignment._id}`,
+    //   {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8", // Indicates the content
+    //     },
+    //     body: JSON.stringify(updatedAssignment),
+    //   }
+    // );
+    horsemernAPI.patch(`/assignments/${assignment._id}`, updatedAssignment);
   };
 
   return (
@@ -49,6 +70,13 @@ function Assignments() {
               })()}
               viewUrl={assignment?.url}
               published={assignment.published}
+              publishFunc={() =>
+                updateAssingment(
+                  assignment.published
+                    ? updateAssingment(false, assignment)
+                    : updateAssingment(true, assignment)
+                )
+              }
               type="assignments"
             />
           ))}

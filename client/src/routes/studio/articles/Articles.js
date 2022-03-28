@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import ProtectedRoute from "../../../utils/protectedRoute";
 import { useAuth } from "../../../utils/authContext";
 import { horsemernAPI } from "../../../utils/api";
 import dateParts from "../../../utils/dateParts";
+import newIcon from "../../../img/Icon/New.svg";
 import Table from "../components/table/Table";
 
 import "./Articles.scss";
@@ -92,6 +94,12 @@ function Articles() {
           ))}
         </tbody>
       </table>
+      <div className="newBtn">
+        <Link to="/studio/articles/new-article">
+          <img src={newIcon} alt="New arcticle"></img>
+        </Link>
+        <p className="p3">New</p>
+      </div>
     </div>
   );
 }

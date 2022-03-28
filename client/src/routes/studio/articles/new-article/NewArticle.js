@@ -8,10 +8,13 @@ import ArticleForm from "../../components/article-form/ArticleForm";
 function NewArticle() {
   const { user } = useAuth();
 
+  console.log(user.name);
+
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [article, setArticle] = useState({
     author: user._id,
+    authorName: user.name,
     title: "",
     content: "",
   });
