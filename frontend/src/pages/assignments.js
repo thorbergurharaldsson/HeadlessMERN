@@ -32,7 +32,7 @@ function Assignments() {
       <div className={styles.container}>
         <div>
           <div className={styles.cardContainer}>
-            {data.map((assignment, index) => (
+            {data.data.map((assignment, index) => (
               <div key={index} className={styles.card}>
                 <p>{assignment.author}</p>
                 <p className={styles.pSmall}>
