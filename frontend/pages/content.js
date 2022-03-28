@@ -31,7 +31,6 @@ export default function Content() {
       <div id="content" className={styles.container}>
         <div className={styles.buttonContainer}>
           <button className={styles.button}>Search</button>
-          <button className={styles.button}>Browse by</button>
 
           <Dropdown
             options={[
@@ -45,7 +44,7 @@ export default function Content() {
               },
             ]}
             text="Browse by"
-            // onSelect={(id) => fetch(`url?lat=${stationMap[id].lat}`)}
+            onSelect={(id) => console.log(id)}
           />
         </div>
         <div>

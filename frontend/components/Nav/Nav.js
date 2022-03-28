@@ -44,14 +44,14 @@ const Nav = () => {
 
         <ul className={styles.navMenu}>
           <li>
-            <Link href="/">
+            <Link href="/" passHref>
               <h5>
                 <a>About</a>
               </h5>
             </Link>
           </li>
           <li>
-            <Link href="/content">
+            <Link href="/content" passHref>
               <h5>
                 <a>Content</a>
               </h5>

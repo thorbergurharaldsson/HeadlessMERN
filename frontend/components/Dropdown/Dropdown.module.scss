@@ -1,6 +1,6 @@
 @import "../../styles/variables/__variables";
 
-.browse {
+.buttonBrowse {
   font-size: $font-size-h5;
   font-family: $open-sans;
   color: $secondary-250;
@@ -13,15 +13,15 @@
 }
 
 .dropdownButton {
-  background-color: white;
-  border: none;
   cursor: pointer;
   text-decoration: none;
+  padding: 0;
+  margin: 0;
 
   &:hover {
     background-color: $secondary-200;
-
-    border-color: white;
+    overflow: visible;
+    display: block;
   }
 
   h5 {
@@ -29,6 +29,13 @@
     font-weight: 500;
     &:hover {
       color: $neutral-50;
+    }
+    &:first-child {
+      padding-top: 0.7rem;
+    }
+
+    &:last-child {
+      padding-top: 0.5rem;
     }
   }
 }

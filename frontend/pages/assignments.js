@@ -11,13 +11,13 @@ function Assignments() {
   if (error)
     return (
       <div className={styles.loading}>
-        <h4>Failed to load projects</h4>
+        <h5>Failed to load projects :(</h5>
       </div>
     );
   if (!data)
     return (
       <div className={styles.loading}>
-        <h4>Loading projects...</h4>
+        <h5>Loading projects...</h5>
       </div>
     );
 

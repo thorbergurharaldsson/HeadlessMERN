@@ -11,13 +11,13 @@ function Articles() {
   if (error)
     return (
       <div className={styles.loading}>
-        <h4>Failed to load articles</h4>
+        <h5>Failed to load articles :(</h5>
       </div>
     );
   if (!data)
     return (
       <div className={styles.loading}>
-        <h4>Loading articles...</h4>
+        <h5>Loading articles...</h5>
       </div>
     );
   // to get the id from the clicked article

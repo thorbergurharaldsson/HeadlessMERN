@@ -35,9 +35,10 @@ const DropdownMenu = ({ setIsActive, options, onSelect }) => {
   });
   return (
     <div className={styles.dropdownMenu} ref={ref}>
-      {options.map((option) => (
+      {options.map((option, index) => (
         <div
           className={styles.dropdownButton}
+          key={index}
           onClick={() => onSelect(option.id)}
         >
           <h5>{option.text}</h5>
