@@ -5,6 +5,9 @@
     color: $primary-200;
     font-weight: bold;
     padding-top: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   h4 {

@@ -21,9 +21,10 @@ export default function Content() {
   const [isShown, setIsShown] = useState(false);
 
   // to browse by
-  const getContent = async (id) => {
-    const { data, error } = useSWR("/articles", fetcher);
-  };
+  // const [id, setID] = useState();
+  const [id, setID] = useState();
+  const { data, error } = useSWR(`/${id}`, fetcher);
+  console.log(data);
 
   return (
     <div id="content" className={styles.container}>
