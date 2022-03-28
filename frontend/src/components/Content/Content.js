@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/api";
 import Link from "next/link";
-import styles from "../../styles/index.module.scss";
+import styles from "./Content.module.scss";
 import dateParts from "../../utils/dateParts";
 
 // import Container from "../Container/Container";
@@ -19,6 +19,12 @@ import Dropdown from "../Dropdown/Dropdown";
 export default function Content() {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
+
+  // to browse by
+  const getContent = async (id) => {
+    const { data, error } = useSWR("/articles", fetcher);
+  };
+
   return (
     <div id="content" className={styles.container}>
       <div className={styles.buttonContainer}>

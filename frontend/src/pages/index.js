@@ -23,7 +23,7 @@ export default function Home() {
   // if (!assignments) return <div>Loading...</div>;
 
   return (
-    <>
+    <div>
       <Container>
         <Nav />
         <Header />
@@ -31,6 +31,6 @@ export default function Home() {
       <Container>
         <Content />
       </Container>
-    </>
+    </div>
   );
 }

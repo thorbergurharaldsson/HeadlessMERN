@@ -45,7 +45,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link href="/content" passHref>
+          <Link href="#content" passHref>
             <h5>
               <a>Content</a>
             </h5>
