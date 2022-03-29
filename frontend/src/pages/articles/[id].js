@@ -7,11 +7,22 @@ import dateParts from "../../utils/dateParts";
 
 import Nav from "../../components/Nav/Nav";
 
+import Image from "next/image";
+import arrowDown from "../../../public/arrowDown.png";
+import arrowDown2 from "../../../public/arrowDown2.png";
+import linkedin from "../../../public/linkedin.png";
+import github from "../../../public/github.png";
+import instagram from "../../../public/instagram.png";
+import twitter from "../../../public/twitter.png";
+
 const BlogPost = ({ post }) => {
   const [id, setID] = useState();
   const { data } = useSWR("/articles", fetcher);
   // console.log(data);
   if (!data) return <div>Loading...</div>;
+
+  // to change the arrow on hover
+  const [isShown, setIsShown] = useState(false);
 
   const getID = async (id) => {
     // console.log(id);
@@ -20,6 +31,29 @@ const BlogPost = ({ post }) => {
   return (
     <div className={styles.mainContainer}>
       <Nav />
+      <div className={styles.arrowSideContainer}>
+        <div
+          className={styles.arrowSide}
+          onMouseEnter={() => setIsShown(true)}
+          onMouseLeave={() => setIsShown(false)}
+        >
+          {isShown && (
+            <Link href="/#content">
+              <a>
+                <Image
+                  src={arrowDown2}
+                  alt="Arrow down"
+                  width={42}
+                  height={28}
+                />
+              </a>
+            </Link>
+          )}
+          {!isShown && (
+            <Image src={arrowDown} alt="Arrow down" width={42} height={28} />
+          )}
+        </div>
+      </div>
       <div className={styles.parent}>
         <div className={styles.article}>
           <div className={styles.main}>
@@ -44,10 +78,13 @@ const BlogPost = ({ post }) => {
               </div>
               <h3 className={styles.recommendedh3}>{article.title}</h3>
               <h5 className={styles.recommendedh4}>{article.subtitle}</h5>
-              <p className={styles.recommendedP}>{article.posted_at}</p>
-              <Link href={`/articles/${article._id}`}>
-                <button className={styles.buttonSmall}>View article</button>
-              </Link>
+
+              <p className={styles.recommendedP}>
+                {(() => {
+                  const d = dateParts(article.posted_at);
+                  return `${d.month} ${d.day}, ${d.year}`;
+                })()}
+              </p>
             </div>
           ))}
         </div>
@@ -65,16 +102,44 @@ const BlogPost = ({ post }) => {
           </div>
           <div className={styles.more}>
             <p className={styles.moreHeader}>
-              More from {post.data.authorName}
+              More from <br />
+              {post.data.authorName}
             </p>
             {data.data.slice(0, 3).map((article, index) => (
               <div key={index} className={styles.moreCont}>
-                <p className={styles.moreP}>{article.title}</p>
-                <Link href={`/articles/${article._id}`}>
-                  <button className={styles.moreBtn}>View article</button>
-                </Link>
+                <p className={styles.moreP}>
+                  {(() => {
+                    const d = dateParts(article.posted_at);
+                    return `${d.month} ${d.day}, ${d.year}`;
+                  })()}
+                </p>
+                <h5 className={styles.moreTitle}>{article.title}</h5>
+                <div className={styles.tagContainer}>
+                  <button className={styles.buttonTag}>Tag</button>
+                  <button className={styles.buttonTag}>Tag</button>
+                </div>
               </div>
             ))}
+          </div>
+          <div className={styles.more}>
+            <p className={styles.moreHeader}>
+              Follow <br />
+              {post.data.authorName}
+            </p>
+            <div className={styles.imgContainer}>
+              <div className={styles.img}>
+                <Image src={github} alt="Github Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={twitter} alt="Twitter Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={instagram} alt="Instagram Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={linkedin} alt="Linkedin Icon" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
