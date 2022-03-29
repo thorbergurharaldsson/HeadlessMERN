@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import useSWR from "swr";
-import { fetcher } from "../utils/api";
-import styles from "../styles/index.module.scss";
-import dateParts from "../utils/dateParts";
+import { fetcher } from "../../utils/api";
+import styles from "../../styles/index.module.scss";
+import dateParts from "../../utils/dateParts";
+import Link from "next/link";
 
 function Articles() {
   const [id, setID] = useState();
@@ -31,7 +32,7 @@ function Articles() {
       <div className={styles.container}>
         <div>
           <div className={styles.cardContainer}>
-            {data.data.data.map((article, index) => (
+            {data.data.map((article, index) => (
               <div key={index} className={styles.card}>
                 <p>{article.author}</p>
                 <p className={styles.pSmall}>
@@ -40,13 +41,13 @@ function Articles() {
                     return `${d.month} ${d.day}, ${d.year}`;
                   })()}
                 </p>
-                <h2>{article.title}</h2>
+                <Link href={`/articles/${article._id}`}>
+                  <h2>{article.title}</h2>
+                </Link>
                 {/* <h3>{assignment.description}</h3> */}
                 <h4>{article.subtitle}</h4>
                 <p> {article.content}</p>
-                <button onClick={(e) => getID(e.target.value)}>
-                  <option value={article._id}>...</option>
-                </button>
+
                 <div className={styles.tagContainer}>
                   <button className={styles.buttonTag}>Tag</button>
                   <button className={styles.buttonTag}>Tag</button>

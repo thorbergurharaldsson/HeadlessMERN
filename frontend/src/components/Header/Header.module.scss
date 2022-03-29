@@ -1,13 +1,10 @@
 @import "../../styles/variables/__variables";
 
-.container {
-  padding-left: 0rem;
-  padding-right: 0rem;
-}
-
 .header {
   height: 100%;
-  display: flex;
+  display: grid;
+  padding-top: 3rem;
+  grid-template-rows: 2fr 1fr;
 
   .title,
   h3 {
@@ -47,7 +44,7 @@
   display: grid;
   grid-template-columns: 1fr;
   column-gap: 2rem;
-  width: 100%;
+  // width: 100%;
 
   > * {
     margin-bottom: 2rem;
@@ -67,6 +64,11 @@
     display: grid;
     align-content: center;
   }
+
+  .gridTitle {
+    display: grid;
+    align-content: center;
+  }
 }
 
 .button {
@@ -74,16 +76,14 @@
 }
 
 .arrowDownContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding-top: 7rem;
-  height: 100%;
+  display: grid;
+  justify-self: center;
+  align-self: start;
+  padding-top: 3rem;
 }
 
 .arrowDown {
-  display: flex;
+  display: grid;
 
   &:hover {
     cursor: pointer;

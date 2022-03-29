@@ -13,61 +13,54 @@ const Nav = () => {
   const [isShown, setIsShown] = useState(false);
 
   return (
-    <Container>
-      <div className={styles.navBar}>
-        <div
-          className={styles.navLogo}
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}
-        >
-          {isShown && (
-            <Link href="/">
-              <a>
-                <Image
-                  src={logo2}
-                  alt="Studio Code Logo"
-                  width={113.45}
-                  height={80}
-                />
-              </a>
-            </Link>
-          )}
-          {!isShown && (
-            <Image
-              src={logo}
-              alt="Studio Code Logo"
-              width={113.45}
-              height={80}
-            />
-          )}
-        </div>
-
-        <ul className={styles.navMenu}>
-          <li>
-            <Link href="/" passHref>
-              <h5>
-                <a>About</a>
-              </h5>
-            </Link>
-          </li>
-          <li>
-            <Link href="/content" passHref>
-              <h5>
-                <a>Content</a>
-              </h5>
-            </Link>
-          </li>
-
-          <li className={styles.navSubMenu}>
-            <Link href="https://horsemern.xyz/">
-              <a target="_blank" rel="noreferrer">
-                <button className={styles.button}>Login</button>
-              </a>
-            </Link>
-          </li>
-        </ul>
+    <div className={styles.navBar}>
+      <div
+        className={styles.navLogo}
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
+      >
+        {isShown && (
+          <Link href="/">
+            <a>
+              <Image
+                src={logo2}
+                alt="Studio Code Logo"
+                width={113.45}
+                height={80}
+              />
+            </a>
+          </Link>
+        )}
+        {!isShown && (
+          <Image src={logo} alt="Studio Code Logo" width={113.45} height={80} />
+        )}
       </div>
-    </Container>
+
+      <ul className={styles.navMenu}>
+        <li>
+          <Link href="/" passHref>
+            <h5>
+              <a>About</a>
+            </h5>
+          </Link>
+        </li>
+        <li>
+          <Link href="#content" passHref>
+            <h5>
+              <a>Content</a>
+            </h5>
+          </Link>
+        </li>
+
+        <li className={styles.navSubMenu}>
+          <Link href="https://horsemern.xyz/">
+            <a target="_blank" rel="noreferrer">
+              <button className={styles.button}>Login</button>
+            </a>
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 
