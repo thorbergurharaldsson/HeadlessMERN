@@ -64,9 +64,9 @@ function Articles() {
             </th>
             <th></th>
             <th className="p3">View</th>
+            <th className="p3">Publish</th>
             <th className="p3">Edit</th>
             <th className="p3">Delete</th>
-            <th className="p3">Publish</th>
           </tr>
         </thead>
         <tbody>
