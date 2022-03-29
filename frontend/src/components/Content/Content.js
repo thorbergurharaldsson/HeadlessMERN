@@ -3,27 +3,33 @@ import useSWR from "swr";
 import { fetcher } from "../../utils/api";
 import Link from "next/link";
 import styles from "./Content.module.scss";
-import dateParts from "../../utils/dateParts";
-
-// import Container from "../Container/Container";
+// import dateParts from "../../utils/dateParts";
 
 import Articles from "../../pages/articles";
 import Assignments from "../../pages/assignments";
+import Dropdown from "../Dropdown/Dropdown";
 
 import Image from "next/image";
 import arrowDown from "../../../public/arrowDown.png";
 import arrowDown2 from "../../../public/arrowDown2.png";
-
-import Dropdown from "../Dropdown/Dropdown";
 
 export default function Content() {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
 
   // to browse by
-  // const [id, setID] = useState();
-  const [id, setID] = useState();
-  const { data, error } = useSWR(`/${id}`, fetcher);
+  useEffect(() => {
+    handleContent("assignments");
+  }, []);
+
+  const [content, setContent] = useState();
+
+  const handleContent = (content) => {
+    setContent(content);
+    // console.log(content);
+  };
+
+  const { data, error } = useSWR(`/${content}`, fetcher);
   console.log(data);
 
   return (
@@ -42,8 +48,8 @@ export default function Content() {
               text: "Projects",
             },
           ]}
-          text="Browse by"
-          onSelect={(id) => console.log(id)}
+          text={content}
+          onSelect={(id) => handleContent(id)}
         />
       </div>
       <div>
