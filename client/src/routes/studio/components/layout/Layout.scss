@@ -1,37 +1,32 @@
 .layout {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
-	overflow: scroll;
-	height: 100vh;
-
-	width: 100%;
-	padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
-.sidebar {
-	padding: 10px;
-	color: white;
-	background-color: #282c34;
-	height: 100vh;
+.header {
+  padding: 5rem 8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
-	a {
-		color: white;
-	}
+  &__links {
+    display: flex;
+  }
 
-	&__links {
-		display: flex;
-		flex-direction: column;
-
-		padding-top: 20px;
-		font-size: 24px;
-		font-weight: 800;
-	}
-
-	&__user {
-		position: absolute;
-		bottom: 20px;
-	}
+  &__link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 6rem;
+    min-width: 54.2px;
+  }
+  &__user {
+    padding: 2rem 0rem;
+  }
 }

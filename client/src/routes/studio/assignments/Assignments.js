@@ -1,12 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import ProtectedRoute from "../../../utils/protectedRoute";
-import Markdown from "../../../components/markdown/Markdown";
 import { useAuth } from "../../../utils/authContext";
 import { horsemernAPI } from "../../../utils/api";
+import dateParts from "../../../utils/dateParts";
+import Table from "../components/table/Table";
 
-import "./Assignments.scss";
-
-function Assignments(params) {
+function Assignments() {
   const { user } = useAuth();
   const [assignments, setAssignments] = useState([]);
 
@@ -17,28 +17,61 @@ function Assignments(params) {
   const getAssignments = async () => {
     const response = horsemernAPI.get("/assignments");
     const data = (await response).data;
-    console.log(data);
     const filteredAssignments = data.filter(
-      (assignment) => assignment.author == user.name
+      (assignment) => assignment.author === user.name
+    );
+    setAssignments(filteredAssignments);
+  };
+
+  const updateAssingment = async (published, assignment) => {
+    const updatedAssignment = {
+      ...assignment,
+      published,
+    };
+    const updatedAssignments = assignments.map((a) =>
+      a._id === assignment._id ? updatedAssignment : a
     );
 
-    setAssignments(filteredAssignments);
+    setAssignments(updatedAssignments);
+    horsemernAPI.patch(`/assignments/${assignment._id}`, updatedAssignment);
   };
 
   return (
     <div>
-      <div className="title">
-        <h1>Your Assignments</h1>
-      </div>
-      {assignments?.map((assignment) => (
-        <div className="assignment" key={assignment._id}>
-          <div>
-            <h2>{assignment?.title}</h2>
-            <h3>{assignment.author}</h3>
-            <Markdown>{assignment?.description}</Markdown>
-          </div>
-        </div>
-      ))}
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <h5>Assignments</h5>
+            </th>
+            <th></th>
+            <th className="p3">View</th>
+            <th className="p3">Publish</th>
+          </tr>
+        </thead>
+        <tbody>
+          {assignments?.map((assignment) => (
+            <Table
+              key={assignment.uniqueID}
+              title={assignment.assignmentTitle}
+              date={(() => {
+                const d = dateParts(assignment.createdAt);
+                return `${d.month} ${d.day}, ${d.year}`;
+              })()}
+              viewUrl={assignment?.url}
+              published={assignment.published}
+              publishFunc={() =>
+                updateAssingment(
+                  assignment.published
+                    ? updateAssingment(false, assignment)
+                    : updateAssingment(true, assignment)
+                )
+              }
+              type="assignments"
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

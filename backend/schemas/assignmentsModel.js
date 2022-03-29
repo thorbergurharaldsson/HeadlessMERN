@@ -12,7 +12,10 @@ let assignmentsSchema = new Schema(
       type: String,
       required: true,
     },
-    title: {
+    moduleTitle: {
+      type: String,
+    },
+    assignmentTitle: {
       type: String,
     },
     description: {
@@ -23,6 +26,16 @@ let assignmentsSchema = new Schema(
     },
     url: {
       type: String,
+    },
+    createdAt: {
+      type: Date,
+    },
+    updatedAt: {
+      type: Date,
+    },
+    published: {
+      type: Boolean,
+      default: false,
     },
   },
   {

@@ -19,6 +19,10 @@ const articleSchema = new Schema({
     type: String,
     required: true,
   },
+  authorName: {
+    type: String,
+    required: true,
+  },
   published: {
     type: Boolean,
     default: false,
@@ -26,6 +30,9 @@ const articleSchema = new Schema({
   posted_at: {
     type: Date,
     default: Date.now,
+  },
+  updated_at: {
+    type: String,
   },
   comments: {
     type: Array,

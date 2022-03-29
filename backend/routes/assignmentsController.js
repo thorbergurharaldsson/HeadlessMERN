@@ -26,8 +26,8 @@ router.route("/:id").get((req, res) => {
   });
 });
 
-// PUT: Update Assignment
-router.route("/:id").put((req, res, next) => {
+// PATCH: Update Assignment
+router.route("/:id").patch((req, res, next) => {
   assignmentsSchema.findByIdAndUpdate(
     req.params.id,
     {

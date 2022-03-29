@@ -27,10 +27,13 @@ export const insertData = async () => {
         let assignments = new assignmentsSchema({
           uniqueID: json[i]._id,
           author: json[i].sender.name,
-          title: json[i].assignment.project.Title,
+          moduleTitle: json[i].assignment.project.Title,
+          assignmentTitle: json[i].assignment.title,
           description: json[i].assignment.project.Description,
           comment: json[i].comment,
           url: json[i].url,
+          createdAt: json[i].createdAt,
+          updatedAt: json[i].updatedAt,
         });
 
         assignments.save(() => {

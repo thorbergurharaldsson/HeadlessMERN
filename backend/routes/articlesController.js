@@ -25,7 +25,9 @@ export const newArticle = (req, res) => {
   article.subtitle = req.body.subtitle;
   article.content = req.body.content;
   article.author = req.body.author;
+  article.authorName = req.body.authorName;
   article.published = req.body.published;
+  article.updated_at = new Date().toISOString();
 
   if (!article.title) {
     return res.status(400).json({
@@ -74,8 +76,12 @@ export const updateArticle = (req, res) => {
     article.subtitle = req.body.subtitle ? req.body.subtitle : article.subtitle;
     article.content = req.body.content ? req.body.content : article.content;
     article.author = req.body.author ? req.body.author : article.author;
+    article.authorName = req.body.authorName
+      ? req.body.authorName
+      : article.authorName;
     article.published =
       req.body.published !== undefined ? req.body.published : article.published;
+    article.updated_at = new Date().toISOString();
 
     article.save((err) => {
       if (err) res.json(err);
