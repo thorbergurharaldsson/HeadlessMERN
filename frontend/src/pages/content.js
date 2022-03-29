@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
-import useSWR from "swr";
-import { fetcher } from "../utils/api";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/index.module.scss";
-import dateParts from "../utils/dateParts";
 
 import Container from "../components/Container/Container";
-
-import Articles from "./articles";
-import Assignments from "./assignments";
 
 import Image from "next/image";
 import arrowDown from "../../public/arrowDown.png";
 import arrowDown2 from "../../public/arrowDown2.png";
 
 import Dropdown from "../components/Dropdown/Dropdown";
+import ArticlesAndAssignments from "../components/ArticlesAndAssignments/ArticlesAndAssignments";
 
 export default function Content() {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
+
   return (
     <Container>
       <div id="content" className={styles.container}>
@@ -41,8 +37,7 @@ export default function Content() {
           />
         </div>
         <div>
-          <Articles />
-          <Assignments />
+          <ArticlesAndAssignments />
         </div>
         <div className={styles.arrowUpContainer}>
           <div

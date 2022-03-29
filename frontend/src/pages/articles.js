@@ -31,7 +31,7 @@ function Articles() {
       <div className={styles.container}>
         <div>
           <div className={styles.cardContainer}>
-            {data.data.map((article, index) => (
+            {data.data.data.map((article, index) => (
               <div key={index} className={styles.card}>
                 <p>{article.author}</p>
                 <p className={styles.pSmall}>
