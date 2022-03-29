@@ -33,16 +33,6 @@ function Assignments() {
     );
 
     setAssignments(updatedAssignments);
-    // await fetch(
-    //   `${process.env.REACT_APP_HORSEMERN_API}/assignments/${assignment._id}`,
-    //   {
-    //     method: "PATCH",
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8", // Indicates the content
-    //     },
-    //     body: JSON.stringify(updatedAssignment),
-    //   }
-    // );
     horsemernAPI.patch(`/assignments/${assignment._id}`, updatedAssignment);
   };
 
