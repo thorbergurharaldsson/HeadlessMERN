@@ -67,7 +67,7 @@ const ArticlesAndAssignments = () => {
                     </p>
                     <h2>{entry.assignmentTitle}</h2>
                     <h4>{entry.moduleTitle}</h4>
-                    <p>{entry.comment}</p>
+                    <ReactMarkdown>{entry.comment}</ReactMarkdown>
                     <button onClick={(e) => getID(e.target.value)}>
                       <option value={entry._id}>...</option>
                     </button>
