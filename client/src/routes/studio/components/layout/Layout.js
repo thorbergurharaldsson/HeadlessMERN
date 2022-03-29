@@ -30,7 +30,7 @@ export default function Layout({ children }) {
                   alt="Articles"
                 ></img>
               </Link>
-              <p>Articles</p>
+              <p>Your Articles</p>
             </div>
             <div className="header__link">
               <Link to="/studio/assignments">
@@ -43,7 +43,7 @@ export default function Layout({ children }) {
                   alt="Assignments"
                 ></img>
               </Link>
-              <p>Projects</p>
+              <p>Your Projects</p>
             </div>
           </div>
         )}
