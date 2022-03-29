@@ -18,19 +18,19 @@ export default function Content() {
   const [isShown, setIsShown] = useState(false);
 
   // to browse by
-  useEffect(() => {
-    handleContent("assignments");
-  }, []);
+  // useEffect(() => {
+  //   handleContent("assignments");
+  // }, []);
 
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("Browse by");
 
   const handleContent = (content) => {
     setContent(content);
     // console.log(content);
   };
 
-  const { data, error } = useSWR(`/${content}`, fetcher);
-  console.log(data);
+  // const { data, error } = useSWR(`/${content}`, fetcher);
+  // console.log(data);
 
   return (
     <div id="content" className={styles.container}>
@@ -40,6 +40,10 @@ export default function Content() {
         <Dropdown
           options={[
             {
+              id: "",
+              text: "Browse by",
+            },
+            {
               id: "articles",
               text: "Articles",
             },
@@ -48,7 +52,7 @@ export default function Content() {
               text: "Projects",
             },
           ]}
-          text={content}
+          text="Browse by"
           onSelect={(id) => handleContent(id)}
         />
       </div>

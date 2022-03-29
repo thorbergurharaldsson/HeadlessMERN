@@ -3,8 +3,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/api";
+import dateParts from "../../utils/dateParts";
 
-import Container from "../../components/Container/Container";
 import Nav from "../../components/Nav/Nav";
 
 const BlogPost = ({ post }) => {
@@ -18,13 +18,17 @@ const BlogPost = ({ post }) => {
     setID(id);
   };
   return (
-    <Container>
+    <div className={styles.mainContainer}>
       <Nav />
-
       <div className={styles.parent}>
         <div className={styles.article}>
           <div className={styles.main}>
-            <p>{post.data.posted_at}</p>
+            <p className={styles.pSmall}>
+              {(() => {
+                const d = dateParts(post.data.posted_at);
+                return `${d.month} ${d.day}, ${d.year}`;
+              })()}
+            </p>
             <h1 className={styles.title}>{post.data.title}</h1>
             <h4 className={styles.subtitle}>{post.data.subtitle}</h4>
             <p className={styles.articleContent}>{post.data.content}</p>
@@ -48,29 +52,33 @@ const BlogPost = ({ post }) => {
           ))}
         </div>
 
-        <div className={styles.author}>
-          <div className={styles.avatar}>
-            <div className={styles.avatar__letters}> FU </div>
-          </div>
-          <p className={styles.authorName}>{post.data.authorName}</p>
-          <p className={styles.authorBio}>
-            this is me. I like pc and various things, like coding and love
-            makings
-          </p>
-        </div>
-        <div className={styles.more}>
-          <p className={styles.moreHeader}>More from {post.data.authorName}</p>
-          {data.data.slice(0, 3).map((article, index) => (
-            <div key={index} className={styles.moreCont}>
-              <p className={styles.moreP}>{article.title}</p>
-              <Link href={`/articles/${article._id}`}>
-                <button className={styles.moreBtn}>View article</button>
-              </Link>
+        <div>
+          <div className={styles.author}>
+            <div className={styles.avatar}>
+              <div className={styles.avatar__letters}> FU </div>
             </div>
-          ))}
+            <p className={styles.authorName}>{post.data.authorName}</p>
+            <p className={styles.authorBio}>
+              this is me. I like pc and various things, like coding and love
+              makings
+            </p>
+          </div>
+          <div className={styles.more}>
+            <p className={styles.moreHeader}>
+              More from {post.data.authorName}
+            </p>
+            {data.data.slice(0, 3).map((article, index) => (
+              <div key={index} className={styles.moreCont}>
+                <p className={styles.moreP}>{article.title}</p>
+                <Link href={`/articles/${article._id}`}>
+                  <button className={styles.moreBtn}>View article</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
