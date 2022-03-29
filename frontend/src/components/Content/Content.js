@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./Content.module.scss";
 // import dateParts from "../../utils/dateParts";
 
-import ArticlesAndAssignments from "../ArticlesAndAssignments/ArticlesAndAssignments";
+import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments/ArticlesAndAssignments";
 import Dropdown from "../Dropdown/Dropdown";
 
 import Image from "next/image";
@@ -65,7 +65,7 @@ export default function Content() {
           onMouseLeave={() => setIsShown(false)}
         >
           {isShown && (
-            <Link href="/content">
+            <Link href="#content">
               <a>
                 <Image
                   src={arrowDown2}
@@ -77,16 +77,7 @@ export default function Content() {
             </Link>
           )}
           {!isShown && (
-            <Link href="/content">
-              <a>
-                <Image
-                  src={arrowDown}
-                  alt="Arrow down"
-                  width={42}
-                  height={28}
-                />
-              </a>
-            </Link>
+            <Image src={arrowDown} alt="Arrow down" width={42} height={28} />
           )}
         </div>
       </div>

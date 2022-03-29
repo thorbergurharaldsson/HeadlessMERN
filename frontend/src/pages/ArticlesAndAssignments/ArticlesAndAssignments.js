@@ -2,8 +2,16 @@ import React, { useState, useEffect } from "react";
 import { horsemernAPI } from "../../utils/api";
 import dateParts from "../../utils/dateParts";
 import styles from "../../styles/index.module.scss";
+import Link from "next/link";
 
 const ArticlesAndAssignments = () => {
+  const [id, setID] = useState();
+
+  const getID = async (e) => {
+    console.log(e);
+    setID(e);
+  };
+
   const [concatArr, setConcatArr] = useState([]);
 
   const concatenate = async (path1, path2) => {
@@ -49,12 +57,15 @@ const ArticlesAndAssignments = () => {
                         return `${d.month} ${d.day}, ${d.year}`;
                       })()}
                     </p>
-                    <h2>{entry.assignmentTitle}</h2>
+                    <Link href={`/assignments/${entry._id}`}>
+                      <h2>{entry.assignmentTitle}</h2>
+                    </Link>
+
                     <h4>{entry.moduleTitle}</h4>
                     <p dangerouslySetInnerHTML={{ __html: entry.comment }}></p>
-                    <button onClick={(e) => getID(e.target.value)}>
-                      <option value={entry._id}>...</option>
-                    </button>
+                    {/* <button onClick={(e) => getID(e.target.value)}>
+                      <option value={entry.moduleTitle}>...</option>
+                    </button> */}
                   </div>
                 ) : (
                   <div key={index} className={styles.card}>
@@ -65,12 +76,15 @@ const ArticlesAndAssignments = () => {
                         return `${d.month} ${d.day}, ${d.year}`;
                       })()}
                     </p>
-                    <h2>{entry.title}</h2>
+                    <Link href={`/articles/${entry._id}`}>
+                      <h2>{entry.title}</h2>
+                    </Link>
                     <h4>{entry.subtitle}</h4>
                     <p> {entry.content}</p>
-                    <button onClick={(e) => getID(e.target.value)}>
-                      <option value={entry._id}>...</option>
-                    </button>
+
+                    {/* <button onClick={(e) => getID(e.target.value)}>
+                      <option value={entry.moduleTitle}>...</option>
+                    </button> */}
                     <div className={styles.tagContainer}>
                       <button className={styles.buttonTag}>Tag</button>
                       <button className={styles.buttonTag}>Tag</button>
