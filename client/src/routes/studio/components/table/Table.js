@@ -31,6 +31,13 @@ function Table(props) {
           onClick={() => window.open(viewUrl, "_blank").focus()}
         />
       </td>
+      <td>
+        <img
+          src={published ? publish : notPublish}
+          alt="Published"
+          onClick={publishFunc}
+        />
+      </td>
       {type === "assignments" ? null : (
         <>
           <td>
@@ -41,14 +48,6 @@ function Table(props) {
           </td>
         </>
       )}
-
-      <td>
-        <img
-          src={published ? publish : notPublish}
-          alt="Published"
-          onClick={publishFunc}
-        />
-      </td>
     </tr>
   );
 }
