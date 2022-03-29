@@ -37,47 +37,49 @@ const ArticlesAndAssignments = () => {
     <>
       <div className={styles.container}>
         <div className={styles.cardContainer}>
-          {concatArr.map((entry, index) => (
-            <div key={index}>
-              {"moduleTitle" in entry ? (
-                <div key={index} className={styles.card}>
-                  <p>{entry.author}</p>
-                  <p className={styles.pSmall}>
-                    {(() => {
-                      const d = dateParts(entry.createdAt);
-                      return `${d.month} ${d.day}, ${d.year}`;
-                    })()}
-                  </p>
-                  <h2>{entry.assignmentTitle}</h2>
-                  <h4>{entry.moduleTitle}</h4>
-                  <p dangerouslySetInnerHTML={{ __html: entry.comment }}></p>
-                  <button onClick={(e) => getID(e.target.value)}>
-                    <option value={entry._id}>...</option>
-                  </button>
-                </div>
-              ) : (
-                <div key={index} className={styles.card}>
-                  <p>{entry.authorName}</p>
-                  <p className={styles.pSmall}>
-                    {(() => {
-                      const d = dateParts(entry.posted_at);
-                      return `${d.month} ${d.day}, ${d.year}`;
-                    })()}
-                  </p>
-                  <h2>{entry.title}</h2>
-                  <h4>{entry.subtitle}</h4>
-                  <p> {entry.content}</p>
-                  <button onClick={(e) => getID(e.target.value)}>
-                    <option value={entry._id}>...</option>
-                  </button>
-                  <div className={styles.tagContainer}>
-                    <button className={styles.buttonTag}>Tag</button>
-                    <button className={styles.buttonTag}>Tag</button>
+          {concatArr.flatMap((entry, index) =>
+            entry.published ? (
+              <div key={index}>
+                {"moduleTitle" in entry ? (
+                  <div key={index} className={styles.card}>
+                    <p>{entry.author}</p>
+                    <p className={styles.pSmall}>
+                      {(() => {
+                        const d = dateParts(entry.createdAt);
+                        return `${d.month} ${d.day}, ${d.year}`;
+                      })()}
+                    </p>
+                    <h2>{entry.assignmentTitle}</h2>
+                    <h4>{entry.moduleTitle}</h4>
+                    <p dangerouslySetInnerHTML={{ __html: entry.comment }}></p>
+                    <button onClick={(e) => getID(e.target.value)}>
+                      <option value={entry._id}>...</option>
+                    </button>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <div key={index} className={styles.card}>
+                    <p>{entry.authorName}</p>
+                    <p className={styles.pSmall}>
+                      {(() => {
+                        const d = dateParts(entry.posted_at);
+                        return `${d.month} ${d.day}, ${d.year}`;
+                      })()}
+                    </p>
+                    <h2>{entry.title}</h2>
+                    <h4>{entry.subtitle}</h4>
+                    <p> {entry.content}</p>
+                    <button onClick={(e) => getID(e.target.value)}>
+                      <option value={entry._id}>...</option>
+                    </button>
+                    <div className={styles.tagContainer}>
+                      <button className={styles.buttonTag}>Tag</button>
+                      <button className={styles.buttonTag}>Tag</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : null
+          )}
         </div>
       </div>
     </>
