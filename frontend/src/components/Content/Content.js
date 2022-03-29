@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from "./Content.module.scss";
 // import dateParts from "../../utils/dateParts";
 
-import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments/ArticlesAndAssignments";
+import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments";
 import Dropdown from "../Dropdown/Dropdown";
 
 import Image from "next/image";

@@ -1,7 +1,8 @@
 @import "../styles/variables/_variables";
 
 .mainContainer {
-  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
   padding: 3.5rem 5rem;
 }
 
@@ -62,7 +63,6 @@
   h1 {
     color: $primary-200;
     font-weight: bold;
-    padding-top: 2rem;
   }
   h2 {
     color: $secondary-200;
@@ -82,7 +82,7 @@
 
   .pSmall {
     font-size: $font-size-p-sm;
-    padding-top: 0.3rem;
+    // padding-top: 0.3rem;
   }
 }
 
@@ -143,7 +143,6 @@
 }
 
 .articleContent {
-  text-align: justify;
 }
 
 .recommended {
@@ -154,11 +153,12 @@
 .recommendedTitle {
   color: $secondary-200;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding-bottom: 2rem;
 }
 .recommendedh3 {
   color: $primary-200;
   font-weight: bold;
+  padding-bottom: 0.5rem;
 }
 .recommendedh4 {
   color: $secondary-200;
@@ -168,17 +168,18 @@
   color: $neutral-500;
   font-weight: normal;
   font-size: $font-size-p-sm;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  // padding-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 .author {
   grid-area: 1 / 2 / 2 / 3;
   display: flex;
   align-items: center;
   flex-direction: column;
-  // padding-right: 3rem;
+  padding-right: 3rem;
+  padding-left: 3rem;
   // width: 20.8rem;
-  padding-top: 5.5rem;
+  margin-top: -4rem;
 }
 .authorName {
   color: $neutral-500;
@@ -198,15 +199,26 @@
   // grid-area: 2 / 2 / 3 / 3;
   // width: 20.8rem;
   padding-top: 6rem;
+  padding-right: 3rem;
+  padding-left: 3rem;
 }
 .moreP {
+  font-size: $font-caption;
   color: $primary-200;
-  font-weight: bold;
-  text-align: center;
+  font-weight: 300;
+  text-align: left;
 }
+
+.moreTitle {
+  // font-size: 1.5rem;
+  color: $primary-200;
+  font-weight: 700;
+  text-align: left;
+}
+
 .moreHeader {
   color: $secondary-200;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   padding-bottom: 1rem;
 }
@@ -216,7 +228,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  // align-items: center;
+
+  &:last-child {
+    border-bottom: 1px solid $neutral-200;
+  }
 }
 .moreBtn {
   font-size: $font-size-h5;
@@ -260,11 +276,15 @@
 }
 .cardSmall {
   padding-bottom: 2rem;
+  padding-top: 2rem;
   text-align: left;
   border-top: 1px solid $neutral-200;
   transition: color 0.15s ease, border-color 0.15s ease;
   flex-basis: 45%;
   color: inherit;
+  &:last-child {
+    border-bottom: 1px solid $neutral-200;
+  }
 }
 .cardSmaller {
   padding-bottom: 2rem;
@@ -273,4 +293,69 @@
   transition: color 0.15s ease, border-color 0.15s ease;
   flex-basis: 45%;
   color: inherit;
+}
+
+.arrowSideContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-self: start;
+  align-self: center;
+  padding-top: 3.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.arrowSide {
+  transform: rotate(90deg);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.tagContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+
+  button {
+    position: relative;
+    background-color: $neutral-150;
+
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-right: 0.5rem;
+    }
+
+    &:last-child {
+      margin-right: 0.5;
+    }
+  }
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+
+  .img {
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-right: 0.5rem;
+    }
+
+    &:nth-child(3) {
+      padding-right: 1rem;
+    }
+
+    &:last-child {
+      margin-right: 0.5;
+    }
+  }
 }
