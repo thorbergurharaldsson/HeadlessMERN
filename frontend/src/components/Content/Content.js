@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import useSWR from "swr";
-import { fetcher } from "../../utils/api";
 import Link from "next/link";
 import styles from "./Content.module.scss";
-// import dateParts from "../../utils/dateParts";
 
 import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments";
 import Dropdown from "../Dropdown/Dropdown";
@@ -16,20 +13,11 @@ export default function Content() {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
 
-  // to browse by
-  // useEffect(() => {
-  //   handleContent("assignments");
-  // }, []);
-
   const [content, setContent] = useState("Browse by");
-
   const handleContent = (content) => {
     setContent(content);
     // console.log(content);
   };
-
-  // const { data, error } = useSWR(`/${content}`, fetcher);
-  // console.log(data);
 
   return (
     <div id="content" className={styles.container}>

@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styles from "./Nav.module.scss";
 
-import Container from "../Container/Container";
-
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 import logo2 from "../../../public/logo2.png";
@@ -45,7 +43,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link href="#content" passHref>
+          <Link href="/#content" passHref>
             <h5>
               <a>Content</a>
             </h5>
