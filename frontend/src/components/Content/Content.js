@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { horsemernAPI } from "../../utils/api";
 import styles from "./Content.module.scss";
 
 import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments";
@@ -13,11 +14,23 @@ export default function Content() {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
 
-  const [content, setContent] = useState("Browse by");
-  const handleContent = (content) => {
-    setContent(content);
-    // console.log(content);
+  // to get the type in browse by
+  const [type, setType] = useState("Browse by");
+  const browseBy = async (type) => {
+    setType(type);
+    console.log(type);
+    const res = await horsemernAPI.get(`${type}`);
+    const data = await res.json();
+    console.log(data);
   };
+
+  // // API call
+  // const { data, error } = useSWR(`/${type}`, fetcher);
+  // console.log(data);
+
+  // if (error) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <div id="content" className={styles.container}>
@@ -26,10 +39,10 @@ export default function Content() {
 
         <Dropdown
           options={[
-            {
-              id: "",
-              text: "Browse by",
-            },
+            // {
+            //   id: "",
+            //   text: "Browse by",
+            // },
             {
               id: "articles",
               text: "Articles",
@@ -40,7 +53,7 @@ export default function Content() {
             },
           ]}
           text="Browse by"
-          onSelect={(id) => handleContent(id)}
+          onSelect={(id) => browseBy(id)}
         />
       </div>
       <div>

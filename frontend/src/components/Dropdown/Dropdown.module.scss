@@ -19,7 +19,8 @@
   margin: 0;
 
   &:hover {
-    background-color: $secondary-200;
+    // background-color: $secondary-200;
+    text-decoration: underline;
     overflow: visible;
     display: block;
   }
@@ -27,9 +28,9 @@
   h5 {
     color: $secondary-250;
     font-weight: 500;
-    &:hover {
-      color: $neutral-50;
-    }
+    // &:hover {
+    //   color: $neutral-50;
+    // }
     &:first-child {
       padding-top: 0.7rem;
     }
