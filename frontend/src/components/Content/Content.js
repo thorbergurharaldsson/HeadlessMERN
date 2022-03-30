@@ -4,6 +4,8 @@ import { horsemernAPI } from "../../utils/api";
 import styles from "./Content.module.scss";
 
 import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments";
+import Articles from "../../pages/Articles";
+import Assignments from "../../pages/Assignments";
 import Dropdown from "../Dropdown/Dropdown";
 
 import Image from "next/image";
@@ -19,18 +21,9 @@ export default function Content() {
   const browseBy = async (type) => {
     setType(type);
     console.log(type);
-    const res = await horsemernAPI.get(`${type}`);
-    const data = await res.json();
-    console.log(data);
+    // const data = await horsemernAPI.get(`/${type}`);
+    // console.log(data);
   };
-
-  // // API call
-  // const { data, error } = useSWR(`/${type}`, fetcher);
-  // console.log(data);
-
-  // if (error) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <div id="content" className={styles.container}>
@@ -39,10 +32,6 @@ export default function Content() {
 
         <Dropdown
           options={[
-            // {
-            //   id: "",
-            //   text: "Browse by",
-            // },
             {
               id: "articles",
               text: "Articles",
@@ -57,7 +46,16 @@ export default function Content() {
         />
       </div>
       <div>
-        <ArticlesAndAssignments />
+        {" "}
+        {(() => {
+          if (type === "articles") {
+            return <Articles />;
+          } else if (type === "assignments") {
+            return <Assignments />;
+          } else {
+            return <ArticlesAndAssignments />;
+          }
+        })()}{" "}
       </div>
       <div className={styles.arrowUpContainer}>
         <div
