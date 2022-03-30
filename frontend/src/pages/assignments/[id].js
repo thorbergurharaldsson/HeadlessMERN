@@ -1,4 +1,4 @@
-import styles from "../../styles/articles.module.scss";
+import styles from "../../styles/Articles.module.scss";
 import Link from "next/link";
 import React, { useState } from "react";
 import useSWR from "swr";
