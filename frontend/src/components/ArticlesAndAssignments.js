@@ -1,40 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
-import { horsemernAPI } from "../utils/api";
 import dateParts from "../utils/dateParts";
 import styles from "../styles/index.module.scss";
 import Link from "next/link";
 
-const ArticlesAndAssignments = () => {
-  const [concatArr, setConcatArr] = useState([]);
-
-  const concatenate = async (path1, path2) => {
-    const assignments = await horsemernAPI.get(`${path1}`);
-    const articles = await horsemernAPI.get(`${path2}`);
-    // console.log(assignments.data);
-    // console.log(articles.data.data);
-    setConcatArr(
-      assignments.data.concat(articles.data.data).sort((a, b) => {
-        return (
-          new Date(b.posted_at || b.createdAt) -
-          new Date(a.posted_at || a.createdAt)
-        );
-      })
-    );
-  };
-
-  useEffect(() => {
-    concatenate("/assignments", "/articles");
-  }, []);
-
-  useEffect(() => {
-    setConcatArr(concatArr);
-  }, [concatArr]);
-
-  if (concatArr.length < 1) {
-    return <div>Loading...</div>;
-  }
-
+const ArticlesAndAssignments = ({ dataArr }) => {
   // calculate time to read
   const timeToRead = (text) => {
     const words = text.split(" ");
@@ -55,7 +25,7 @@ const ArticlesAndAssignments = () => {
     <>
       <div className={styles.container}>
         <div className={styles.cardContainer}>
-          {concatArr.flatMap((entry, index) =>
+          {dataArr.flatMap((entry, index) =>
             entry.published ? (
               <div key={index}>
                 {"moduleTitle" in entry ? (
@@ -72,10 +42,7 @@ const ArticlesAndAssignments = () => {
                     </Link>
 
                     <h4>{entry.moduleTitle}</h4>
-                    <p dangerouslySetInnerHTML={{ __html: entry.comment }}></p>
-                    {/* <button onClick={(e) => getID(e.target.value)}>
-                      <option value={entry.moduleTitle}>...</option>
-                    </button> */}
+                    <ReactMarkdown children={loadFirst40Words(entry.comment)} />
                   </div>
                 ) : (
                   <div key={index} className={styles.card}>
