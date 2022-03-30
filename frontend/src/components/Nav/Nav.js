@@ -38,7 +38,7 @@ const Nav = () => {
 
       <ul className={styles.navMenu}>
         <li>
-          <Link href="/" passHref>
+          <Link href="/about" passHref>
             <h5>
               <a>About</a>
             </h5>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/api";
+import dateParts from "../../utils/dateParts";
 
 import Nav from "../../components/Nav/Nav";
 
@@ -60,59 +61,75 @@ const BlogPost = ({ post }) => {
 
         <div className={styles.recommended}>
           <h2 className={styles.recommendedTitle}>You might also like</h2>
-          {/* {data.data.slice(0, 3).map((article, index) => (
-          <div key={index} className={styles.cardSmall}>
-            <div>
-              <p className={styles.recommendedP}>{article.authorName}</p>
+          {data.data.slice(0, 3).map((article, index) => (
+            <div key={index} className={styles.cardSmall}>
+              <div>
+                <p className={styles.recommendedP}>{article.author}</p>
+              </div>
+              <Link href={`/assignments/${article._id}`}>
+                <h3 className={styles.recommendedh3}>
+                  {article.assignmentTitle}
+                </h3>
+              </Link>
+              <h5 className={styles.recommendedh4}>{article.subtitle}</h5>
+              <p className={styles.recommendedP}>{article.moduleTitle}</p>
             </div>
-            <h3 className={styles.recommendedh3}>{article.title}</h3>
-            <h5 className={styles.recommendedh4}>{article.subtitle}</h5>
-            <p className={styles.recommendedP}>{article.posted_at}</p>
-            <Link href={`/articles/${article._id}`}>
-              <button className={styles.buttonSmall}>View article</button>
-            </Link>
-          </div>
-        ))} */}
+          ))}
         </div>
-
-        <div className={styles.author}>
-          <div className={styles.avatar}>
-            <div className={styles.avatar__letters}> FU </div>
+        <div>
+          <div className={styles.author}>
+            <div className={styles.avatar}>
+              <div className={styles.avatar__letters}> FU </div>
+            </div>
+            <p className={styles.authorName}>{post.author}</p>
+            <p className={styles.authorBio}>
+              this is me. I like pc and various things, like coding and love
+              makings
+            </p>
           </div>
-          <p className={styles.authorName}>{post.author}</p>
-          <p className={styles.authorBio}>
-            this is me. I like pc and various things, like coding and love
-            makings
-          </p>
-        </div>
-        <div className={styles.more}>
-          <p className={styles.moreHeader}>More from {post.author}</p>
-          {/* {articles.data.slice(0, 3).map((article, index) => (
-          <div key={index} className={styles.moreCont}>
-            <p className={styles.moreP}>{article.title}</p>
-            <Link href={`/articles/${article._id}`}>
-              <button className={styles.moreBtn}>View article</button>
-            </Link>
+          <div className={styles.more}>
+            <p className={styles.moreHeader}>
+              More from <br />
+              {post.author}
+            </p>
+            {data.data.slice(0, 3).map((article, index) => (
+              <div key={index} className={styles.moreCont}>
+                <p className={styles.moreP}>
+                  {(() => {
+                    const d = dateParts(article.updatedAt);
+                    return `${d.month} ${d.day}, ${d.year}`;
+                  })()}
+                </p>
+                <Link href={`/assignments/${article._id}`}>
+                  <h5 className={styles.moreTitle}>
+                    {article.assignmentTitle}
+                  </h5>
+                </Link>
+                <div className={styles.tagContainer}>
+                  <button className={styles.buttonTag}>Tag</button>
+                  <button className={styles.buttonTag}>Tag</button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))} */}
-        </div>
-        <div className={styles.more}>
-          <p className={styles.moreHeader}>
-            Follow <br />
-            {post.author}
-          </p>
-          <div className={styles.imgContainer}>
-            <div className={styles.img}>
-              <Image src={github} alt="Github Icon" />
-            </div>
-            <div className={styles.img}>
-              <Image src={twitter} alt="Twitter Icon" />
-            </div>
-            <div className={styles.img}>
-              <Image src={instagram} alt="Instagram Icon" />
-            </div>
-            <div className={styles.img}>
-              <Image src={linkedin} alt="Linkedin Icon" />
+          <div className={styles.more}>
+            <p className={styles.moreHeader}>
+              Follow <br />
+              {post.author}
+            </p>
+            <div className={styles.imgContainer}>
+              <div className={styles.img}>
+                <Image src={github} alt="Github Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={twitter} alt="Twitter Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={instagram} alt="Instagram Icon" />
+              </div>
+              <div className={styles.img}>
+                <Image src={linkedin} alt="Linkedin Icon" />
+              </div>
             </div>
           </div>
         </div>
