@@ -6,13 +6,6 @@ import styles from "../styles/index.module.scss";
 import Link from "next/link";
 
 const ArticlesAndAssignments = () => {
-  const [id, setID] = useState();
-
-  const getID = async (e) => {
-    console.log(e);
-    setID(e);
-  };
-
   const [concatArr, setConcatArr] = useState([]);
 
   const concatenate = async (path1, path2) => {

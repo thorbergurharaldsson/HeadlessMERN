@@ -23,14 +23,14 @@ const Nav = () => {
               <Image
                 src={logo2}
                 alt="Studio Code Logo"
-                width={113.45}
+                width={114}
                 height={80}
               />
             </a>
           </Link>
         )}
         {!isShown && (
-          <Image src={logo} alt="Studio Code Logo" width={113.45} height={80} />
+          <Image src={logo} alt="Studio Code Logo" width={114} height={80} />
         )}
       </div>
 
