@@ -16,7 +16,7 @@
 		"react-firebase-hooks": "^5.0.1",
 		"react-markdown": "^8.0.0",
 		"react-router-dom": "^6.2.1",
-		"react-scripts": "5.0.0"
+		"react-scripts": "5.0.0",
 		"sass": "^1.49.9",
 		"serve": "^13.0.2",
 		"swr": "^1.2.2",
