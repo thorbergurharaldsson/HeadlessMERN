@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../../utils/api";
 import dateParts from "../../utils/dateParts";
+import { ReactMarkdown } from "react-markdown";
 
 import Nav from "../../components/Nav/Nav";
 
@@ -60,7 +61,9 @@ const BlogPost = ({ post }) => {
             </p>
             <h1 className={styles.title}>{post.data.title}</h1>
             <h4 className={styles.subtitle}>{post.data.subtitle}</h4>
-            <p className={styles.articleContent}>{post.data.content}</p>
+            <ReactMarkdown className={styles.articleContent}>
+              {post.data.content}
+            </ReactMarkdown>
           </div>
         </div>
 
