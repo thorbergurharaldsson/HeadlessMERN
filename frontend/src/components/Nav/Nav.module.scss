@@ -5,10 +5,14 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  height: 100%;
   padding-top: 0;
   padding-bottom: 0;
   margin: 0;
+  width: 100%;
+  top: 2rem;
+  // position: sticky;
+  // z-index: 99;
+  // background-color: white;
 }
 
 .navLogo {

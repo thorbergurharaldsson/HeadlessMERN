@@ -1,0 +1,50 @@
+@import "../../styles/variables/__variables";
+
+.container {
+  height: 100%;
+  display: grid;
+  padding-top: 3rem;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 5.5rem;
+  padding-bottom: 9rem;
+  margin: 0;
+
+  button {
+    position: relative;
+
+    &:first-child {
+      margin-bottom: 1.5rem;
+    }
+
+    &:nth-child(2) {
+      margin-bottom: 1.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0.5;
+    }
+  }
+}
+
+.arrowUpContainer {
+  display: grid;
+  justify-self: center;
+  align-self: start;
+  padding-top: 5rem;
+  padding-bottom: 8rem;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
