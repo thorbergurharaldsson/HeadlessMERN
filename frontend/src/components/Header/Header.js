@@ -29,7 +29,7 @@ const Header = () => {
             This is the Showroom of the students of the Reykjavík Academy of Web
             Development.
           </h4>
-          <Link href="/">
+          <Link href="/about">
             <a>
               <button className={styles.button}>More</button>
             </a>
