@@ -1,8 +1,7 @@
 import styles from "../../styles/Articles.module.scss";
 import Link from "next/link";
 import React, { useState } from "react";
-import useSWR from "swr";
-import { fetcher } from "../../utils/api";
+import { horsemernAPI } from "../../utils/api";
 import dateParts from "../../utils/dateParts";
 import ReactMarkdown from "react-markdown";
 
@@ -16,12 +15,10 @@ import github from "../../../public/github.png";
 import instagram from "../../../public/instagram.png";
 import twitter from "../../../public/twitter.png";
 
-const BlogPost = ({ post }) => {
+const BlogPost = ({ post, data }) => {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
 
-  const { data } = useSWR("/assignments", fetcher);
-  // console.log(data);
   if (!data) return <div>Loading...</div>;
 
   return (
@@ -53,18 +50,24 @@ const BlogPost = ({ post }) => {
       <div className={styles.parent}>
         <div className={styles.article}>
           <div className={styles.main}>
-            <p>{post.updatedAt}</p>
+            <p>
+              {(() => {
+                const d = dateParts(post.updatedAt);
+                return `${d.month} ${d.day}, ${d.year}`;
+              })()}
+            </p>
             <h1 className={styles.title}>{post.assignmentTitle}</h1>
             <h4 className={styles.subtitle}>{post.moduleTitle}</h4>
-            <ReactMarkdown className={styles.articleContent}>
-              {post.description}
-            </ReactMarkdown>
+            <ReactMarkdown
+              className={styles.articleContent}
+              children={post.comment}
+            />
           </div>
         </div>
 
         <div className={styles.recommended}>
           <h2 className={styles.recommendedTitle}>You might also like</h2>
-          {data.data.slice(0, 3).map((article, index) => (
+          {data.slice(0, 3).map((article, index) => (
             <div key={index} className={styles.cardSmall}>
               <div>
                 <p className={styles.recommendedP}>{article.author}</p>
@@ -95,7 +98,7 @@ const BlogPost = ({ post }) => {
               More from <br />
               {post.author}
             </p>
-            {data.data.slice(0, 3).map((article, index) => (
+            {data.slice(0, 3).map((article, index) => (
               <div key={index} className={styles.moreCont}>
                 <p className={styles.moreP}>
                   {(() => {
@@ -142,8 +145,7 @@ const BlogPost = ({ post }) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/assignments`);
-  const posts = await res.json();
+  const { data: posts } = await horsemernAPI.get("/assignments");
 
   const paths = posts.map((post) => ({
     params: { id: post._id },
@@ -156,13 +158,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/assignments/${params.id}`
-  );
-  const post = await res.json();
+  const { data: post } = await horsemernAPI.get(`/assignments/${params.id}`);
+  const data = await horsemernAPI.get("/assignments");
 
   return {
-    props: { post },
+    props: { post, data: data.data },
   };
 }
 

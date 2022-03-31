@@ -4,8 +4,9 @@ import Container from "../components/Container/Container";
 import Content from "../components/Content/Content";
 import Nav from "../components/Nav/Nav";
 import Header from "../components/Header/Header";
+import { horsemernAPI } from "../utils/api";
 
-export default function Home() {
+export default function Home({ dataArr, articles, assignments }) {
   return (
     <div>
       <Container>
@@ -13,8 +14,32 @@ export default function Home() {
         <Header />
       </Container>
       <Container>
-        <Content />
+        <Content
+          dataArr={dataArr}
+          articles={articles}
+          assignments={assignments}
+        />
       </Container>
     </div>
   );
 }
+
+// use getStaticProps() to get articles and assignments and concatenate them
+export const getStaticProps = async () => {
+  const { data: assignments } = await horsemernAPI.get("/assignments");
+  const { data: articles } = await horsemernAPI.get("/articles");
+  const concatArr = assignments.concat(articles.data).sort((a, b) => {
+    return (
+      new Date(b.posted_at || b.createdAt) -
+      new Date(a.posted_at || a.createdAt)
+    );
+  });
+  return {
+    props: {
+      dataArr: concatArr,
+      assignments: assignments,
+      articles: articles.data,
+      testing: "testing",
+    },
+  };
+};

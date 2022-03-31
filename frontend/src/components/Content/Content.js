@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { horsemernAPI } from "../../utils/api";
 import styles from "./Content.module.scss";
 
-import ArticlesAndAssignments from "../../pages/ArticlesAndAssignments";
-import Articles from "../../pages/Articles";
-import Assignments from "../../pages/Assignments";
+import ArticlesAndAssignments from "../ArticlesAndAssignments";
 import Dropdown from "../Dropdown/Dropdown";
 
 import Image from "next/image";
 import arrowDown from "../../../public/arrowDown.png";
 import arrowDown2 from "../../../public/arrowDown2.png";
 
-export default function Content() {
+export default function Content({ dataArr, articles, assignments }) {
   // to change the arrow on hover
   const [isShown, setIsShown] = useState(false);
 
@@ -20,9 +17,6 @@ export default function Content() {
   const [type, setType] = useState("Browse by");
   const browseBy = async (type) => {
     setType(type);
-    console.log(type);
-    // const data = await horsemernAPI.get(`/${type}`);
-    // console.log(data);
   };
 
   return (
@@ -46,16 +40,15 @@ export default function Content() {
         />
       </div>
       <div>
-        {" "}
         {(() => {
           if (type === "articles") {
-            return <Articles />;
+            return <ArticlesAndAssignments dataArr={articles} />;
           } else if (type === "assignments") {
-            return <Assignments />;
+            return <ArticlesAndAssignments dataArr={assignments} />;
           } else {
-            return <ArticlesAndAssignments />;
+            return <ArticlesAndAssignments dataArr={dataArr} />;
           }
-        })()}{" "}
+        })()}
       </div>
       <div className={styles.arrowUpContainer}>
         <div
