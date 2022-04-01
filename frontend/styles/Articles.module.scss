@@ -14,12 +14,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-} .space {
+}
+.space {
   height: 1rem;
-  } 
-  .spacingLeft{
-    padding-left: 24%;
-  }
+}
+.spacingLeft {
+  padding-left: 24%;
+}
 
 .header {
   height: 40vh;
@@ -50,7 +51,6 @@
     line-height: 2rem;
     padding-bottom: 1rem;
   }
-  
 }
 
 .main {
@@ -81,7 +81,6 @@
   }
 }
 
-
 /* Grid System */
 .grid {
   align-items: center;
@@ -104,7 +103,6 @@
     }
   }
 }
-
 
 .card {
   padding-bottom: 7rem;
@@ -132,114 +130,121 @@
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 110px;
   grid-row-gap: 20px;
-  }  .article { 
-    grid-area: 1 / 1 / 2 / 2;
-    padding-left: 3rem;
-    padding-top: 3rem;
+}
+.article {
+  grid-area: 1 / 1 / 2 / 2;
+  padding-left: 3rem;
+  padding-top: 3rem;
+}
+.recommended {
+  grid-area: 2 / 1 / 3 / 2;
+  padding-left: 3rem;
+  padding-top: 5rem;
+}
+.recommendedTitle {
+  color: $secondary-200;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+.recommendedh3 {
+  color: $primary-200;
+  font-weight: bold;
+}
+.recommendedh4 {
+  color: $secondary-200;
+  font-weight: normal;
+}
+.recommendedP {
+  color: $neutral-500;
+  font-weight: normal;
+  font-size: $font-size-p-sm;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+.author {
+  grid-area: 1 / 2 / 2 / 3;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-right: 3rem;
+  width: 20.8rem;
+}
+.authorName {
+  color: $neutral-500;
+  font-weight: bold;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+.authorBio {
+  color: $neutral-400;
+  font-weight: normal;
+  font-size: $font-size-p-sm;
+  padding-top: 0.3rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+.more {
+  grid-area: 2 / 2 / 3 / 3;
+  width: 20.8rem;
+}
+.moreP {
+  color: $primary-200;
+  font-weight: bold;
+  text-align: center;
+}
+.moreHeader {
+  color: $secondary-200;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+.moreCont {
+  border-top: 1px solid $neutral-200;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.moreBtn {
+  font-size: $font-size-h5;
+  font-family: $open-sans;
+  color: $secondary-250;
+  background-color: white;
+  border: solid 2px $secondary-250;
+  border-radius: 24px;
+  padding: 5px 30px;
+  cursor: pointer;
+  text-decoration: none;
+
+  margin: 1rem;
+
+  &:hover {
+    background-color: $primary-150;
+    color: $neutral-50;
+    border-color: white;
   }
-    .recommended { 
-    grid-area: 2 / 1 / 3 / 2;
-    padding-left: 3rem;
-    padding-top: 5rem;
-  }     .recommendedTitle{
-          color: $secondary-200;
-          font-weight: bold;
-          padding-bottom: 0.5rem;
-        }
-        .recommendedh3{
-          color: $primary-200;
-          font-weight: bold;
-        }
-        .recommendedh4{
-          color: $secondary-200;
-          font-weight: normal;
-        }
-        .recommendedP{
-          color: $neutral-500;
-          font-weight: normal;
-          font-size: $font-size-p-sm;
-          padding-top: 1rem;
-          padding-bottom: 2rem;
-        }
-    .author {
-     grid-area: 1 / 2 / 2 / 3;  
-     display: flex;
-     align-items: center;
-     flex-direction: column;
-     padding-right: 3rem;
-     width: 20.8rem;
-  }     .authorName {
-          color: $neutral-500;
-          font-weight: bold;
-          padding-top: 1rem;
-          padding-bottom: 2rem;
-        }
-        .authorBio{
-          color: $neutral-400;
-          font-weight: normal;
-          font-size: $font-size-p-sm;
-          padding-top: 0.3rem;
-          padding-bottom: 2rem;
-          text-align: center;
-        }
-    .more {
-      grid-area: 2 / 2 / 3 / 3; 
-      width: 20.8rem;
-  }      .moreP{
-            color: $primary-200;
-            font-weight: bold;
-            text-align: center;
-        } .moreHeader{
-            color: $secondary-200;
-            font-weight: bold;
-            text-align: center;
-            padding-bottom: 1rem;
-        } .moreCont {
-          border-top: 1px solid $neutral-200;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        } .moreBtn {
-            font-size: $font-size-h5;
-            font-family: $open-sans;
-            color: $secondary-250;
-            background-color: white;
-            border: solid 2px $secondary-250;
-            border-radius: 24px;
-            padding: 5px 30px;
-            cursor: pointer;
-            text-decoration: none;
-            
-            margin: 1rem;
-          
-            &:hover {
-              background-color: $primary-150;
-              color: $neutral-50;
-              border-color: white;
-            }
-          }
+}
 
-  .avatar {
-    display: inline-block;
-    vertical-align: middle;
+.avatar {
+  display: inline-block;
+  vertical-align: middle;
 
-    position: relative;
+  position: relative;
 
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #F2F4FB;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #f2f4fb;
 
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
 }
 
 .avatar__letters {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .cardSmall {
   padding-bottom: 2rem;
@@ -250,12 +255,41 @@
   color: inherit;
 }
 .cardSmaller {
-padding-bottom: 2rem;
-text-align: left;
-border-top: 1px solid $neutral-200;
-transition: color 0.15s ease, border-color 0.15s ease;
-flex-basis: 45%;
-color: inherit;
+  padding-bottom: 2rem;
+  text-align: left;
+  border-top: 1px solid $neutral-200;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  flex-basis: 45%;
+  color: inherit;
 }
-  
-  
+
+.searchTxt {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: $font-size-h5;
+  font-family: $open-sans;
+  color: $secondary-250;
+  background-color: white;
+  border: solid 2px $secondary-250;
+  border-radius: 24px;
+  height: 2.5rem;
+  width: 10rem;
+  padding: 5px 15px;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    background-color: $secondary-250;
+    color: white;
+    border-color: white;
+  }
+  &:focus {
+    background-color: $secondary-250;
+    color: white;
+    border-color: white;
+  }
+}
+.resultCont {
+  margin-left: 10rem;
+  line-height: 2rem;
+}

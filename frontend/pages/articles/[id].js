@@ -16,7 +16,6 @@ const BlogPost = ({ post }) => {
     }
     return (    
     <div className={styles.parent}>
-
         <div className={styles.article}>
             <div className={styles.main}>
                 <p>{post.data.posted_at }</p>
