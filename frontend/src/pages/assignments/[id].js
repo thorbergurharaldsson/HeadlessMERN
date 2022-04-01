@@ -1,4 +1,4 @@
-import styles from "../../styles/Articles.module.scss";
+import styles from "../../styles/singlePost.module.scss";
 import Link from "next/link";
 import React, { useState } from "react";
 import { horsemernAPI } from "../../utils/api";
@@ -10,6 +10,7 @@ import Nav from "../../components/Nav/Nav";
 import Image from "next/image";
 import arrowDown from "../../../public/arrowDown.png";
 import arrowDown2 from "../../../public/arrowDown2.png";
+import avatar from "../../../public/avatar.png";
 import linkedin from "../../../public/linkedin.png";
 import github from "../../../public/github.png";
 import instagram from "../../../public/instagram.png";
@@ -24,117 +25,127 @@ const BlogPost = ({ post, data }) => {
   return (
     <div className={styles.mainContainer}>
       <Nav />
-      <div className={styles.arrowSideContainer}>
-        <div
-          className={styles.arrowSide}
-          onMouseEnter={() => setIsShown(true)}
-          onMouseLeave={() => setIsShown(false)}
-        >
-          {isShown && (
-            <Link href="/#content">
-              <a>
-                <Image
-                  src={arrowDown2}
-                  alt="Arrow down"
-                  width={42}
-                  height={28}
-                />
-              </a>
-            </Link>
-          )}
-          {!isShown && (
-            <Image src={arrowDown} alt="Arrow down" width={42} height={28} />
-          )}
-        </div>
-      </div>
-      <div className={styles.parent}>
-        <div className={styles.article}>
-          <div className={styles.main}>
-            <p>
-              {(() => {
-                const d = dateParts(post.updatedAt);
-                return `${d.month} ${d.day}, ${d.year}`;
-              })()}
-            </p>
-            <h1 className={styles.title}>{post.assignmentTitle}</h1>
-            <h4 className={styles.subtitle}>{post.moduleTitle}</h4>
-            <ReactMarkdown
-              className={styles.articleContent}
-              children={post.comment}
-            />
-          </div>
-        </div>
-
-        <div className={styles.recommended}>
-          <h2 className={styles.recommendedTitle}>You might also like</h2>
-          {data.slice(0, 3).map((article, index) => (
-            <div key={index} className={styles.cardSmall}>
-              <div>
-                <p className={styles.recommendedP}>{article.author}</p>
-              </div>
-              <Link href={`/assignments/${article._id}`}>
-                <h3 className={styles.recommendedh3}>
-                  {article.assignmentTitle}
-                </h3>
+      <div className={styles.container}>
+        {/* // SIDE ARROW  */}
+        <div className={styles.arrowSideContainer}>
+          <div
+            className={styles.arrowSide}
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+          >
+            {isShown && (
+              <Link href="/#content">
+                <a>
+                  <Image
+                    src={arrowDown2}
+                    alt="Arrow down"
+                    width={42}
+                    height={28}
+                  />
+                </a>
               </Link>
-              <h5 className={styles.recommendedh4}>{article.subtitle}</h5>
-              <p className={styles.recommendedP}>{article.moduleTitle}</p>
-            </div>
-          ))}
+            )}
+            {!isShown && (
+              <Image src={arrowDown} alt="Arrow down" width={42} height={28} />
+            )}
+          </div>
         </div>
-        <div>
-          <div className={styles.author}>
-            <div className={styles.avatar}>
-              <div className={styles.avatar__letters}> FU </div>
+        <div className={styles.mainGrid}>
+          {/* // MAIN CONTENT  */}
+          <div>
+            <div className={styles.content}>
+              <p className={styles.pSmall}>
+                {(() => {
+                  const d = dateParts(post.createdAt);
+                  return `${d.month} ${d.day}, ${d.year}`;
+                })()}
+              </p>
+              <h1 className={styles.displayLg}>{post.assignmentTitle}</h1>
+              <h1>{post.moduleTitle}</h1>
+              <ReactMarkdown
+                className={styles.articleContent}
+                children={post.comment}
+              />
             </div>
-            <p className={styles.authorName}>{post.author}</p>
-            <p className={styles.authorBio}>
-              this is me. I like pc and various things, like coding and love
-              makings
-            </p>
-          </div>
-          <div className={styles.more}>
-            <p className={styles.moreHeader}>
-              More from <br />
-              {post.author}
-            </p>
-            {data.slice(0, 3).map((article, index) => (
-              <div key={index} className={styles.moreCont}>
-                <p className={styles.moreP}>
-                  {(() => {
-                    const d = dateParts(article.updatedAt);
-                    return `${d.month} ${d.day}, ${d.year}`;
-                  })()}
-                </p>
-                <Link href={`/assignments/${article._id}`}>
-                  <h5 className={styles.moreTitle}>
-                    {article.assignmentTitle}
-                  </h5>
-                </Link>
-                <div className={styles.tagContainer}>
-                  <button className={styles.buttonTag}>Tag</button>
-                  <button className={styles.buttonTag}>Tag</button>
+            {/* // YOU MIGHT ALSO LIKE  */}
+            <div className={styles.recommended}>
+              <h1>You might also like</h1>
+              {data.slice(0, 3).map((assignment, index) => (
+                <div key={index} className={styles.likeCard}>
+                  <h5>{assignment.author}</h5>
+                  <Link href={`/assignments/${assignment._id}`}>
+                    <h2>{assignment.assignmentTitle}</h2>
+                  </Link>
+                  <h4>{assignment.moduleTitle}</h4>
+                  <p>
+                    {(() => {
+                      const d = dateParts(assignment.createdAt);
+                      return `${d.month} ${d.day}, ${d.year}`;
+                    })()}
+                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-          <div className={styles.more}>
-            <p className={styles.moreHeader}>
-              Follow <br />
-              {post.author}
-            </p>
-            <div className={styles.imgContainer}>
-              <div className={styles.img}>
-                <Image src={github} alt="Github Icon" />
+          {/* // SIDE BAR  */}
+          <div className={styles.sideGrid}>
+            {/* // AUTHOR */}
+            <div className={styles.author}>
+              <div className={styles.avatar}>
+                <Image
+                  className={styles.avatar__letters}
+                  src={avatar}
+                  alt="Student Avatar"
+                />
               </div>
-              <div className={styles.img}>
-                <Image src={twitter} alt="Twitter Icon" />
-              </div>
-              <div className={styles.img}>
-                <Image src={instagram} alt="Instagram Icon" />
-              </div>
-              <div className={styles.img}>
-                <Image src={linkedin} alt="Linkedin Icon" />
+              <h5>{post.author}</h5>
+              <p>
+                I'm a student at the Reykjavík Academy of Web Development. I
+                like programming and designing.
+              </p>
+            </div>
+            {/* // MORE FROM THE AUTHOR */}
+            <div className={styles.more}>
+              <h4>
+                More from&nbsp;
+                {post.author}
+              </h4>
+              {data.slice(0, 3).map((assignment, index) => (
+                <div key={index} className={styles.moreCard}>
+                  <p>
+                    {(() => {
+                      const d = dateParts(assignment.createdAt);
+                      return `${d.month} ${d.day}, ${d.year}`;
+                    })()}
+                  </p>
+                  <Link href={`/assignments/${assignment._id}`}>
+                    <h4>{assignment.assignmentTitle}</h4>
+                  </Link>
+                  <div className={styles.tagContainer}>
+                    <button className={styles.buttonTag}>Tag</button>
+                    <button className={styles.buttonTag}>Tag</button>
+                  </div>
+                </div>
+              ))}
+              <div className={styles.socialContainer}>
+                <h4>
+                  Follow&nbsp;
+                  {post.author}
+                </h4>
+                <div className={styles.imgContainer}>
+                  <div className={styles.img}>
+                    <Image src={github} alt="Github Icon" />
+                  </div>
+                  <div className={styles.img}>
+                    <Image src={twitter} alt="Twitter Icon" />
+                  </div>
+                  <div className={styles.img}>
+                    <Image src={instagram} alt="Instagram Icon" />
+                  </div>
+                  <div className={styles.img}>
+                    <Image src={linkedin} alt="Linkedin Icon" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
