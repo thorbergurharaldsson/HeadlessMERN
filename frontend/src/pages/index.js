@@ -24,8 +24,8 @@ export default function Home({ dataArr, articles, assignments }) {
   );
 }
 
-// use getStaticProps() to get articles and assignments and concatenate them
-export const getStaticProps = async () => {
+// use getServerSideProps() to get articles and assignments and concatenate them
+export const getServerSideProps = async () => {
   const { data: assignments } = await horsemernAPI.get("/assignments");
   const { data: articles } = await horsemernAPI.get("/articles");
   const concatArr = assignments.concat(articles.data).sort((a, b) => {
