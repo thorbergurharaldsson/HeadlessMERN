@@ -16,8 +16,8 @@ export default function Layout({ children }) {
           <Logo />
         </div>
 
-        {window.location.pathname != "/studio/articles" &&
-        window.location.pathname != "/studio/assignments" ? null : (
+        {window.location.pathname !== "/studio/articles" &&
+        window.location.pathname !== "/studio/assignments" ? null : (
           <div className="header__links">
             <div className="header__link">
               <Link to="/studio/articles">
