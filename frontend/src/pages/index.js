@@ -27,19 +27,29 @@ export default function Home({ dataArr, articles, assignments }) {
 // use getServerSideProps() to get articles and assignments and concatenate them
 export const getServerSideProps = async () => {
   const { data: assignments } = await horsemernAPI.get("/assignments");
+  const publishedAssignments = assignments.filter(
+    (assignment) => assignment.published
+  );
+
   const { data: articles } = await horsemernAPI.get("/articles");
-  const concatArr = assignments.concat(articles.data).sort((a, b) => {
-    return (
-      new Date(b.posted_at || b.createdAt) -
-      new Date(a.posted_at || a.createdAt)
-    );
-  });
+
+  const publishedArticles = articles.data.filter(
+    (article) => article.published
+  );
+
+  const concatArr = publishedAssignments
+    .concat(publishedArticles)
+    .sort((a, b) => {
+      return (
+        new Date(b.posted_at || b.createdAt) -
+        new Date(a.posted_at || a.createdAt)
+      );
+    });
   return {
     props: {
       dataArr: concatArr,
-      assignments: assignments,
-      articles: articles.data,
-      testing: "testing",
+      assignments: publishedAssignments,
+      articles: publishedArticles,
     },
   };
 };

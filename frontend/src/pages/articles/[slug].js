@@ -56,23 +56,23 @@ const BlogPost = ({ post, data }) => {
             <div className={styles.content}>
               <p className={styles.pSmall}>
                 {(() => {
-                  const d = dateParts(post.data.posted_at);
+                  const d = dateParts(post.posted_at);
                   return `${d.month} ${d.day}, ${d.year}`;
                 })()}
               </p>
-              <h1 className={styles.displayLg}>{post.data.title}</h1>
-              <h1>{post.data.subtitle}</h1>
+              <h1 className={styles.displayLg}>{post.title}</h1>
+              <h1>{post.subtitle}</h1>
               <ReactMarkdown className={styles.articleContent}>
-                {post.data.content}
+                {post.content}
               </ReactMarkdown>
             </div>
             {/* // YOU MIGHT ALSO LIKE  */}
             <div className={styles.recommended}>
               <h1>You might also like</h1>
-              {data.data.slice(0, 3).map((article, index) => (
+              {data.slice(0, 3).map((article, index) => (
                 <div key={index} className={styles.likeCard}>
                   <h5>{article.authorName}</h5>
-                  <Link href={`/articles/${article._id}`}>
+                  <Link href={`/articles/${article.slug}`}>
                     <h2>{article.title}</h2>
                   </Link>
                   <h4>{article.subtitle}</h4>
@@ -97,7 +97,7 @@ const BlogPost = ({ post, data }) => {
                   alt="Student Avatar"
                 />
               </div>
-              <h5>{post.data.authorName}</h5>
+              <h5>{post.authorName}</h5>
               <p>
                 I'm a student at the Reykjavík Academy of Web Development. I
                 like programming and designing.
@@ -107,29 +107,35 @@ const BlogPost = ({ post, data }) => {
             <div className={styles.more}>
               <h4>
                 More from&nbsp;
-                {post.data.authorName}
+                {post.authorName}
               </h4>
-              {data.data.slice(0, 3).map((article, index) => (
-                <div key={index} className={styles.moreCard}>
-                  <p>
-                    {(() => {
-                      const d = dateParts(article.posted_at);
-                      return `${d.month} ${d.day}, ${d.year}`;
-                    })()}
-                  </p>
-                  <Link href={`/articles/${article._id}`}>
-                    <h4>{article.title}</h4>
-                  </Link>
-                  <div className={styles.tagContainer}>
-                    <button className={styles.buttonTag}>Tag</button>
-                    <button className={styles.buttonTag}>Tag</button>
+              {/* Get more from author */}
+              {data
+                .flatMap((article) =>
+                  article.authorName === post.authorName ? article : []
+                )
+                .slice(0, 3)
+                .map((article, index) => (
+                  <div key={index} className={styles.moreCard}>
+                    <p>
+                      {(() => {
+                        const d = dateParts(article.posted_at);
+                        return `${d.month} ${d.day}, ${d.year}`;
+                      })()}
+                    </p>
+                    <Link href={`/articles/${article.slug}`}>
+                      <h4>{article.title}</h4>
+                    </Link>
+                    <div className={styles.tagContainer}>
+                      <button className={styles.buttonTag}>Tag</button>
+                      <button className={styles.buttonTag}>Tag</button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               <div className={styles.socialContainer}>
                 <h4>
                   Follow&nbsp;
-                  {post.data.authorName}
+                  {post.authorName}
                 </h4>
                 <div className={styles.imgContainer}>
                   <div className={styles.img}>
@@ -154,25 +160,28 @@ const BlogPost = ({ post, data }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const { data: posts } = await horsemernAPI.get("/articles");
+// export async function getStaticPaths() {
+//   const { data: posts } = await horsemernAPI.get("/articles");
 
-  const paths = posts.data.map((post) => ({
-    params: { id: post._id },
-  }));
+//   const paths = posts.data.map((post) => ({
+//     params: { id: post._id },
+//   }));
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+export async function getServerSideProps({ params }) {
+  const { data: articles } = await horsemernAPI.get(`/articles/`);
+  const post = articles.data.find((article) => article.slug === params.slug);
+  const publishedArticles = articles.data.filter(
+    (article) => article.published
+  );
 
   return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const { data: post } = await horsemernAPI.get(`/articles/${params.id}`);
-  const data = await horsemernAPI.get("/articles");
-
-  return {
-    props: { post, data: data.data },
+    props: { post, data: publishedArticles },
   };
 }
 

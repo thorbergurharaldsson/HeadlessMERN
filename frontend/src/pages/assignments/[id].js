@@ -110,23 +110,30 @@ const BlogPost = ({ post, data }) => {
                 More from&nbsp;
                 {post.author}
               </h4>
-              {data.slice(0, 3).map((assignment, index) => (
-                <div key={index} className={styles.moreCard}>
-                  <p>
-                    {(() => {
-                      const d = dateParts(assignment.createdAt);
-                      return `${d.month} ${d.day}, ${d.year}`;
-                    })()}
-                  </p>
-                  <Link href={`/assignments/${assignment._id}`}>
-                    <h4>{assignment.assignmentTitle}</h4>
-                  </Link>
-                  <div className={styles.tagContainer}>
-                    <button className={styles.buttonTag}>Tag</button>
-                    <button className={styles.buttonTag}>Tag</button>
+
+              {/* Get more articles from author */}
+              {data
+                .flatMap((assignment) =>
+                  assignment.author === post.author ? assignment : []
+                )
+                .slice(0, 3)
+                .map((assignment, index) => (
+                  <div key={index} className={styles.moreCard}>
+                    <p>
+                      {(() => {
+                        const d = dateParts(assignment.createdAt);
+                        return `${d.month} ${d.day}, ${d.year}`;
+                      })()}
+                    </p>
+                    <Link href={`/assignments/${assignment._id}`}>
+                      <h4>{assignment.assignmentTitle}</h4>
+                    </Link>
+                    <div className={styles.tagContainer}>
+                      <button className={styles.buttonTag}>Tag</button>
+                      <button className={styles.buttonTag}>Tag</button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               <div className={styles.socialContainer}>
                 <h4>
                   Follow&nbsp;
@@ -155,25 +162,27 @@ const BlogPost = ({ post, data }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const { data: posts } = await horsemernAPI.get("/assignments");
+// export async function getStaticPaths() {
+//   const { data: posts } = await horsemernAPI.get("/assignments");
 
-  const paths = posts.map((post) => ({
-    params: { id: post._id },
-  }));
+//   const paths = posts.map((post) => ({
+//     params: { id: post._id },
+//   }));
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const { data: post } = await horsemernAPI.get(`/assignments/${params.id}`);
   const data = await horsemernAPI.get("/assignments");
+  //get only published data
+  const published = data.data.filter((assignment) => assignment.published);
 
   return {
-    props: { post, data: data.data },
+    props: { post, data: published },
   };
 }
 

@@ -53,7 +53,7 @@ const ArticlesAndAssignments = ({ dataArr }) => {
                         return `${d.month} ${d.day}, ${d.year}`;
                       })()}
                     </p>
-                    <Link href={`/articles/${entry._id}`}>
+                    <Link href={`/articles/${entry.slug}`}>
                       <h2>{entry.title}</h2>
                     </Link>
                     <h4>{entry.subtitle}</h4>

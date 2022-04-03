@@ -19,6 +19,12 @@ body {
   word-break: break-word;
 }
 
+.display1 {
+  font-weight: 600;
+  font-size: 7.63rem;
+  line-height: 9.6rem;
+}
+
 h2 {
   font-weight: 700;
   font-size: 4rem;
@@ -63,8 +69,11 @@ a {
 }
 
 button {
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: none;
+  border: solid 1px var(--secondary-color);
+  border-radius: 2.4rem;
+  color: var(--secondary-color);
+  max-width: 30rem;
 }
 
 input,
