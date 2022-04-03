@@ -160,19 +160,6 @@ const BlogPost = ({ post, data }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   const { data: posts } = await horsemernAPI.get("/articles");
-
-//   const paths = posts.data.map((post) => ({
-//     params: { id: post._id },
-//   }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-
 export async function getServerSideProps({ params }) {
   const { data: articles } = await horsemernAPI.get(`/articles/`);
   const post = articles.data.find((article) => article.slug === params.slug);
